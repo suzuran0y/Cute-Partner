@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "characterId": "default",
+  "contract": "cute-partner-character-v1",
+  "native_live2d": true,
+  "parameters": 26,
+  "motions": 7,
+  "expressions": 6,
+  "mouth": "decoded playback PCM envelope",
+  "previewRoute": "/character-preview.png",
+  "finalVisualAcceptance": false
+}

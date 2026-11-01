@@ -1,0 +1,9 @@
+{
+  "name": "Cute-Partner",
+  "displayName": "可爱的助手",
+  "version": "1.0.0",
+  "releaseTarget": "1.0.0",
+  "channel": "stable",
+  "characterId": "default",
+  "characterContract": "cute-partner-character-v1"
+}

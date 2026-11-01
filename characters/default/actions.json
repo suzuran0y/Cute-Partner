@@ -1,0 +1,716 @@
+{
+  "version": "0.4",
+  "stage": "communication_review_candidate",
+  "status": "awaiting_user_visual_review",
+  "implementation": "native parameter bindings + motion3/exp3 playback + synthesized secondary dynamics",
+  "actions": [
+    {
+      "id": "ambient.ear_twitch",
+      "label": "偶发耳鳍轻抖",
+      "type": "ambient",
+      "trigger": [
+        "ear.left",
+        "ear.right",
+        "ear.both"
+      ],
+      "channels": [
+        "ParamEarL",
+        "ParamEarR"
+      ],
+      "restSeconds": [
+        6,
+        14
+      ],
+      "durationSeconds": 0.73,
+      "occupancy": [
+        "ears"
+      ],
+      "interruptible": true,
+      "returnTo": "current_state_ear_pose"
+    },
+    {
+      "id": "ambient.tail_sway",
+      "label": "日常缓慢摆尾",
+      "type": "ambient",
+      "channels": [
+        "ParamTailSway",
+        "ParamTailTip"
+      ],
+      "basePeriodSeconds": 5.6,
+      "occupancy": [
+        "tail"
+      ],
+      "interruptible": true,
+      "returnTo": "neutral_if_disabled"
+    },
+    {
+      "id": "gesture.tail_swish",
+      "label": "短时大幅摆尾",
+      "type": "one_shot",
+      "trigger": "tail.swish",
+      "channels": [
+        "ParamTailSway",
+        "ParamTailTip"
+      ],
+      "durationSeconds": 2.8,
+      "cycles": 2.5,
+      "autoRestSeconds": [
+        45,
+        85
+      ],
+      "occupancy": [
+        "tail"
+      ],
+      "blockedStates": [
+        "working",
+        "waiting",
+        "error",
+        "cancelled"
+      ],
+      "interruptible": true,
+      "returnTo": "ambient.tail_sway",
+      "fadeInSeconds": 0.24,
+      "fadeOutSeconds": 0.55
+    },
+    {
+      "id": "gesture.acknowledge",
+      "label": "点头确认",
+      "type": "one_shot",
+      "file": "model/motions/acknowledge.motion3.json",
+      "durationSeconds": 1.1,
+      "parameters": [
+        "ParamHeadPitch",
+        "ParamAngleY"
+      ],
+      "occupancy": [
+        "head"
+      ],
+      "internal": false,
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "entrySeconds": 0.12,
+      "interruptExitSeconds": 0.22,
+      "interruptible": true,
+      "returnTo": "current_state_and_follow",
+      "blockedStates": [],
+      "requiresFreeHand": false,
+      "compatibleExpressions": [
+        "neutral",
+        "friendly",
+        "focused",
+        "curious",
+        "concerned",
+        "happy"
+      ],
+      "requiresConfirmedEvent": false,
+      "changesTaskState": false
+    },
+    {
+      "id": "gesture.decline",
+      "label": "轻轻摇头",
+      "type": "one_shot",
+      "file": "model/motions/decline.motion3.json",
+      "durationSeconds": 1.4,
+      "parameters": [
+        "ParamHeadTurn",
+        "ParamAngleZ"
+      ],
+      "occupancy": [
+        "head"
+      ],
+      "internal": false,
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "entrySeconds": 0.12,
+      "interruptExitSeconds": 0.22,
+      "interruptible": true,
+      "returnTo": "current_state_and_follow",
+      "blockedStates": [],
+      "requiresFreeHand": false,
+      "compatibleExpressions": [
+        "neutral",
+        "friendly",
+        "focused",
+        "curious",
+        "concerned",
+        "happy"
+      ],
+      "requiresConfirmedEvent": false,
+      "changesTaskState": false
+    },
+    {
+      "id": "gesture.curious",
+      "label": "好奇歪头",
+      "type": "one_shot",
+      "file": "model/motions/curious.motion3.json",
+      "durationSeconds": 1.7,
+      "parameters": [
+        "ParamAngleZ",
+        "ParamHeadPitch"
+      ],
+      "occupancy": [
+        "head"
+      ],
+      "internal": false,
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "entrySeconds": 0.12,
+      "interruptExitSeconds": 0.22,
+      "interruptible": true,
+      "returnTo": "current_state_and_follow",
+      "blockedStates": [],
+      "requiresFreeHand": false,
+      "compatibleExpressions": [
+        "neutral",
+        "friendly",
+        "focused",
+        "curious",
+        "concerned",
+        "happy"
+      ],
+      "requiresConfirmedEvent": false,
+      "changesTaskState": false
+    },
+    {
+      "id": "gesture.greet",
+      "label": "招手",
+      "type": "one_shot",
+      "file": "model/motions/greet.motion3.json",
+      "durationSeconds": 2.4,
+      "parameters": [
+        "ParamArmLiftL",
+        "ParamHandOpenL",
+        "ParamHandWaveL",
+        "ParamAngleZ"
+      ],
+      "occupancy": [
+        "head",
+        "left_arm"
+      ],
+      "internal": false,
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "entrySeconds": 0.12,
+      "interruptExitSeconds": 0.22,
+      "interruptible": true,
+      "returnTo": "current_state_and_follow",
+      "blockedStates": [
+        "working",
+        "waiting",
+        "error",
+        "cancelled"
+      ],
+      "requiresFreeHand": true,
+      "compatibleExpressions": [
+        "neutral",
+        "friendly",
+        "focused",
+        "curious",
+        "concerned",
+        "happy"
+      ],
+      "requiresConfirmedEvent": false,
+      "changesTaskState": false
+    },
+    {
+      "id": "interaction.tap",
+      "label": "点击回应",
+      "type": "one_shot",
+      "file": "model/motions/tap.motion3.json",
+      "durationSeconds": 0.9,
+      "parameters": [
+        "ParamHeadTurn",
+        "ParamEyeBallX",
+        "ParamHeadPitch"
+      ],
+      "occupancy": [
+        "head",
+        "gaze"
+      ],
+      "internal": false,
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "entrySeconds": 0.12,
+      "interruptExitSeconds": 0.22,
+      "interruptible": true,
+      "returnTo": "current_state_and_follow",
+      "blockedStates": [],
+      "requiresFreeHand": false,
+      "compatibleExpressions": [
+        "neutral",
+        "friendly",
+        "focused",
+        "curious",
+        "concerned",
+        "happy"
+      ],
+      "requiresConfirmedEvent": false,
+      "changesTaskState": false
+    },
+    {
+      "id": "interaction.drag.pickup",
+      "label": "提起",
+      "type": "one_shot",
+      "file": "model/motions/drag-pickup.motion3.json",
+      "durationSeconds": 0.35,
+      "parameters": [
+        "ParamBodyAngleY",
+        "ParamAngleZ",
+        "ParamHeadPitch"
+      ],
+      "occupancy": [
+        "head",
+        "body"
+      ],
+      "internal": true,
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "entrySeconds": 0.12,
+      "interruptExitSeconds": 0.22,
+      "interruptible": true,
+      "returnTo": "current_state_and_follow",
+      "blockedStates": [],
+      "requiresFreeHand": false,
+      "compatibleExpressions": [
+        "neutral",
+        "friendly",
+        "focused",
+        "curious",
+        "concerned",
+        "happy"
+      ],
+      "requiresConfirmedEvent": false,
+      "changesTaskState": false
+    },
+    {
+      "id": "interaction.drag.land",
+      "label": "落地收势",
+      "type": "one_shot",
+      "file": "model/motions/drag-land.motion3.json",
+      "durationSeconds": 0.85,
+      "parameters": [
+        "ParamBodyAngleY",
+        "ParamAngleZ",
+        "ParamHeadPitch"
+      ],
+      "occupancy": [
+        "head",
+        "body"
+      ],
+      "internal": true,
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "entrySeconds": 0.12,
+      "interruptExitSeconds": 0.22,
+      "interruptible": true,
+      "returnTo": "current_state_and_follow",
+      "blockedStates": [],
+      "requiresFreeHand": false,
+      "compatibleExpressions": [
+        "neutral",
+        "friendly",
+        "focused",
+        "curious",
+        "concerned",
+        "happy"
+      ],
+      "requiresConfirmedEvent": false,
+      "changesTaskState": false
+    },
+    {
+      "id": "interaction.drag",
+      "label": "拖起／保持／落地",
+      "type": "interactive",
+      "phases": [
+        "interaction.drag.pickup",
+        "hold",
+        "interaction.drag.land"
+      ],
+      "occupancy": [
+        "head",
+        "body",
+        "host_position"
+      ],
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "loop": "hold until endDrag",
+      "interruptible": true,
+      "interruptExitSeconds": 0.22,
+      "globalPositionOwner": "desktop_host_not_implemented; preview bounded canvas offset only",
+      "suppresses": [
+        "gesture.*",
+        "gesture.tail_swish"
+      ],
+      "returnTo": "current_state_and_follow",
+      "changesTaskState": false
+    }
+  ],
+  "inheritedStates": {
+    "source": "native-character-motion-assets",
+    "actions": [
+      {
+        "id": "idle",
+        "label": "待机",
+        "description": "自然动态与鼠标跟随",
+        "type": "persistent",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": true,
+        "interruptible": true,
+        "returnTo": null,
+        "durationSeconds": null,
+        "requiresConfirmedEvent": false,
+        "pose": {
+          "label": "待机",
+          "description": "自然动态与鼠标跟随",
+          "weight": 0,
+          "tail": 1
+        }
+      },
+      {
+        "id": "listening",
+        "label": "注意／听取",
+        "description": "面向用户，双耳微抬，轻抬头",
+        "type": "persistent",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": true,
+        "interruptible": true,
+        "returnTo": null,
+        "durationSeconds": null,
+        "requiresConfirmedEvent": false,
+        "pose": {
+          "label": "注意／听取",
+          "description": "面向用户，双耳微抬，轻抬头",
+          "weight": 0.9,
+          "y": 4,
+          "by": 1.2,
+          "browL": 0.35,
+          "browR": 0.35,
+          "earL": 16,
+          "earR": 16,
+          "tail": 0.65
+        }
+      },
+      {
+        "id": "thinking",
+        "label": "思考",
+        "description": "轻歪头，视线暂时偏移",
+        "type": "persistent",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": true,
+        "interruptible": true,
+        "returnTo": null,
+        "durationSeconds": null,
+        "requiresConfirmedEvent": false,
+        "pose": {
+          "label": "思考",
+          "description": "轻歪头，视线暂时偏移",
+          "weight": 0.9,
+          "x": 3,
+          "y": 2,
+          "z": 7,
+          "bx": 0.7,
+          "ex": 0.25,
+          "ey": 0.2,
+          "browL": 0.35,
+          "browR": -0.1,
+          "earL": 8,
+          "earR": -3,
+          "tail": 0.4
+        }
+      },
+      {
+        "id": "working",
+        "label": "执行工作",
+        "description": "低头专注，身体略前倾，耳尾活动减弱",
+        "type": "persistent",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": true,
+        "interruptible": true,
+        "returnTo": null,
+        "durationSeconds": null,
+        "requiresConfirmedEvent": false,
+        "pose": {
+          "label": "执行工作",
+          "description": "低头专注，身体略前倾，耳尾活动减弱",
+          "weight": 0.9,
+          "y": -8,
+          "z": -1,
+          "by": -2,
+          "ey": -0.3,
+          "browL": -0.28,
+          "browR": -0.28,
+          "earL": -5,
+          "earR": -5,
+          "tail": 0.2
+        }
+      },
+      {
+        "id": "waiting",
+        "label": "等待",
+        "description": "收势并看向用户；等待原因由文字说明",
+        "type": "persistent",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": true,
+        "interruptible": true,
+        "returnTo": null,
+        "durationSeconds": null,
+        "requiresConfirmedEvent": false,
+        "pose": {
+          "label": "等待",
+          "description": "收势并看向用户；等待原因由文字说明",
+          "weight": 0.85,
+          "y": 1,
+          "browL": 0.12,
+          "browR": 0.12,
+          "earL": 4,
+          "earR": 4,
+          "tail": 0.35
+        }
+      },
+      {
+        "id": "speaking",
+        "label": "输出回应",
+        "description": "面向用户，小幅点头；口型仅随实际音频幅度",
+        "type": "persistent",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": true,
+        "interruptible": true,
+        "returnTo": null,
+        "durationSeconds": null,
+        "requiresConfirmedEvent": false,
+        "pose": {
+          "label": "输出回应",
+          "description": "面向用户，小幅点头；口型仅随实际音频幅度",
+          "weight": 0.8,
+          "y": 2,
+          "by": 0.3,
+          "browL": 0.2,
+          "browR": 0.2,
+          "earL": 7,
+          "earR": 7,
+          "mouth": 0.35,
+          "tail": 0.6
+        }
+      },
+      {
+        "id": "success",
+        "label": "完成",
+        "description": "短促点头、开心确认、尾巴轻摆，随后回待机",
+        "type": "one_shot",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": false,
+        "interruptible": true,
+        "returnTo": "idle",
+        "durationSeconds": 1.8,
+        "requiresConfirmedEvent": true,
+        "pose": {
+          "label": "完成",
+          "description": "短促点头、开心确认、尾巴轻摆，随后回待机",
+          "weight": 1,
+          "y": 2,
+          "browL": 0.5,
+          "browR": 0.5,
+          "earL": 18,
+          "earR": 18,
+          "mouth": 0.8,
+          "tail": 1,
+          "duration": 1.8
+        }
+      },
+      {
+        "id": "error",
+        "label": "异常／需处理",
+        "description": "停止工作姿态，轻歪头并看向用户",
+        "type": "persistent",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": true,
+        "interruptible": true,
+        "returnTo": null,
+        "durationSeconds": null,
+        "requiresConfirmedEvent": false,
+        "pose": {
+          "label": "异常／需处理",
+          "description": "停止工作姿态，轻歪头并看向用户",
+          "weight": 1,
+          "y": -2,
+          "z": -6,
+          "browL": 0.4,
+          "browR": -0.15,
+          "earL": -6,
+          "earR": -3,
+          "mouth": -0.4,
+          "tail": 0.15
+        }
+      },
+      {
+        "id": "cancelled",
+        "label": "已取消",
+        "description": "收到停止确认后收势，随后回待机",
+        "type": "one_shot",
+        "enterSeconds": 0.5,
+        "exitSeconds": 0.5,
+        "loop": false,
+        "interruptible": true,
+        "returnTo": "idle",
+        "durationSeconds": 1.2,
+        "requiresConfirmedEvent": true,
+        "pose": {
+          "label": "已取消",
+          "description": "收到停止确认后收势，随后回待机",
+          "weight": 0.9,
+          "y": -2,
+          "earL": -2,
+          "earR": -2,
+          "tail": 0.3,
+          "duration": 1.2
+        }
+      }
+    ]
+  },
+  "plannedNotImplemented": [
+    "global desktop drag integration"
+  ],
+  "rules": [
+    "所有当前动作由用户视觉验收后才标记可正式使用。",
+    "表达动作不改写任务状态。",
+    "耳尾总开关覆盖自然与短动作；关闭后平滑归零。",
+    "重复短动作请求不排队，工作状态拒绝大摆。",
+    "暂停冻结计时；复位清空短动作。",
+    "拖起与落地优先于短手势，期间降低耳尾并抑制大摆。",
+    "表情不写 ParamMouthOpenY，实际音频独立控制开口。",
+    "模型自主调用只允许 userAccepted=true 且当前姿势兼容的项目；当前新增候选均未开放。"
+  ],
+  "authoringStatus": {
+    "updatedOn": "2026-10-21",
+    "headLocalKeyformsSaved": true,
+    "smileMouthAuthored": true,
+    "smileEyesAuthored": true,
+    "nativeEditorBlocked": null,
+    "nativeExportVerified": true,
+    "nativeEvidence": "qa/native-gesture-check.json",
+    "visualReviewOwner": "user",
+    "visualAccepted": false
+  },
+  "nativePending": {
+    "missing": [],
+    "unbound": []
+  },
+  "expressions": [
+    {
+      "id": "neutral",
+      "label": "中立",
+      "file": "model/expressions/neutral.exp3.json",
+      "type": "persistent",
+      "entrySeconds": 0.25,
+      "exitSeconds": 0.25,
+      "occupancy": [
+        "brows",
+        "eyelids",
+        "mouth_form"
+      ],
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "audioOpenPreserved": true,
+      "blinkComposition": "natural blink multiplied by eyelid openness",
+      "changesTaskState": false
+    },
+    {
+      "id": "friendly",
+      "label": "亲切",
+      "file": "model/expressions/friendly.exp3.json",
+      "type": "persistent",
+      "entrySeconds": 0.25,
+      "exitSeconds": 0.25,
+      "occupancy": [
+        "brows",
+        "eyelids",
+        "mouth_form"
+      ],
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "audioOpenPreserved": true,
+      "blinkComposition": "natural blink multiplied by eyelid openness",
+      "changesTaskState": false
+    },
+    {
+      "id": "focused",
+      "label": "专注",
+      "file": "model/expressions/focused.exp3.json",
+      "type": "persistent",
+      "entrySeconds": 0.25,
+      "exitSeconds": 0.25,
+      "occupancy": [
+        "brows",
+        "eyelids",
+        "mouth_form"
+      ],
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "audioOpenPreserved": true,
+      "blinkComposition": "natural blink multiplied by eyelid openness",
+      "changesTaskState": false
+    },
+    {
+      "id": "curious",
+      "label": "好奇",
+      "file": "model/expressions/curious.exp3.json",
+      "type": "persistent",
+      "entrySeconds": 0.25,
+      "exitSeconds": 0.25,
+      "occupancy": [
+        "brows",
+        "eyelids",
+        "mouth_form"
+      ],
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "audioOpenPreserved": true,
+      "blinkComposition": "natural blink multiplied by eyelid openness",
+      "changesTaskState": false
+    },
+    {
+      "id": "concerned",
+      "label": "担忧",
+      "file": "model/expressions/concerned.exp3.json",
+      "type": "persistent",
+      "entrySeconds": 0.25,
+      "exitSeconds": 0.25,
+      "occupancy": [
+        "brows",
+        "eyelids",
+        "mouth_form"
+      ],
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "audioOpenPreserved": true,
+      "blinkComposition": "natural blink multiplied by eyelid openness",
+      "changesTaskState": false
+    },
+    {
+      "id": "happy",
+      "label": "开心",
+      "file": "model/expressions/happy.exp3.json",
+      "type": "persistent",
+      "entrySeconds": 0.25,
+      "exitSeconds": 0.25,
+      "occupancy": [
+        "brows",
+        "eyelids",
+        "mouth_form"
+      ],
+      "status": "native_bound_candidate",
+      "userAccepted": false,
+      "audioOpenPreserved": true,
+      "blinkComposition": "smile owns eyelid closure; blink remains scheduled",
+      "changesTaskState": false
+    }
+  ]
+}

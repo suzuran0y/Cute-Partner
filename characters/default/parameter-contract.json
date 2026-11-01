@@ -1,0 +1,1076 @@
+{
+  "schema_version": "1.0",
+  "version": "cute-partner-character-v1",
+  "date": "2026-10-21",
+  "status": "awaiting_user_visual_review",
+  "source": "source/character.cmo3",
+  "entry": "model/character.model3.json",
+  "editor": "Cubism Editor 5.3.04 PRO trial",
+  "exportTarget": "SDK 5.3 / Cubism5.3",
+  "sideConvention": "anatomical_L_R",
+  "nativeParameterCount": 37,
+  "actualBoundParameterCount": 26,
+  "parameters": [
+    {
+      "id": "ParamAngleX",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "purpose": "头部左右小幅平移",
+      "deformer": "DHeadXY / Warp24",
+      "preview": [
+        -30,
+        30
+      ],
+      "keys": [
+        -30,
+        0,
+        30
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamAngleY",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "purpose": "头部上下小幅平移",
+      "deformer": "DHeadXY / Warp24",
+      "preview": [
+        -22.5,
+        22.5
+      ],
+      "keys": [
+        -30,
+        0,
+        30
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamAngleZ",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "purpose": "头部轻微倾斜",
+      "deformer": "旋转 / Rotation5",
+      "preview": [
+        -15,
+        15
+      ],
+      "keys": [
+        -30,
+        0,
+        30
+      ],
+      "physicalDegreesAtEnds": [
+        5,
+        -5
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamEyeLOpen",
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "purpose": "角色左眼开合",
+      "deformer": "DEyeLOpen / Warp + 原有眼珠关键形",
+      "preview": [
+        0,
+        1
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "EyeLLash",
+        "EyeLCrease",
+        "EyeLIris",
+        "EyeLWhite"
+      ]
+    },
+    {
+      "id": "ParamEyeROpen",
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "purpose": "角色右眼开合",
+      "deformer": "DEyeROpen / Warp2 + 原有眼珠关键形",
+      "preview": [
+        0,
+        1
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "EyeRLash",
+        "EyeRCrease",
+        "EyeRIris",
+        "EyeRWhite"
+      ]
+    },
+    {
+      "id": "ParamEyeBallX",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "purpose": "眼球左右视线",
+      "deformer": "DGazeL / Warp4; DGazeR / Warp3",
+      "preview": [
+        -1,
+        1
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "EyeLIris",
+        "EyeRIris"
+      ]
+    },
+    {
+      "id": "ParamEyeBallY",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "purpose": "眼球上下视线",
+      "deformer": "DGazeL / Warp4; DGazeR / Warp3",
+      "preview": [
+        -1,
+        1
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "EyeLIris",
+        "EyeRIris"
+      ]
+    },
+    {
+      "purpose": "独立左眉上下，用于注意、思考与疑问",
+      "deformer": "Warp16 / 左眉毛的位置",
+      "preview": [
+        -0.6,
+        0.7
+      ],
+      "keys": [
+        -1,
+        0,
+        1
+      ],
+      "id": "ParamBrowLY",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "BrowL"
+      ]
+    },
+    {
+      "purpose": "独立右眉上下",
+      "deformer": "Warp19 / 右眉毛的位置",
+      "preview": [
+        -0.6,
+        0.7
+      ],
+      "keys": [
+        -1,
+        0,
+        1
+      ],
+      "id": "ParamBrowRY",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "BrowR"
+      ]
+    },
+    {
+      "purpose": "默认闭口弧线的放松或紧张变化；非完整笑脸素材",
+      "deformer": "MouthUpper 直接网格关键形",
+      "preview": [
+        -1,
+        1
+      ],
+      "keys": [
+        -1,
+        0,
+        1
+      ],
+      "id": "ParamMouthForm",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "MouthUpper"
+      ]
+    },
+    {
+      "purpose": "嘴内真实压合/展开及收隐；由实际音频幅度驱动",
+      "deformer": "MouthInside2 / 显示名 MouthInside，父 Warp23",
+      "preview": [
+        0,
+        1
+      ],
+      "keys": [
+        0,
+        1
+      ],
+      "id": "ParamMouthOpenY",
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamBodyAngleX",
+      "min": -10,
+      "max": 10,
+      "default": 0,
+      "purpose": "上半身左右轻微位移",
+      "deformer": "上半身的曲面Z / Warp5",
+      "preview": [
+        -9,
+        9
+      ],
+      "keys": [
+        -10,
+        0,
+        10
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "BowJewel",
+        "ApronStrapL",
+        "ApronStrapR",
+        "MaidCollar",
+        "ChestBib",
+        "CuffL",
+        "CuffR",
+        "HandLGripBack",
+        "HandRGripBack",
+        "ForearmL",
+        "ForearmR",
+        "Torso",
+        "UpperArmL",
+        "UpperArmR",
+        "Neck",
+        "HemFront",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamBodyAngleY",
+      "min": -10,
+      "max": 10,
+      "default": 0,
+      "purpose": "上半身上下轻微位移",
+      "deformer": "上半身的曲面Y / Warp6",
+      "preview": [
+        -6,
+        6
+      ],
+      "keys": [
+        -10,
+        0,
+        10
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "BowJewel",
+        "ApronStrapL",
+        "ApronStrapR",
+        "MaidCollar",
+        "ChestBib",
+        "CuffL",
+        "CuffR",
+        "HandLGripBack",
+        "HandRGripBack",
+        "ForearmL",
+        "ForearmR",
+        "Torso",
+        "UpperArmL",
+        "UpperArmR",
+        "Neck",
+        "HemFront",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamBodyAngleZ",
+      "min": -10,
+      "max": 10,
+      "default": 0,
+      "purpose": "上半身轻微倾斜",
+      "deformer": "旋转2 / Rotation6",
+      "preview": [
+        -4.5,
+        4.5
+      ],
+      "keys": [
+        -10,
+        0,
+        10
+      ],
+      "physicalDegreesAtEnds": [
+        2,
+        -2
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "BowJewel",
+        "ApronStrapL",
+        "ApronStrapR",
+        "MaidCollar",
+        "ChestBib",
+        "CuffL",
+        "CuffR",
+        "HandLGripBack",
+        "HandRGripBack",
+        "ForearmL",
+        "ForearmR",
+        "Torso",
+        "UpperArmL",
+        "UpperArmR",
+        "Neck",
+        "HemFront",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamBreath",
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "purpose": "躯干及胸前衣料局部呼吸",
+      "deformer": "Torso; ChestBib 直接网格关键形",
+      "preview": [
+        0,
+        1
+      ],
+      "keys": [
+        0,
+        1
+      ],
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "ChestBib",
+        "Torso"
+      ]
+    },
+    {
+      "purpose": "角色右侧蓝白鳍耳轻抬落（正面画面左侧）",
+      "deformer": "Warp22 / 右耳朵变形",
+      "preview": [
+        -30,
+        30
+      ],
+      "keys": [
+        -30,
+        0,
+        30
+      ],
+      "id": "ParamEarR",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "HeadFinR"
+      ]
+    },
+    {
+      "purpose": "角色左侧蓝白鳍耳轻抬落（正面画面右侧）",
+      "deformer": "Warp25 / 曲面，父 Warp21",
+      "preview": [
+        -30,
+        30
+      ],
+      "keys": [
+        -30,
+        0,
+        30
+      ],
+      "id": "ParamEarL",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "HeadFinL"
+      ]
+    },
+    {
+      "purpose": "尾巴中段连同尾鳍两向扇形扫动",
+      "deformer": "Rotation7 / 旋转3",
+      "preview": [
+        -30,
+        30
+      ],
+      "keys": [
+        -30,
+        0,
+        30
+      ],
+      "physicalDegreesAtEnds": [
+        18,
+        -18
+      ],
+      "id": "ParamTailSway",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "TailFin",
+        "TailMid"
+      ],
+      "verification": "qa/native-ear-tail-check.json"
+    },
+    {
+      "purpose": "加强尾鳍外端弯曲；与中段错峰，原默认形不变",
+      "deformer": "Warp26 / 曲面2，父 Rotation7",
+      "preview": [
+        -30,
+        30
+      ],
+      "keys": [
+        -30,
+        0,
+        30
+      ],
+      "id": "ParamTailTip",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "TailFin"
+      ],
+      "verification": "qa/native-ear-tail-check.json"
+    },
+    {
+      "id": "ParamHeadPitch",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ],
+      "verification": "qa/native-gesture-check.json"
+    },
+    {
+      "id": "ParamHeadTurn",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ],
+      "verification": "qa/native-gesture-check.json"
+    },
+    {
+      "id": "ParamArmLiftL",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "CuffL",
+        "HandLGripBack",
+        "HandLOpen",
+        "ForearmL",
+        "UpperArmL"
+      ],
+      "verification": "qa/native-gesture-check.json"
+    },
+    {
+      "id": "ParamHandWaveL",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "HandLGripBack",
+        "HandLOpen"
+      ],
+      "verification": "qa/native-gesture-check.json"
+    },
+    {
+      "id": "ParamHandOpenL",
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "HandLGripBack",
+        "HandLOpen"
+      ],
+      "verification": "qa/native-gesture-check.json"
+    },
+    {
+      "id": "ParamEyeLSmile",
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "EyeLLash",
+        "EyeLCrease",
+        "EyeLIris",
+        "EyeLWhite"
+      ],
+      "verification": "qa/native-gesture-check.json"
+    },
+    {
+      "id": "ParamEyeRSmile",
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "mechanicallyCheckedDrawables": [
+        "EyeRLash",
+        "EyeRCrease",
+        "EyeRIris",
+        "EyeRWhite"
+      ],
+      "verification": "qa/native-gesture-check.json"
+    }
+  ],
+  "remainingSlots": {
+    "ids": [
+      "ParamBrowLX",
+      "ParamBrowRX",
+      "ParamBrowLAngle",
+      "ParamBrowRAngle",
+      "ParamBrowLForm",
+      "ParamBrowRForm",
+      "ParamCheek",
+      "ParamHairFront",
+      "ParamHairSide",
+      "ParamHairBack",
+      "Param"
+    ],
+    "status": "未制作有效绑定；不要把存在的槽位当作可用表情或头发物理"
+  },
+  "driver": {
+    "module": "web/interaction-driver.js + web/state-driver.js + web/secondary-dynamics.js",
+    "class": "InteractionMotionDriver",
+    "baseTuning": {
+      "eyeSmoothingSeconds": 0.13,
+      "headSmoothingSeconds": 0.35,
+      "bodySmoothingSeconds": 0.8,
+      "headGain": {
+        "x": 20,
+        "y": 15,
+        "z": -10
+      },
+      "bodyGain": {
+        "x": 6,
+        "y": 4,
+        "z": -3
+      },
+      "breathPeriodSeconds": 4.4,
+      "blinkCloseSeconds": 0.09,
+      "blinkHoldSeconds": 0.05,
+      "blinkOpenSeconds": 0.16,
+      "blinkIntervalSeconds": [
+        2.8,
+        6
+      ],
+      "firstBlinkSeconds": [
+        2,
+        5
+      ]
+    },
+    "baseDefaults": {
+      "followMouse": true,
+      "eye": true,
+      "head": true,
+      "body": true,
+      "blink": true,
+      "breathe": true,
+      "breathAmplitude": 0.8,
+      "breathPeriod": 4.4,
+      "linkage": 1,
+      "followSpeed": 1
+    },
+    "defaults": {
+      "ears": true,
+      "tail": true,
+      "face": true,
+      "stateMotion": true,
+      "dynamicAmplitude": 0.8,
+      "naturalEars": true,
+      "naturalTail": true,
+      "autoSwish": true
+    },
+    "fps": 30,
+    "transitionSeconds": 0.5,
+    "debounceSeconds": 0.22,
+    "hostAPI": {
+      "state": "setState(id, {reason, confirmed, immediate})",
+      "audio": "setAudioLevel(0..1)",
+      "tick": "update(deltaSeconds) -> final parameters",
+      "reaction": "triggerReaction('ear.left'|'ear.right'|'ear.both'|'tail.swish') -> boolean",
+      "pause": "setPaused(boolean)",
+      "reset": "resetSettings(); setPaused(false) to resume",
+      "install": "installLibrary({motions, expressions})",
+      "gesture": "triggerGesture(id, {direction:-1..1}) -> boolean",
+      "expression": "setExpression(auto|neutral|friendly|focused|curious|concerned|happy) -> boolean",
+      "drag": "beginDrag(); moveDrag(horizontalSpeed); endDrag()",
+      "cancelGesture": "cancelGesture()"
+    },
+    "priority": "drag/landing > short gesture > follow/state posture; independent expression + actual audio; unified ear/tail owner; final single write",
+    "audio": "仅播放的音频测幅；attack 35ms / release 70ms；静音归零；没有音素识别",
+    "dynamics": "程序合成；分级摆尾＋局部延迟，随机动态无积攒队列；没有 physics3",
+    "pause": "冻结姿态与计时，停止音频；页面隐藏停止绘制并停止音频",
+    "earRestSeconds": [
+      6,
+      14
+    ],
+    "earDurationSeconds": 0.62,
+    "tailBasePeriodSeconds": 5.6,
+    "swishDurationSeconds": 2.8,
+    "autoSwishRestSeconds": [
+      45,
+      85
+    ]
+  },
+  "proDependency": {
+    "used": true,
+    "reason": "多级曲面和旋转变形器，FREE 完整继续编辑未验证"
+  },
+  "constraints": [
+    "头 X/Y 继承 v0.2 的正面小幅位移，Z 为倾斜，没有侧脸或透视转面。",
+    "MouthInside2 是运行时网格 ID；原画图层名仍为 MouthInside；MouthLower 保留为原画预备件。",
+    "本页仅模拟模型状态；尚无后端事件连接、语音识别或语音合成服务。",
+    "正式桌面宿主暂保留旧版本，本轮只提供独立网页验收，不声称全局鼠标与新状态已接入桌面程序。",
+    "大摆围绕正面单侧尾巴姿态进行扇形扫动，未制作横跨人物背后的路径。",
+    "本批增加小笑口和弧形笑眼；开口仍为音频幅度驱动的单轴口型，未制作全音素。"
+  ],
+  "evidence": [
+    "qa/native-ear-tail-check.json",
+    "qa/native-gesture-check.json",
+    "qa/runtime-combination-check.json"
+  ],
+  "actions": "actions.json",
+  "visualReview": "pending_user",
+  "stage": "communication_review_candidate",
+  "nativeExport": {
+    "mocSha256": "6c9cb18db4bd357dd037c1b9b428ebbd9958589c0a88404b47f9dd5894ce9c06",
+    "drawables": 59,
+    "missing": [],
+    "unbound": [],
+    "sourceHasNewerHeadKeyforms": false
+  },
+  "communicationParameters": [
+    {
+      "id": "ParamHeadPitch",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "affected": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamHeadTurn",
+      "min": -1,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "affected": [
+        "Ahoge",
+        "HeadBowL",
+        "BrowL",
+        "BrowR",
+        "HeadFinL",
+        "EyeLLash",
+        "EyeRLash",
+        "HairFrontMHighlight",
+        "HairFrontM",
+        "HairFrontL",
+        "HairFrontR",
+        "HeadBowR",
+        "HeadFinR",
+        "Headband",
+        "MouthUpper",
+        "EyeLCrease",
+        "EyeRCrease",
+        "EyeLIris",
+        "EyeLWhite",
+        "EyeRIris",
+        "EyeRWhite",
+        "BlushL",
+        "BlushR",
+        "FaceBase",
+        "EarL",
+        "EarR",
+        "HairSideL",
+        "HairSideR",
+        "HairBack",
+        "MouthInside2"
+      ]
+    },
+    {
+      "id": "ParamArmLiftL",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "bound": true,
+      "affected": [
+        "CuffL",
+        "HandLGripBack",
+        "HandLOpen",
+        "ForearmL",
+        "UpperArmL"
+      ]
+    },
+    {
+      "id": "ParamHandWaveL",
+      "min": -30,
+      "max": 30,
+      "default": 0,
+      "bound": true,
+      "affected": [
+        "HandLGripBack",
+        "HandLOpen"
+      ]
+    },
+    {
+      "id": "ParamHandOpenL",
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "affected": [
+        "HandLGripBack",
+        "HandLOpen"
+      ]
+    },
+    {
+      "id": "ParamEyeLSmile",
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "affected": [
+        "EyeLLash",
+        "EyeLCrease",
+        "EyeLIris",
+        "EyeLWhite"
+      ]
+    },
+    {
+      "id": "ParamEyeRSmile",
+      "min": 0,
+      "max": 1,
+      "default": 0,
+      "bound": true,
+      "affected": [
+        "EyeRLash",
+        "EyeRCrease",
+        "EyeRIris",
+        "EyeRWhite"
+      ]
+    }
+  ],
+  "authoringStatus": {
+    "updatedOn": "2026-10-21",
+    "headLocalKeyformsSaved": true,
+    "smileMouthAuthored": true,
+    "smileEyesAuthored": true,
+    "nativeEditorBlocked": null,
+    "nativeExportVerified": true,
+    "nativeEvidence": "qa/native-gesture-check.json",
+    "visualReviewOwner": "user",
+    "visualAccepted": false
+  },
+  "communicationLimitations": [
+    "当前只支持画布内拖动，未接桌面宿主或模型服务。",
+    "头姿为正面素材上的有限形变，不包含完整侧脸和背面姿态。",
+    "motion3/exp3 为可复用资源，当前由自有组合器读取；不能再让另一个播放器重复写同一参数。",
+    "所有新增动作及表情等待用户视觉验收，模型自主调用仍关闭。"
+  ],
+  "neutralGeometry": {
+    "maxDifferenceCanvasPx": 0.2650909423828125,
+    "toleranceCanvasPx": 0.5,
+    "opacityPreserved": true
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "dsh-cute-partner",
+  "version": "1.0.0",
+  "description": "Optional entry for the installed Cute-Partner desktop companion",
+  "main": "index.cjs",
+  "files": [
+    "index.cjs",
+    "cordis.patch.yml",
+    "locale",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": "./index.cjs",
+    "./locale/en.json": "./locale/en.json",
+    "./locale/zh.json": "./locale/zh.json"
+  },
+  "engines": {
+    "dsh": "=0.2.1-rc.2",
+    "node": ">=24"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT",
+  "keywords": [
+    "dsh-plugin",
+    "desktop-companion",
+    "live2d"
+  ]
+}

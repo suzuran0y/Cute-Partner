@@ -1,0 +1,19 @@
+{
+  "name": "cute-partner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Windows desktop companion with Live2D, DeepSeek Harness, voice and scoped memory",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "doctor": "node tools/doctor.cjs",
+    "start": "node apps/desktop/tools/start.cjs",
+    "check:release": "node tools/check-release.cjs",
+    "voice:plan": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/install-voice.ps1 -Plan",
+    "voice:install": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File tools/install-voice.ps1",
+    "speech:prepare": "node apps/desktop/tools/prepare-speech.cjs",
+    "market:build": "node tools/build-market-index.cjs"
+  }
+}

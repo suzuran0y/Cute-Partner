@@ -1,0 +1,13 @@
+'use strict';
+const { spawn } = require('node:child_process');
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.resolve(__dirname, '..');
+const executable = require('./prepare-runtime.cjs').prepare();
+fs.mkdirSync(path.join(root, '.runtime'), { recursive: true });
+const log = fs.openSync(path.join(root, '.runtime/desktop.log'), 'a');
+const desktopEnv = { ...process.env }; delete desktopEnv.ELECTRON_RUN_AS_NODE;
+const child = spawn(executable, [root], { cwd: root, env: desktopEnv, detached: true, windowsHide: true, stdio: ['ignore', log, log] });
+child.on('error', error => { console.error('启动失败：' + error.message); process.exitCode = 1; });
+child.unref(); fs.closeSync(log);
+console.log('已启动可爱的助手；关闭小档案后继续驻留，右键角色或托盘选择“睡觉去吧”可完全退出。');

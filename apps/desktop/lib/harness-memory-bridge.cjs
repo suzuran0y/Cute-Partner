@@ -1,0 +1,15 @@
+'use strict';
+// User explicitly approved bounded confirmed-memory sharing to DeepSeek on 2026-10-25.
+exports.installMemory = function(ctx, host) {
+  const path = require('node:path'), { defineTool } = require(path.join(process.env.CUTE_PARTNER_HARNESS_MODULES, '@deepseek-ai/dsh-tools'));
+  for (const [name, description, parameters, action] of [
+    ['memory_search', '按具体关键词跨抽屉查相关片段，最多12条且约1800token，可用drawerId定向查找。返回真实id/revision；本轮已查的抽屉可自主整理，不自动加载整库。空检索只查当前/关联范围。includeCandidates返回推断，不能当事实或新证据重复保存。', { query: { type: 'string', required: true }, drawerId: { type: 'string' }, includeCandidates: { type: 'boolean' } }, 'memory-search'],
+    ['memory_candidate', '把本轮用户话语推断出的信息另存待确认候选，不冒充用户确认，不覆盖旧条目。明确记住的原话已由宿主保存；不要重复提取召回或自己的摘要。', { content: { type: 'string', required: true }, kind: { type: 'string', enum: ['fact', 'decision', 'plan', 'todo', 'reference'] } }, 'memory-candidate'],
+    ['memory_drawer', '为必要的新事务创建抽屉，或用id和expectedRevision更名当前/已关联抽屉。返回id后可用memory_manage保存本轮资料；不会切换活动会话或关联其他旧事务，不授予文件权限，不修改schema。告知用户整理到哪里。', { name: { type: 'string', required: true }, summary: { type: 'string' }, id: { type: 'string' }, expectedRevision: { type: 'number' } }, 'memory-drawer'],
+    ['memory_manage', '自主持久整理关于你(global)、当前/关联/本轮检索/新建事务：remember新增，update更正，move仅移归属，forget遗忘，history查修订，confirm确认候选，core设为/取消核心。普通新增、分类和计划增量直接保存；冲突、已确认事实/偏好改写、遗忘和核心变更由宿主弹卡确认。先检索防重复、取真实id/revision。用户原话摘录可用，推断只存候选；明确记住已由宿主先存，必要时move分类。不要把暂存当已保存，不按召回频率设核心。', { operation: { type: 'string', required: true, enum: ['remember','update','move','forget','history','confirm','core'] }, id: { type: 'string' }, expectedRevision: { type: 'number' }, drawerId: { type: 'string' }, content: { type: 'string' }, kind: { type: 'string', enum: ['fact','decision','plan','todo','reference','result'] }, conflict: { type: 'boolean' }, core: { type: 'boolean' } }, 'memory-manage'],
+    ...(process.env.CUTE_PARTNER_GROWTH_ENABLED === '1' ? [
+      ['conversation_topic','话题整理工具：begin/continue绑定话题；stage只暂存未明确线索，不是长期保存。形成持续目标、计划或复访后archive可自主归档到新建/已检索抽屉，明确要求记住也可归档，无需例行询问。归属有歧义时才propose弹卡讨论；用户延后或不长期保存不绕过，resume需要明确恢复。普通记忆直接memory_manage，不要只stage就声称记住。status查当前话题。', {operation:{type:'string',required:true,enum:['status','begin','continue','stage','archive','propose','resume']},topicId:{type:'string'},title:{type:'string'},content:{type:'string'},kind:{type:'string',enum:['fact','decision','plan','todo','reference','result']},summary:{type:'string'},itemIds:{type:'string'},drawerId:{type:'string'}},'growth-topic'],
+      ['persona_update','查询或提出相处方式修改。status获取真实revision；append增补或replace替换（短设定）需expectedRevision和content。宿主先展示差异、用户确认才保存；不把个人事实、项目计划、权限或工具规则写成人物设定。保留历史与撤销，下轮使用新设定。',{operation:{type:'string',required:true,enum:['status','append','replace']},expectedRevision:{type:'number'},content:{type:'string'}},'growth-persona'],
+    ] : []),
+  ]) ctx.tools.register(defineTool({ name, description, parameters, output: { schema: { type: 'string' }, render: (_args, value) => [{ type: 'text', text: value }] }, async execute(args, exec) { return JSON.stringify(await host(action, { ...args, sessionId: String(exec.agent.session.id) }, exec.signal)); } }));
+};

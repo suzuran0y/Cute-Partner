@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "provider": "deepseek-harness",
+  "limits": {
+    "monthlyRequests": 0,
+    "monthlyReportedTokens": 0,
+    "turnsPerConversation": 20
+  }
+}

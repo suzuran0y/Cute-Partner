@@ -1,0 +1,37 @@
+# Cute-Partner owns a dedicated sdk-minimal home; no user desktop plugins.
+- id: tool-fs
+  disabled: true
+- id: tool-working-directory
+  disabled: true
+- id: persistent-bash
+  disabled: true
+- id: persistent-pwsh
+  disabled: true
+- id: terminal-bash
+  disabled: true
+- id: terminal-pwsh
+  disabled: true
+- id: system-prompt
+  config:
+    includeHarnessIdentity: false
+    includeRuntimeContext: false
+    personaPrefix: !!js "process.env.CUTE_PARTNER_CONTEXT_FILE ? process.getBuiltinModule('node:fs').readFileSync(process.env.CUTE_PARTNER_CONTEXT_FILE, 'utf8') : '你是桌面伙伴可爱的助手，提供简洁自然的中文文字对话，不能操作桌面或文件。'"
+- id: llm-deepseek
+  config:
+    streamIdleTimeoutMs: 45000
+- id: llm-retry
+  disabled: true
+- id: session-log-deepseek
+  disabled: true
+- id: plugin-package-inventory-deepseek
+  disabled: true
+- insert:
+    - id: credentials
+      name: '@deepseek-ai/dsh-credentials-local'
+      config:
+        path: !!js process.env.CUTE_PARTNER_CREDENTIAL_FILE
+        watch: false
+
+- insert:
+    - id: cute-partner-user-questions
+      name: '@deepseek-ai/dsh-user-questions'

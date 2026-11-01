@@ -1,0 +1,65 @@
+# Full SDK agent, with the desktop host answering permissions and questions.
+- id: system-prompt
+  config:
+    includeHarnessIdentity: true
+    includeRuntimeContext: true
+    personaPrefix: !!js "process.getBuiltinModule('node:fs').readFileSync(process.env.CUTE_PARTNER_CONTEXT_FILE, 'utf8')"
+- id: sandbox-policy
+  config:
+    mode: !!js "process.env.CUTE_PARTNER_AGENT_MODE === 'desktop' ? 'danger-full-access' : 'workspace-write'"
+    workspaceRoot: !!js process.env.CUTE_PARTNER_AGENT_WORKSPACE
+- id: approval
+  config:
+    policy: ask
+- id: permission
+  config:
+    presets:
+      workspace-write:
+        sandbox: workspace-write
+        approval: ask
+      danger-full-access:
+        sandbox: danger-full-access
+        approval: ask
+- id: sdk-jsonrpc-server
+  config:
+    maxTokensAsSuccess: false
+- id: llm-deepseek
+  config:
+    streamIdleTimeoutMs: 45000
+- id: llm-retry
+  disabled: true
+- id: session-log-deepseek
+  disabled: true
+- id: plugin-package-inventory-deepseek
+  disabled: true
+- id: session-telemetry-otel
+  disabled: true
+- id: otel
+  disabled: true
+# Autonomous goals and extra model workers are separate future capabilities.
+- id: goal-round-driver
+  disabled: true
+- id: tool-goal
+  disabled: true
+- id: tool-subagent
+  disabled: true
+- id: tool-subagent-fork
+  disabled: true
+- id: tool-subagent-control
+  disabled: true
+- id: tool-subagent-list-agents
+  disabled: true
+- id: tool-workflow
+  disabled: true
+- id: tool-web
+  config:
+    search: false
+    fetch: true
+- id: credentials
+  config:
+    path: !!js process.env.CUTE_PARTNER_CREDENTIAL_FILE
+    watch: false
+- insert:
+    - id: cute-partner-host
+      name: __CUTE_PARTNER_HOST_PLUGIN__
+
