@@ -1,6 +1,5 @@
 <a id="top"></a>
-
-<img align="right" src="apps/desktop/assets/character-icon.png" alt="Cute-Partner application icon" width="88">
+<img align="right" src="apps/desktop/assets/character-icon.png" alt="Cute-Partner application icon" width="80">
 
 # Cute-Partner
 
