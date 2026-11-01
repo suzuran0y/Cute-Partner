@@ -1288,4 +1288,5 @@ Cute-Partner 由桌面应用、角色资源和可选语音组件组成，当前�
 ### 6.4. 使用与授权说明 [⌃](#top)
 
 Cute-Partner 项目原创代码采用 **[MIT License](LICENSE)**。
+
 © 2026 Suzuran0y
