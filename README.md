@@ -445,44 +445,44 @@ Cute-Partner 以 DeepSeek Harness 提供后台智能体能力，再把交流和�
 ```text
 Cute-Partner/
     │
-    ├── apps/desktop/                # 桌面应用
-    │   ├── main.cjs                 # 窗口、服务组装与生命周期
-    │   ├── preload.cjs              # 界面调用宿主的接口
-    │   ├── server.cjs               # 本机服务与角色资源读取
-    │   ├── launch.ps1               # 桌面快捷方式的后台启动入口
-    │   ├── package.json             # 桌面依赖与脚本
-    │   ├── pnpm-lock.yaml           # 固定依赖版本
-    │   ├── pnpm-workspace.yaml      # 桌面依赖安装配置
-    │   ├── model-service.config.json # 模型与调用限额
-    │   ├── lib/                     # 对话、记忆、工具、语音与资料
-    │   ├── ui/                      # 角色、白云、聊聊与小本本
-    │   ├── assets/                  # 图标与预置音色
-    │   ├── optional-modules/        # 可选语音组件适配
-    │   └── tools/                   # 启动与组件准备
+    ├── apps/desktop/                  # 桌面应用
+    │   ├── main.cjs                   # 窗口、服务组装与生命周期
+    │   ├── preload.cjs                # 界面调用宿主的接口
+    │   ├── server.cjs                 # 本机服务与角色资源读取
+    │   ├── launch.ps1                 # 桌面快捷方式的后台启动入口
+    │   ├── package.json               # 桌面依赖与脚本
+    │   ├── pnpm-lock.yaml             # 固定依赖版本
+    │   ├── pnpm-workspace.yaml        # 桌面依赖安装配置
+    │   ├── model-service.config.json  # 模型与调用限额
+    │   ├── lib/                       # 对话、记忆、工具、语音与资料
+    │   ├── ui/                        # 角色、白云、聊聊与小本本
+    │   ├── assets/                    # 图标与预置音色
+    │   ├── optional-modules/          # 可选语音组件适配
+    │   └── tools/                     # 启动与组件准备
     │
-    ├── characters/default/          # 默认角色：哦鲸鲸
-    │   ├── character.json           # 角色 ID 与显示名
-    │   ├── parameter-contract.json  # 参数契约
-    │   ├── actions.json             # 动作清单
-    │   ├── model/                   # 模型、纹理、动作与表情
-    │   ├── preview.png              # 静态预览图
-    │   └── web/                     # 角色驱动、SDK 与 Core
+    ├── characters/default/            # 默认角色：哦鲸鲸
+    │   ├── character.json             # 角色 ID 与显示名
+    │   ├── parameter-contract.json    # 参数契约
+    │   ├── actions.json               # 动作清单
+    │   ├── model/                     # 模型、纹理、动作与表情
+    │   ├── preview.png                # 静态预览图
+    │   └── web/                       # 角色驱动、SDK 与 Core
     │
-    ├── integrations/harness/        # Harness 集成入口
-    ├── tools/                       # 环境检查、组件安装与发布工具
-    │   ├── doctor.cjs               # 基础环境检查
-    │   ├── install-voice.ps1        # 可选自然语音安装
-    │   ├── check-release.cjs        # 上传候选文件检查
-    │   ├── release-resources.json   # 公开资源的大小与哈希
-    │   └── build-market-index.cjs   # Harness 集成索引生成
-    ├── docs/media/                  # 文档图片、动图与试听
-    ├── .gitignore                   # 排除依赖、运行资料与下载资源
-    ├── package.json                 # 项目命令入口
-    ├── pnpm-workspace.yaml          # 根目录脚本配置
-    ├── product.json                 # 产品名称、版本与默认角色
-    ├── README.md                    # 中文项目文档
-    ├── README_EN.md                 # 英文项目文档
-    └── LICENSE                      # MIT License
+    ├── integrations/harness/          # Harness 集成入口
+    ├── tools/                         # 环境检查、组件安装与发布工具
+    │   ├── doctor.cjs                 # 基础环境检查
+    │   ├── install-voice.ps1          # 可选自然语音安装
+    │   ├── check-release.cjs          # 上传候选文件检查
+    │   ├── release-resources.json     # 公开资源的大小与哈希
+    │   └── build-market-index.cjs     # Harness 集成索引生成
+    ├── docs/media/                    # 文档图片、动图与试听
+    ├── .gitignore                     # 排除依赖、运行资料与下载资源
+    ├── package.json                   # 项目命令入口
+    ├── pnpm-workspace.yaml            # 根目录脚本配置
+    ├── product.json                   # 产品名称、版本与默认角色
+    ├── README.md                      # 中文项目文档
+    ├── README_EN.md                   # 英文项目文档
+    └── LICENSE                        # MIT License
 ```
 
 <a id="sec32"></a>
