@@ -1,6 +1,5 @@
 <a id="top"></a>
-
-<img align="right" src="apps/desktop/assets/character-icon.png" alt="Cute-Partner 程序图标" width="88">
+<img align="right" src="apps/desktop/assets/character-icon.png" alt="Cute-Partner 程序图标" width="80">
 
 # Cute-Partner · 可爱的助手
 
