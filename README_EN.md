@@ -3,7 +3,7 @@
 
 # Cute-Partner
 
-[![Version](https://img.shields.io/badge/version-1.0.0-black)](#sec61)
+[![Version](https://img.shields.io/badge/version-1.0.0-black)](https://github.com/suzuran0y/Cute-Partner/issues/1)
 [![Platform](https://img.shields.io/badge/platform-Windows%20x64-blue)](#sec32)
 [![Live2D](https://img.shields.io/badge/Live2D-Cubism-FF6699)](#sec54)
 [![Harness](https://img.shields.io/badge/Agent-DeepSeek%20Harness-536DFE)](#sec12)
@@ -1212,7 +1212,7 @@ The three personal settings files are in `apps/desktop/.runtime/`. Long-term mem
 
 ---
 
-Further development is welcome. Use **Issues** to discuss problems and ideas, and **Pull Requests** to improve code, documentation, or resource information. Small fixes and improvements to existing interfaces are all welcome.
+Further development is welcome. Use **[Issues](https://github.com/suzuran0y/Cute-Partner/issues)** to discuss problems and ideas, and **[Pull Requests](https://github.com/suzuran0y/Cute-Partner/pulls)** to improve code, documentation, or resource information. Small fixes and improvements to existing interfaces are all welcome.
 
 ---
 

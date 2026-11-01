@@ -3,7 +3,7 @@
 
 # Cute-Partner · 可爱的助手
 
-[![Version](https://img.shields.io/badge/version-1.0.0-black)](#sec61)
+[![Version](https://img.shields.io/badge/version-1.0.0-black)](https://github.com/suzuran0y/Cute-Partner/issues/1)
 [![Platform](https://img.shields.io/badge/platform-Windows%20x64-blue)](#sec32)
 [![Live2D](https://img.shields.io/badge/Live2D-Cubism-FF6699)](#sec54)
 [![Harness](https://img.shields.io/badge/Agent-DeepSeek%20Harness-536DFE)](#sec12)
@@ -1199,7 +1199,7 @@ Harness 集成入口读取 `CUTE_PARTNER_HOME` 定位已安装的 Cute-Partner�
 
 ---
 
-欢迎基于 Cute-Partner 继续开发，也欢迎通过 **Issue** 交流使用问题与想法，通过 **Pull Request** 提交代码、文档和资源说明的改进。无论是一次小修正，还是对已有接口的完善，都欢迎参与。
+欢迎基于 Cute-Partner 继续开发，也欢迎通过 **[Issue](https://github.com/suzuran0y/Cute-Partner/issues)** 交流使用问题与想法，通过 **[Pull Request](https://github.com/suzuran0y/Cute-Partner/pulls)** 提交代码、文档和资源说明的改进。无论是一次小修正，还是对已有接口的完善，都欢迎参与。
 
 ---
 
