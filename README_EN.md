@@ -482,7 +482,8 @@ Cute-Partner/
     │   ├── install-voice.ps1        # Optional natural speech installer
     │   ├── check-release.cjs        # Git upload candidate checks
     │   ├── release-resources.json   # Public resource sizes and hashes
-    │   └── build-market-index.cjs   # Harness integration index builder
+    │   ├── build-market-index.cjs   # Harness integration index builder
+    │   └── build-windows-release.cjs # Windows base application packager
     ├── docs/media/                  # Documentation images, GIFs, and audio
     ├── .gitignore                   # Excludes dependencies, personal data, and downloads
     ├── package.json                 # Project commands
@@ -1190,11 +1191,11 @@ The `audio`, `stop`, and `update` events connect to [audio-output.js](apps/deskt
 | [model-service.config.json](apps/desktop/model-service.config.json) | Provider ID and session, request, and token limits |
 | `CUTE_PARTNER_HARNESS_DIR` | Specifies the Harness installation directory used by the Provider |
 | `CompanionSettings`, `TtsService`, `BudgetGuard` | Validate and save persona/working scope, speech, and balance protection settings |
-| [integrations/harness/index.cjs](integrations/harness/index.cjs) | Exposes `createController({ root, platform, run, node })`, returning `inspect()` and `start(signal)` |
+| [integrations/harness/index.cjs](integrations/harness/index.cjs) | Exposes `createController({ root, platform, run, node, installer })`, returning `inspect()`, `install(options)`, and `start(signal)` |
 
 This version loads character resources from `characters/default`. The `characterId` field in `product.json` records the character identifier; the loading code defines the actual resource paths.
 
-The integration reads `CUTE_PARTNER_HOME` to locate an installed Cute-Partner. It registers `cute_partner_status` to inspect installation status and `cute_partner_start` to explicitly start the desktop application. The character uses its own sessions and personal data. The accompanying `cordis.patch.yml` and `package.json` define the integration entry.
+The integration locates Cute-Partner through its local installation record or `CUTE_PARTNER_HOME`. It registers `cute_partner_status` to inspect the installation, `cute_partner_install` to show the installation plan and prepare the Windows base application after confirmation, and `cute_partner_start` to launch the character. The installer checks the fixed release package's size and SHA-256 against `release.json`; optional voice models are not downloaded. The character uses its own sessions and personal data, and removing the integration retains the independent application. The accompanying `cordis.patch.yml` and `package.json` define the integration entry.
 
 **Common settings and storage.** Save everyday settings in the Notebook. Code defaults and locally saved settings determine startup behavior; changes to source configuration take effect after restart.
 

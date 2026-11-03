@@ -474,7 +474,8 @@ Cute-Partner/
     │   ├── install-voice.ps1          # 可选自然语音安装
     │   ├── check-release.cjs          # 上传候选文件检查
     │   ├── release-resources.json     # 公开资源的大小与哈希
-    │   └── build-market-index.cjs     # Harness 集成索引生成
+    │   ├── build-market-index.cjs     # Harness 集成索引生成
+    │   └── build-windows-release.cjs # Windows 基础程序包构建
     ├── docs/media/                    # 文档图片、动图与试听
     ├── .gitignore                     # 排除依赖、运行资料与下载资源
     ├── package.json                   # 项目命令入口
@@ -1177,11 +1178,11 @@ window.addEventListener('pagehide', unsubscribe, { once: true });
 | [model-service.config.json](apps/desktop/model-service.config.json) | 当前 Provider 标识与会话、请求、token 限额 |
 | `CUTE_PARTNER_HARNESS_DIR` | 指定 Harness 安装目录；Provider 据此定位本机运行框架 |
 | `CompanionSettings`、`TtsService`、`BudgetGuard` | 分别校验与保存相处方式/工作范围、声音、余额保护设置 |
-| [integrations/harness/index.cjs](integrations/harness/index.cjs) | 提供 `createController({ root, platform, run, node })`，返回 `inspect()` 和 `start(signal)` |
+| [integrations/harness/index.cjs](integrations/harness/index.cjs) | 提供 `createController({ root, platform, run, node, installer })`，返回 `inspect()`、`install(options)` 和 `start(signal)` |
 
 本版从 `characters/default` 加载角色资源；`product.json` 中的 `characterId` 记录角色标识，实际资源路径由加载代码确定。
 
-Harness 集成入口读取 `CUTE_PARTNER_HOME` 定位已安装的 Cute-Partner，注册 `cute_partner_status` 检查安装状态、`cute_partner_start` 显式启动桌面程序；启动后的角色使用自己的会话和资料。配套 `cordis.patch.yml` 与 `package.json` 定义集成入口。
+Harness 集成入口通过本机安装记录或 `CUTE_PARTNER_HOME` 定位 Cute-Partner，注册 `cute_partner_status` 检查状态、`cute_partner_install` 展示安装计划并在确认后准备 Windows 基础程序、`cute_partner_start` 显式启动角色。安装器依据 `release.json` 校验固定发布包的大小与 SHA-256，不下载可选语音模型。启动后的角色使用自己的会话和资料，卸载集成入口保留独立程序。配套 `cordis.patch.yml` 与 `package.json` 定义集成入口。
 
 **常用配置与保存位置。** 日常设置通过小本本保存，代码默认值与本机已保存设置共同决定启动状态；源码配置修改后重启生效。
 

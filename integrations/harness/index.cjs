@@ -1,8 +1,11 @@
 'use strict';
 const fs = require('node:fs'), path = require('node:path'), { spawn } = require('node:child_process');
-function createController({ root = process.env.CUTE_PARTNER_HOME, platform = process.platform, run = spawn, node = process.execPath } = {}) {
+const { createInstaller } = require('./installer.cjs');
+function createController({ root = process.env.CUTE_PARTNER_HOME, platform = process.platform, run = spawn, node = process.execPath, installer = createInstaller() } = {}) {
+  const installationRoot = () => root || installer.installed();
   function inspect() {
-    if (!root || !path.isAbsolute(root)) return { configured: false, ready: false, next: 'Set CUTE_PARTNER_HOME to your installed Cute-Partner directory before starting Harness.' };
+    root = installationRoot();
+    if (!root || !path.isAbsolute(root)) return { configured: false, ready: false, installation: installer.plan(), next: 'Use cute_partner_install to prepare the base application, or set CUTE_PARTNER_HOME to an existing installation.' };
     try {
       const metadataFile = path.join(root, 'product.json');
       if (fs.statSync(metadataFile).size > 16384) throw Error();
@@ -26,7 +29,7 @@ function createController({ root = process.env.CUTE_PARTNER_HOME, platform = pro
       child.once('close', code => finish(code === 0 ? null : Error('Launch helper failed.')));
     });
   }
-  return { inspect, start };
+  return { inspect, start, install: options => installer.install(options) };
 }
 exports.createController = createController;
 exports.name = 'cute-partner-entry';
@@ -34,6 +37,7 @@ exports.inject = ['tools'];
 exports.apply = function (ctx) {
   const { defineTool } = require('@deepseek-ai/dsh-tools'), controller = createController();
   const output = { schema: { type: 'string' }, render: (_args, value) => [{ type: 'text', text: value }] };
-  ctx.tools.register(defineTool({ name: 'cute_partner_status', description: 'Check the explicitly configured Cute-Partner base installation without reading credentials or personal runtime files. Does not start or install anything.', parameters: {}, output, execute: () => JSON.stringify(controller.inspect()) }));
+  ctx.tools.register(defineTool({ name: 'cute_partner_status', description: 'Check the Cute-Partner base installation and report the installation plan if missing. Does not start or install anything.', parameters: {}, output, execute: () => JSON.stringify(controller.inspect()) }));
+  ctx.tools.register(defineTool({ name: 'cute_partner_install', timeoutMs: 960000, description: 'Install the fixed Windows x64 Cute-Partner base application in the user directory, including its desktop runtime. First call without confirm to show the download size and destination. Set confirm=true only after the user authorizes this download and installation. Voice modules are optional and are not downloaded. Does not start the character or call a model.', parameters: { confirm: { type: 'boolean', description: 'User has approved the displayed base application installation plan.' } }, output, execute: async (args, exec) => JSON.stringify(await controller.install({ confirm: args.confirm === true, signal: exec.signal })) }));
   ctx.tools.register(defineTool({ name: 'cute_partner_start', description: 'Start the already installed Cute-Partner desktop application only when the user explicitly requests it. Does not install dependencies, download voice models, change permissions, or reuse this Harness conversation.', parameters: {}, output, execute: async (_args, exec) => JSON.stringify(await controller.start(exec.signal)) }));
 };

@@ -1,10 +1,22 @@
 {
   "name": "dsh-cute-partner",
   "version": "1.0.0",
-  "description": "Optional entry for the installed Cute-Partner desktop companion",
+  "description": "Install and launch the Cute-Partner Windows desktop companion",
   "main": "index.cjs",
+  "homepage": "https://github.com/suzuran0y/Cute-Partner",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suzuran0y/Cute-Partner.git",
+    "directory": "integrations/harness"
+  },
+  "os": ["win32"],
+  "cpu": ["x64"],
   "files": [
     "index.cjs",
+    "installer.cjs",
+    "install-windows.ps1",
+    "release.json",
+    "README.md",
     "cordis.patch.yml",
     "locale",
     "LICENSE"
