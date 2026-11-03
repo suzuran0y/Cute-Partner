@@ -1,0 +1,48 @@
+{
+  "format": 1,
+  "title": {
+    "en": "Cute-Partner",
+    "zh": "可爱的助手"
+  },
+  "plugins": [
+    {
+      "name": "dsh-cute-partner",
+      "title": {
+        "en": "Cute-Partner",
+        "zh": "可爱的助手 · Cute-Partner"
+      },
+      "description": {
+        "en": "Install and launch a Windows Live2D desktop companion for conversation and tasks in the character window. Voice components are optional.",
+        "zh": "安装并启动 Windows Live2D 桌面伙伴，直接与角色交流和处理任务；语音组件可选。"
+      },
+      "icon": "https://raw.githubusercontent.com/suzuran0y/Cute-Partner/f42e49a6ab6c24a747dc6b35e44cf8f613297d85/apps/desktop/assets/character-icon.png",
+      "author": "suzuran0y",
+      "homepage": "https://github.com/suzuran0y/Cute-Partner",
+      "repository": {
+        "url": "https://github.com/suzuran0y/Cute-Partner"
+      },
+      "metadata": {
+        "keywords": [
+          "dsh-plugin",
+          "desktop-companion",
+          "live2d"
+        ]
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1793705728,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/suzuran0y/Cute-Partner",
+            "commit": "f42e49a6ab6c24a747dc6b35e44cf8f613297d85",
+            "path": "integrations/harness"
+          },
+          "engines": {
+            "dsh": "=0.2.1-rc.2"
+          }
+        }
+      ]
+    }
+  ]
+}
