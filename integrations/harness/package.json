@@ -1,6 +1,6 @@
 {
   "name": "dsh-cute-partner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Install and launch the Cute-Partner Windows desktop companion",
   "main": "index.cjs",
   "homepage": "https://github.com/suzuran0y/Cute-Partner",

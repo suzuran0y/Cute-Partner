@@ -1,6 +1,6 @@
 {
   "name": "cute-partner-desktop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Windows Live2D companion with DeepSeek Harness, voice and scoped memory",
   "main": "main.cjs",

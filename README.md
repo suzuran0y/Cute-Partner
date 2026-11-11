@@ -1,414 +1,417 @@
 <a id="top"></a>
-<img align="right" src="apps/desktop/assets/character-icon.png" alt="Cute-Partner 程序图标" width="80">
+<img align="right" src="apps/desktop/assets/character-icon.png" alt="Cute-Partner application icon" width="80">
 
-# Cute-Partner · 可爱的助手
+# Cute-Partner
 
-[![Version](https://img.shields.io/badge/version-1.0.0-black)](https://github.com/suzuran0y/Cute-Partner/issues/1)
+[![Version](https://img.shields.io/badge/version-1.0.1-black)](CHANGELOG.md)
 [![Live2D](https://img.shields.io/badge/Live2D-Cubism-FF6699)](#sec54)
 [![Harness](https://img.shields.io/badge/Agent-DeepSeek%20Harness-536DFE)](#sec12)
-[![Codex](https://img.shields.io/badge/Agent-Codex-27272A)](docs/codex-pet.md)
+[![Codex](https://img.shields.io/badge/Agent-Codex-27272A)](docs/codex-pet_EN.md)
 [![SQLite](https://img.shields.io/badge/memory-SQLite-003B57)](#sec22)
 
-[🇨🇳 中文](README.md) | [🇺🇸 English](README_EN.md)
+[🇺🇸 English](README.md) | [🇨🇳 中文](README_CN.md)
 
-**Cute-Partner 是一个陪你交流、一起干活的桌面伙伴。**
+**Cute-Partner is a desktop companion for conversation and working together.**
 
-她把模型与工具能力放在身后：你可以直接与她交谈，向她交付任务，在需要决定时回答她的问题，也可以只让她陪在桌面上。
+She brings the model and its tools into a character you can talk to. Give her a task, answer her questions when a decision is needed, or simply enjoy her company on your desktop.
 
-项目当前以 DeepSeek Harness 为后台运行框架，默认搭载的角色是大肥鱼——**哦鲸鲸**：
+The project currently uses DeepSeek Harness as its backend framework. Its default character is the whale girl **哦鲸鲸**:
 
-Codex 端目前只完成了桌宠的基础适配，待后续进一步开发。
+Codex currently has basic desktop pet support for the character. Further development is planned.
 
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/media/character-pointer.gif" alt="哦鲸鲸跟随鼠标的真实 Live2D 互动" width="280"></td>
-    <td align="center"><img src="docs/media/character-codex-pet.gif" alt="哦鲸鲸的 Codex 桌宠跳跃动画预览" width="280"></td>
+    <td align="center"><img src="docs/media/character-pointer.gif" alt="The default character responding to mouse movements in a real Live2D recording" width="280"></td>
+    <td align="center"><img src="docs/media/character-codex-pet.gif" alt="Jump animation preview of the Codex desktop pet" width="280"></td>
   </tr>
   <tr>
-    <td align="center"><em>图 1.1 - 与鼠标互动的哦鲸鲸</em></td>
-    <td align="center"><em>图 1.2 - Codex 桌宠形态</em></td>
+    <td align="center"><em>Figure 1.1 - Interacting with the mouse</em></td>
+    <td align="center"><em>Figure 1.2 - Codex desktop pet</em></td>
   </tr>
 </table>
 
-> 在使用项目前，建议按顺序阅读：① [项目概览](#sec1) → ② [项目部署](#sec3) → ③ [运行与使用](#sec4)。  
-> 需要将她加载为 Codex 桌宠，请参考 [Codex 使用指南](docs/codex-pet.md)。<br>
-> 如果需要进一步开发，请阅读 [开发与扩展](#sec5)。
+> Recommended reading order: ① [Project Overview](#sec1) → ② [Installation](#sec3) → ③ [Using Cute-Partner](#sec4).  
+> To use her as a Codex desktop pet, see the [Codex guide](docs/codex-pet_EN.md).<br>
+> For further development, see [Development and Extension](#sec5).
+
+The current interface and screenshots use Chinese. This guide includes the original UI labels and confirmation text where needed to help you find the right controls.
 
 ---
 
-## 目录
+## Contents
 
-- [1. 项目概览](#sec1)
-  - [1.1. 项目定位](#sec11)
-  - [1.2. 系统组成](#sec12)
-  - [1.3. 使用场景](#sec13)
-- [2. 功能实现](#sec2)
-  - [2.1. 桌面角色](#sec21)
-  - [2.2. 设定与记忆](#sec22)
-  - [2.3. 处理事务](#sec23)
-  - [2.4. 结构化对接](#sec24)
-  - [2.5. 资料管理](#sec25)
-  - [2.6. 伙食费与用量](#sec26)
-  - [2.7. 语音功能](#sec27)
-- [3. 项目部署](#sec3)
-  - [3.1. 项目结构](#sec31)
-  - [3.2. 前置工作](#sec32)
-  - [3.3. 基础安装](#sec33)
-  - [3.4. 语音组件安装](#sec34)
-- [4. 运行与使用](#sec4)
-  - [4.1. 首次交流](#sec41)
-  - [4.2. 角色界面](#sec42)
-  - [4.3. 小本本指南](#sec43)
-  - [4.4. 阅读与回答](#sec44)
-  - [4.5. 导出、载入与重置](#sec45)
-- [5. 开发与扩展](#sec5)
-  - [5.1. 宿主与界面接口](#sec51)
-  - [5.2. 模型、工具与问题接口](#sec52)
-  - [5.3. 设定、记忆与资料接口](#sec53)
-  - [5.4. 角色显示与动作接口](#sec54)
-  - [5.5. 语音识别与合成接口](#sec55)
-  - [5.6. 配置与 Harness 集成接口](#sec56)
-- [6. 项目信息](#sec6)
-  - [6.1. 系统版本](#sec61)
-  - [6.2. 测试环境](#sec62)
-  - [6.3. 后续规划](#sec63)
-  - [6.4. 使用与授权说明](#sec64)
+- [1. Project Overview](#sec1)
+  - [1.1. Purpose](#sec11)
+  - [1.2. Architecture](#sec12)
+  - [1.3. Use Cases](#sec13)
+- [2. Features](#sec2)
+  - [2.1. Desktop Character](#sec21)
+  - [2.2. Persona and Memory](#sec22)
+  - [2.3. Projects and Tasks](#sec23)
+  - [2.4. Structured Interaction](#sec24)
+  - [2.5. Personal Data](#sec25)
+  - [2.6. Food Budget and Usage](#sec26)
+  - [2.7. Voice](#sec27)
+- [3. Installation](#sec3)
+  - [3.1. Project Structure](#sec31)
+  - [3.2. Prerequisites](#sec32)
+  - [3.3. Base Installation](#sec33)
+  - [3.4. Optional Voice Components](#sec34)
+- [4. Using Cute-Partner](#sec4)
+  - [4.1. Your First Conversation](#sec41)
+  - [4.2. Character Interface](#sec42)
+  - [4.3. Notebook Guide](#sec43)
+  - [4.4. Reading and Answering](#sec44)
+  - [4.5. Export, Restore, and Reset](#sec45)
+- [5. Development and Extension](#sec5)
+  - [5.1. Host and UI Interfaces](#sec51)
+  - [5.2. Model, Tool, and Question Interfaces](#sec52)
+  - [5.3. Persona, Memory, and Data Interfaces](#sec53)
+  - [5.4. Character Rendering and Motion Interfaces](#sec54)
+  - [5.5. Speech Recognition and Synthesis Interfaces](#sec55)
+  - [5.6. Configuration and Harness Integration](#sec56)
+- [6. Project Information](#sec6)
+  - [6.1. Version](#sec61)
+  - [6.2. Test Environment](#sec62)
+  - [6.3. Future Plans](#sec63)
+  - [6.4. License](#sec64)
 
 ---
 
 <a id="sec1"></a>
 
-## 1. 项目概览 [⌃](#top)
+## 1. Project Overview [⌃](#top)
 
-图形化的智能体工具让人与模型协作变得更直观。Cute-Partner 希望在这种交互方式上加入角色的形象、声音与持续记忆，让交流和工作协作融入桌面陪伴。
+Graphical agent tools make working with models more intuitive. Cute-Partner adds a character, a voice, and persistent memory to that experience, bringing conversation and collaboration into everyday desktop companionship.
 
-你可以与她聊日常、告诉她自己的偏好，也可以向她交付工作、回答问题并查看结果。希望她逐渐成为一个熟悉你的、仿佛有“灵魂”的桌面伙伴，是这个项目的出发点。
+Talk about your day, share your preferences, give her work to do, and review her questions and results. The project begins with a simple wish: a desktop companion who gradually gets to know you and feels as though she has a personality of her own.
 
 ---
 
 <a id="sec11"></a>
 
-### 1.1. 项目定位 [⌃](#top)
+### 1.1. Purpose [⌃](#top)
 
-Cute-Partner 同时面向日常陪伴与工作协作。角色端承接用户能看见、能操作的交流体验；模型端负责理解需求、生成回复，并通过工具参与任务处理。
+Cute-Partner supports both companionship and practical collaboration. The character provides the interaction you see and use; the model understands requests, generates replies, and uses tools to help complete tasks.
 
 ```text
-Cute-Partner · 可爱的助手
+Cute-Partner
       │
-      ├── 角色端：与你交流，呈现进展与结果
-      │     ├── 桌面陪伴：Live2D 形象、自然动态、视线与动作反馈
-      │     ├── 信息交流：文字输入、白云消息、完整阅读与可选声音
-      │     ├── 共同决定：展示问题、选项、修改差异和权限审批
-      │     └── 资料查看：设定、记忆、事务、修订与用量入口
+      ├── Character: conversation, progress, and results
+      │     ├── Companionship: Live2D animation, gaze, and reactions
+      │     ├── Communication: text, cloud bubbles, full replies, optional voice
+      │     ├── Decisions: questions, choices, proposed changes, and approvals
+      │     └── Personal data: persona, memory, projects, revisions, and usage
       │
-      └── 模型端：理解需求，组织回复与任务
-            ├── 日常交流：结合设定与本轮相关记忆生成回复
-            ├── 信息整理：提出设定修改、整理偏好与事务记录
-            ├── 工作协作：规划步骤、提出问题，并调用已接入工具
-            └── 结果反馈：将回复、问题与工具进展交回角色界面
+      └── Model: understanding, replies, and tasks
+            ├── Conversation: persona and relevant saved memories
+            ├── Organization: proposed persona edits, preferences, and project notes
+            ├── Collaboration: planning, questions, and available tools
+            └── Feedback: replies, questions, and tool progress sent to the character
 ```
 
-两端由桌面应用连接：资料保存、权限校验、工具执行协调和停止控制由程序负责。模型提出的修改与任务结果，会按相应规则经过确认、保存或核验，再反馈到界面。
+The desktop application connects the two sides. It saves data, checks permissions, coordinates tools, and handles stopping. Proposed edits and task results are confirmed, saved, or checked according to the relevant rules before being presented through the character.
 
 ---
 
 <a id="sec12"></a>
 
-### 1.2. 系统组成 [⌃](#top)
+### 1.2. Architecture [⌃](#top)
 
-项目由**角色交互层、桌面应用层、后台运行层**组成。它们分别负责交流入口、本机服务协调，以及模型会话与工具运行。
+The project has three layers: **character interaction**, **desktop application**, and **backend runtime**. They handle the conversation interface, local services, and model sessions with tools, respectively.
 
 ```text
-┌──────────────────────────────────────────────────────────┐
-│                       角色交互层                          
-│                                                                           
-│      文字或语音输入 → 阅读回复 → 回答问题 / 审批 / 停止         
-└──────────────────────────┬───────────────────────────────┘
-                           │ 受控 preload IPC
-                           ▼
-┌──────────────────────────────────────────────────────────┐
-│                      桌面应用层
-│                Cute-Partner（Electron）
-│                                                          
-│  会话管理 ── 问题与工具状态 ── 操作权限                   
-│      ├── 设定 / SQLite 记忆 / 事务                  
-│      ├── 本地识别 / 自然语音（可选项）                 
-│      └── 角色事件 → Live2D 参数驱动         
-└──────────────────────────┬───────────────────────────────┘
-                           │ 独立后台会话
-                           ▼
-┌──────────────────────────────────────────────────────────┐
-│                      后台运行层
-│              DeepSeek Harness 与模型服务                   
-│
-│      模型回复  ·  工具调用  ·  结构化问题  ·  用量报告          
-└──────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│                      Character interaction                       │
+│                                                                  │
+│  Text / voice → Read replies → Answer / Approve / Stop           │
+└────────────────────────────────┬─────────────────────────────────┘
+                                 │ Controlled preload IPC
+                                 ▼
+┌──────────────────────────────────────────────────────────────────┐
+│                       Desktop application                        │
+│                       Cute-Partner (Electron)                    │
+│                                                                  │
+│  Sessions ── Questions and tool state ── Permissions             │
+│      ├── Persona / SQLite memory / Projects                      │
+│      ├── Local recognition / Natural speech (optional)           │
+│      └── Character events → Live2D parameter drivers             │
+└────────────────────────────────┬─────────────────────────────────┘
+                                 │ Independent backend session
+                                 ▼
+┌──────────────────────────────────────────────────────────────────┐
+│                         Backend runtime                          │
+│                  DeepSeek Harness and model services             │
+│                                                                  │
+│  Replies · Tool calls · Structured questions · Usage reports     │
+└──────────────────────────────────────────────────────────────────┘
 ```
 
-系统的功能采用模块化设计，角色显示、记忆、事务与资料管理等基础功能由基础程序提供，而本地语音识别和自然语音模块资源则由用户需求决定是否进行装载。
+The design is modular. The base application provides character rendering, memory, projects, and personal data management. Local speech recognition and natural speech resources can be added as needed.
 
-当前已适配的后台运行框架为 DeepSeek Harness。Cute-Partner 管理自己的窗口、资料与用户交互，Harness 在后台提供独立会话与工具运行能力。程序首次运行需准备本机账户及运行依赖，而在加载完成后，日常与角色的交流中无需再切到 Harness 聊天界面逐条操控模型。
+DeepSeek Harness is the currently supported backend framework. Cute-Partner manages its own windows, data, and user interaction; Harness provides independent sessions and tool execution in the background. After the initial account and runtime setup, everyday interaction happens through the character, without switching to the Harness chat interface to operate the model.
 
-开发者可以沿现有源码中的模块边界扩展角色、语音、工具或模型适配，调用接口与源码入口见[5. 开发与扩展](#sec5)。
+Developers can extend character resources, speech, tools, or model adapters along the existing module boundaries. Source entry points and interfaces are covered in [5. Development and Extension](#sec5).
 
 ---
 
 <a id="sec13"></a>
 
-### 1.3. 使用场景 [⌃](#top)
+### 1.3. Use Cases [⌃](#top)
 
-她，可以陪你聊天，也可以在需要时一起处理工作。
+She can keep you company and help with work when you need her.
 
 <table>
 <tr>
-<th width="50%">日常陪伴</th>
-<th width="50%">工作助手</th>
+<th width="50%">Everyday company</th>
+<th width="50%">Work assistant</th>
 </tr>
 <tr>
-<td align="center" valign="top"><img src="docs/media/scenario-companionship.png" alt="场景插画：哦鲸鲸喝茶读书" width="300"></td>
-<td align="center" valign="top"><img src="docs/media/scenario-work-assistant.png" alt="场景插画：哦鲸鲸在电脑前协助工作" width="300"></td>
+<td align="center" valign="top"><img src="docs/media/scenario-companionship.png" alt="Scene illustration: the character reading with a cup of tea" width="300"></td>
+<td align="center" valign="top"><img src="docs/media/scenario-work-assistant.png" alt="Scene illustration: the character helping at a computer" width="300"></td>
 </tr>
 <tr>
 <td valign="top">
-<p><strong>在日常的小事里，慢慢熟悉彼此。</strong></p>
-<p>空闲时聊几句，告诉她自己的喜好，或一起讨论周末的安排。她可以结合已保存的设定与相关记忆回应你；回复消息留在云朵上，详尽内容则可以打开“和她聊聊”仔细阅读。</p>
-<p>文字交流可直接使用；准备好本地语音组件后，也可以通过声音交流。</p>
+<p><strong>Get to know each other through the little things.</strong></p>
+<p>Chat during a break, share your favorite things, or discuss weekend plans. She can respond using your saved persona and relevant memories. Short replies appear in the cloud bubble; longer content stays in the conversation reader, “和她聊聊”.</p>
+<p>Text conversation works on its own. Add the local voice components when you want to talk by voice.</p>
 </td>
 <td valign="top">
-<p><strong>把具体的工作交给她，一起推进。</strong></p>
-<p>请她协助整理文件、编写内容或处理工作区任务。需要补充信息或审批时，在云朵上作决定；执行中可请求停止，并查看工具结果与实际文件。</p>
-<p>持续目标可以整理成事务，保留计划、待办与后续决定，方便下次接着做。</p>
+<p><strong>Give her a concrete task and work through it together.</strong></p>
+<p>Ask her to organize files, draft content, or handle work in your workspace. Answer questions and make decisions through the cloud bubble. During execution, you can request a stop and review tool results and the actual files.</p>
+<p>Ongoing goals can become saved projects, keeping plans, to-dos, and decisions together for your next conversation.</p>
 </td>
 </tr>
 </table>
 
-<p align="center"><em>图 2, 3 – 角色的一瞬</em></p>
+<p align="center"><em>Figures 2, 3 – Moments with the character</em></p>
 
-实际界面与操作见[2. 功能实现](#sec2)和[4. 运行与使用](#sec4)。
+For the interface and controls, see [2. Features](#sec2) and [4. Using Cute-Partner](#sec4).
 
 ---
 
 <a id="sec2"></a>
 
-## 2. 功能实现 [⌃](#top)
+## 2. Features [⌃](#top)
 
-Cute-Partner 将智能体的对话与工具能力接入角色界面，让交流、记忆和任务进展在桌面上连贯呈现。项目的各项功能进行模块化设计，文字交流、角色显示、记忆和资料管理模块共同组成基础体验，而自定义音色的语音模块则按用户的使用需求作为可选加载模块。
+Cute-Partner connects agent conversations and tools to a desktop character, bringing conversation, memory, and task progress into one experience. Text interaction, character rendering, memory, and personal data management form the base application; natural speech and custom voices are optional components.
 
-下面简要介绍角色怎样与你互动、怎样记住信息和协助工作、模型输出如何转换为界面内容的基础逻辑，最后介绍资料、用量与可选语音。
+This chapter explains how the character reacts, remembers information, and helps with work; how model output becomes interface content; and how personal data, usage, and optional voice features fit together.
 
 ---
 
 <a id="sec21"></a>
 
-### 2.1. 桌面角色 [⌃](#top)
-
+### 2.1. Desktop Character [⌃](#top)
 
 <table>
 <tr>
 <td width="55%" valign="top">
-<p><strong>她会留意你的动作，也会回应当前发生的事。</strong></p>
-<p>角色通过 Live2D 在桌面驻留。移动鼠标时，视线、头部与身体会在一定范围内跟随；点击、拖动以及交流、倾听和工作状态，也会产生相应反馈。没有操作时，呼吸、眨眼和自然摆动等微小动作将继续维持角色动态。</p>
-<p>交流中，短消息将实时显示在随身云朵上，详细内容则留在“和她聊聊”板块中。你可以只让她陪着，也可以随时交付一项具体任务。</p>
-<p><em>右图（图4）为真实原生模型录制。可见箭头标示输入位置；鼠标沿角色周围环绕。</em></p>
+<p><strong>She notices your actions and responds to what is happening.</strong></p>
+<p>The Live2D character stays on your desktop. Her gaze, head, and body follow the mouse within a limited range. Clicks, dragging, conversation, listening, and work states also produce reactions. When idle, breathing, blinking, and subtle movements keep her animated.</p>
+<p>During conversation, short messages appear in her cloud bubble, while detailed replies remain in the conversation reader. Let her keep you company or give her a task whenever you need help.</p>
+<p><em>Figure 4 on the right is recorded from the real native renderer. The visible arrow marks mouse input moving around the character.</em></p>
 </td>
-<td width="45%" align="center" valign="middle"><img src="docs/media/character-pointer.gif" alt="真实鼠标环绕输入与角色视线、头部、甩尾反馈" width="300"></td>
+<td width="45%" align="center" valign="middle"><img src="docs/media/character-pointer.gif" alt="Recorded mouse movement with gaze, head, and tail reactions" width="300"></td>
 </tr>
 </table>
 
-角色的动作、表情与云朵消息共同呈现交流进展，让倾听、思考和办事都有可感知的回应。
+Motion, expressions, and cloud messages work together to make listening, thinking, and working visible.
 
 <a id="sec22"></a>
 
-### 2.2. 设定与记忆 [⌃](#top)
+### 2.2. Persona and Memory [⌃](#top)
 
-**设定**描述角色的人物设定，你可以在其中完成对角色的性格、习惯等等人物背景描述，支持自定义文本写作或完整文档导入；
-**记忆**记录“以后还会用到的信息”，在项目初次运行时完全空白，会随着你与角色的沟通逐渐累计记忆，也可以在后台导入记录。
-两者在本机保存，交流时程序只挑选与当前范围相关的内容交给模型。模型可以提出修改或整理请求，再由程序按确认、来源与修订规则处理。
+The **persona** describes the character's personality, habits, and background. You can write it yourself or import a text document. **Memory** stores information worth keeping for later. It starts empty, grows through conversation, and can also receive imported records through the settings interface.
+
+Both are saved locally. During conversation, the application selects information relevant to the current scope and provides it to the model. The model can propose edits or organization, which the application processes with confirmation, source, and revision tracking.
 
 ```text
-交流中的信息
-    ├── 相处方式、表达习惯  → 融合进设定
-    ├── 明确要求记住的资料  → 先保存原话 → 按规则整理归属
-    └── 模型整理出的资料  → 普通归类直接保存，冲突或重要修改先确认 → 后续交流按范围检索使用
+Information from conversation
+    ├── Interaction and expression preferences → Persona
+    ├── Explicit requests to remember → Save the original wording → Organize its scope
+    └── Model-organized notes → Save routine changes; confirm conflicts or important edits
+                              → Retrieve within scope in later conversations
 ```
 
-#### 2.2.1. 相处方式与设定修订
+#### 2.2.1. Interaction Preferences and Persona Revisions
 
 <table>
 <tr>
-<td width="55%" align="center" valign="middle"><img src="docs/media/character-feedback-rounded.svg" alt="角色反馈：相处方式与设定更新" width="260"></td>
+<td width="55%" align="center" valign="middle"><img src="docs/media/character-feedback-rounded.svg" alt="Character feedback about an update to her interaction preferences" width="260"></td>
 <td width="45%" valign="top">
-<p><strong>把交流中的小要求，变成可查看的相处方式。</strong></p>
-<p>例如告诉她：“长内容先给结论，再展开说明。”你可以在小本本中手动填写，也可以在交流中让她提出设定修改。</p>
-<p>她提出的修改会展示差异，确认后保存；在“习惯 → 慢慢认识她”中可以核对最新内容、修改来源及修订，必要时撤销。</p>
-<p><em>左图（图5）为她更新自己做事习惯的例子，展示设定更新的口语反馈。</em></p>
+<p><strong>Turn small requests into preferences you can review.</strong></p>
+<p>For example: “For long replies, give me the conclusion first, then the details.” You can write this in the Notebook or ask her to propose a persona change during conversation.</p>
+<p>Her proposed changes show what would change and are saved after confirmation. Under Habits → Getting to Know Her (习惯 → 慢慢认识她), you can review the current content, sources, and revisions, and undo a change when needed.</p>
+<p><em>Figure 5 on the left shows her conversational feedback after updating a working habit.</em></p>
 </td>
 </tr>
 </table>
 
-#### 2.2.2. 关于你的资料与偏好
+#### 2.2.2. Your Information and Preferences
 
-**重要的信息可以留下来，之后也能更正。**
+**Keep what matters, and correct it later.**
 
-例如：“请记住：我喜欢清淡口味。”角色会先把明确要求记住的原话保存下来，再按规则整理。关于你的资料与偏好放在“关于你”模块中，与具体事项有关的内容会被她自动归入对应事务条目中。
+For example, “请记住：我喜欢清淡口味。” means “Please remember: I prefer lightly seasoned food.” An explicit memory request first saves the original wording, then organizes it. Personal information and preferences go under About You (关于你); information about a particular project can be placed in that project's drawer.
 
-条目保留来源和修订，方便检查记了什么、从哪里来。发现归属不合适或内容变化时，可以人为更正、移动或忘记。
+Entries retain sources and revisions so you can check what was saved and where it came from. You can correct, move, or forget an entry as its content or scope changes.
 
-记忆会随交流不断整理：普通归类自动完成，遇到信息冲突或重要修改时再请你确认；每条记录都保留来源与修订，方便日后调整。后续交流会围绕当前话题和事务检索相关记忆，让已经聊过的偏好、计划和决定自然接续下去。
+Memory continues to be organized through conversation. Routine classification happens automatically; conflicts and important changes are brought back to you for confirmation. Later conversations retrieve relevant memories around the current topic and project, helping preferences, plans, and decisions carry forward.
 
 <a id="sec23"></a>
 
-### 2.3. 处理事务 [⌃](#top)
+### 2.3. Projects and Tasks [⌃](#top)
 
-她能够将一段持续目标的资料衔接起来，视为一件**事务**，任务则是一次具体的执行，这套流程类似于针对特定主题建立一个单独的工作文件夹。你可以持续讨论同一件事，也可以在选定工作范围后，让她实际使用工具处理文件或内容。
+An ongoing goal can be kept as a **project**, while a task is a specific piece of execution. A project's memory drawer works like a folder for one continuing subject. You can keep discussing the same matter and, after choosing a working scope, ask her to use tools on files or content.
 
-#### 2.3.1. 事务：保存持续目标
+#### 2.3.1. Projects: Keeping an Ongoing Goal
 
-**让计划、决定和待办围绕同一件事积累。**
+**Keep plans, decisions, and to-dos together.**
 
-例如：“周末整理照片，先挑选十张，再做一页相册。”相关内容可以整理成“事务抽屉”，继续保存后续决定和待办，方便下一次接着聊、接着做。
+For example: “This weekend, organize my photos: pick ten first, then make a one-page album.” A project drawer can hold the plan and later decisions, ready to continue next time.
 
-事务是资料的组织方式，创建抽屉不会额外授予文件权限。
+Projects organize information. Creating a drawer does not grant additional file permissions.
 
-#### 2.3.2. 任务：从交付到汇报
+#### 2.3.2. Tasks: From Request to Report
 
-一次工作协作，从你说明目标开始。选好办事范围和工作目录后，把任务交给她；遇到信息缺口或需要你决定的操作，她会在交流中提出问题。随后由工具执行具体步骤，核对产出，再由角色汇报进展与结果。
+Collaboration starts with your goal. Choose a working scope and directory, then give her a task. When information or a decision is needed, she asks during the conversation. Tools perform the steps, outputs are checked, and the character reports progress and results.
 
 ```text
-选择办事范围与工作目录 → 交付具体任务 → 补充信息 / 权限审批 → 工具执行 → 核对结果 → 角色汇报
+Choose scope and directory → Give a task → Answer / Approve
+    → Execute tools → Check results → Character reports back
 ```
 
-例如，请她把工作目录中的资料整理成一份清单：先说明整理目标，回答必要的问题，随后查看生成的清单和她的总结。讨论中形成的新决定，也可以继续留在对应事务里，为下一次协作积累上下文。
+For example, ask her to turn the contents of a working directory into a file list. Explain what you want, answer any questions, then review the generated list and her summary. New decisions can stay in the same project for your next session.
 
 <a id="sec24"></a>
 
-### 2.4. 结构化对接 [⌃](#top)
+### 2.4. Structured Interaction [⌃](#top)
 
-同一轮交流可以包含一句口头回应、一份详细结果和几个待回答的问题。Cute-Partner 会把这些内容分配到对应的界面，让简短交流保持轻快，完整信息也有清晰的阅读位置。
+A single turn may contain a short spoken response, a detailed result, and several questions. Cute-Partner sends each part to the right place, keeping brief exchanges light and longer information easy to read.
 
 ```text
-后台输出
-    ├── 回复内容
-    │      ├── 简短口语稿 → 云朵 → 可选声音播放 → 音频驱动口型
-    │      └── 详细正文   → “和她聊聊”中的完整内容与历史
-    ├── 结构化问题       → 单选 / 多选 / 其他 / 多题 → 提交答案
-    ├── 权限审批         → 展示操作请求 → 用户决定 → 继续执行
-    └── 工具事件         → 进展 / 结果 / 停止 → 界面与角色状态
+Backend output
+    ├── Reply
+    │     ├── Short spoken text → Cloud → Optional speech → Audio-driven mouth movement
+    │     └── Detailed body     → Conversation reader and history
+    ├── Structured questions   → Single / Multiple / Other / Several questions → Answers
+    ├── Approval requests      → Show operation → Your decision → Continue
+    └── Tool events            → Progress / Results / Stop → UI and character state
 ```
 
-#### 2.4.1. 口语稿与正文
+#### 2.4.1. Spoken Text and Detailed Content
 
-回复中的口语稿与正文分别组织。例如，一句适合直接说出的回应放在 `<voice>` 中，详细清单、步骤或代码放在 `<body>` 中：
+Replies organize spoken text and detailed content separately. A short response suitable for speech goes in `<voice>`; detailed lists, steps, or code go in `<body>`:
 
 ```xml
-<voice>我先整理一份清单，需要你决定时会再问你。</voice>
-<body>这里保留详细说明、清单、代码或结果，供完整阅读。</body>
+<voice>I'll make a list first and ask when I need your decision.</voice>
+<body>Keep detailed explanations, lists, code, or results here for full reading.</body>
 ```
 
-界面把简短口语送入云朵；开启声音后，再交给所选语音引擎朗读。详细正文同步进入“和她聊聊”，适合仔细阅读、复制和回顾。文字展示与声音播放各有自己的节奏，角色口型则跟随实际音频变化。
+The cloud bubble receives the short spoken text. When voice output is enabled, the selected speech engine reads it aloud. The detailed body appears in the conversation reader for reading, copying, and review. Text and audio follow their own timing, while mouth movement follows the audio that is actually playing.
 
-#### 2.4.2. 问题、审批与工具结果
+#### 2.4.2. Questions, Approvals, and Tool Results
 
-问题请求转换为可操作的选择控件，支持单选、多选、“其他”和多题。云朵与阅读窗口共享同一份草稿，文字和语音答案都能接入当前问题。
+Question requests become interactive controls supporting single choice, multiple choice, Other, and several questions in one batch. The cloud and reader share the same draft; typed and spoken answers can both feed into the current question.
 
-操作审批、工具进展和执行结果也通过各自的事件送回界面。这样，一项工作可以在“提出问题—作出决定—继续执行—收到汇报”之间自然衔接，你可以随时查看进度或请求停止。
+Approvals, tool progress, and results return through their own events. A task can move naturally from a question to a decision, execution, and a report. You can review progress or request a stop along the way.
 
 <a id="sec25"></a>
 
-### 2.5. 资料管理 [⌃](#top)
+### 2.5. Personal Data [⌃](#top)
 
-角色的相处方式与设置、记忆与事务、聊天与问题记录、用量统计，以及已经完成的自制音色，共同组成你的本机个人资料。它们可以完整导出为 `.cpbackup` 文件，也可以预览后重新载入，方便备份、恢复和迁移到兼容的程序实例。
+Your local personal data includes the persona and preferences, memories and projects, chat and question history, usage records, and completed custom voices. Export it as a `.cpbackup` file, preview a backup before restoring it, or move it to a compatible application instance.
 
 ```text
-                   ┌── 导出 → .cpbackup 备份 → 留存 / 迁移
-本机资料 ────────────── 载入 → 预览备份内容 → 确认后替换
-                   └── 重置 → 保留恢复路径 → 重新开始
+                    ┌── Export → .cpbackup → Keep / Transfer
+Local personal data ├── Restore → Preview → Confirm replacement
+                    └── Reset → Keep a recovery copy → Start again
 ```
 
-导出统一保存这套个人资料，载入则以备份完整替换当前资料。账户凭据、安装环境、下载资源包和工作项目文件分别管理，不放入个人资料包。
+Export saves the personal dataset together; restore replaces the current dataset with the backup. Account credentials, installed environments, downloaded resource packs, and files in your work projects are managed separately and are not included.
 
 <a id="sec26"></a>
 
-### 2.6. 伙食费与用量 [⌃](#top)
+### 2.6. Food Budget and Usage [⌃](#top)
 
-模型消耗的 token，在小本本里被称为角色吃掉的“米粒”；模型账户余额则是她的“伙食费”。打开“伙食费”页，就能把剩余预算、近一天的消耗和每小时变化放在一起查看，还可以切换金额与 token 两种统计视角。
+The Notebook calls consumed tokens “grains of rice” (米粒), and your model account balance her “food budget” (伙食费). This page brings together the remaining balance, recent consumption, and hourly changes, with views for estimated cost and token counts.
 
-| 信息 | 含义 |
+| Information | Meaning |
 | --- | --- |
-| 伙食费剩余 | 通过 DeepSeek 官方 `GET https://api.deepseek.com/user/balance` 查询当前账户余额，直观看到还剩多少预算 |
-| 近 24h 饭量 | 汇总本应用在最近24小时收到的用量记录；可查看 token 数量，也可切换为对应的费用估算 |
-| 每小时费用 | 将最近24小时分为24根小时柱，观察各时段的消耗变化；切换到米粒统计后，同一张图展示每小时 token 用量 |
-| 节食保护 | 设置希望保留的余额，程序会在发送前和任务运行中检查；触及下限时暂停模型调用，并在云朵中提醒你 |
+| Remaining food budget | Queries your account balance through DeepSeek's `GET https://api.deepseek.com/user/balance` endpoint |
+| Last 24 hours | Summarizes usage reported to this application over the past 24 hours, as tokens or estimated cost |
+| Hourly cost | Splits the past 24 hours into 24 bars; switching to the rice view shows hourly token usage instead |
+| Budget Guard | Checks the balance before sending and during tasks; reaching your reserve threshold pauses model calls and shows a reminder |
 
-用量来自 Harness 会话报告，费用按应用内价格配置估算。余额可手动刷新，小时柱可查看时段明细；实际结算金额以服务商账单为准。
+Usage comes from Harness session reports. Cost is estimated using the application's pricing configuration. You can refresh the balance and inspect hourly details; the provider's bill determines the actual charge.
 
 <a id="sec27"></a>
 
-### 2.7. 语音功能 [⌃](#top)
+### 2.7. Voice [⌃](#top)
 
 <table>
 <tr>
-<td width="52%" align="center" valign="middle"><img src="docs/media/notebook-voice-rounded.svg" alt="小本本语音页：声音选择、音量、语速、风格与试听" width="430"></td>
+<td width="52%" align="center" valign="middle"><img src="docs/media/notebook-voice-rounded.svg" alt="Notebook voice page: voice, volume, rate, style, and preview" width="430"></td>
 <td width="48%" valign="top">
-<p><strong>让文字有声音，也让交流更随意。</strong></p>
-<p>语音模块把麦克风输入、声音生成和角色口型接在一起：你可以用声音聊天、回答问题，也可以让她读出简短回应。</p>
-<p>在小本本的“语音”页选择系统声音或预置/自制音色，调整音量、语速与表达风格，随时试听或停止。自然语音还提供“早点开口”，让音频边合成边播放。</p>
-<p>语音按需准备，基础文字交流可以独立使用；想让角色开口时，再选择适合自己设备的声音方案。</p>
-<p><em>左图（图6）为语音设置页面。</em></p>
+<p><strong>Give text a voice and make conversation more relaxed.</strong></p>
+<p>The voice components connect microphone input, speech generation, and mouth movement. Talk by voice, answer questions, or have her read a short response.</p>
+<p>On the Voice (语音) page, choose a Windows voice or a bundled/custom voice, adjust volume, rate, and expression style, then preview or stop playback. Natural speech also offers “Speak sooner” (早点开口), playing audio while synthesis continues.</p>
+<p>Prepare voice components as needed. Text conversation works independently; add the voice setup that suits your hardware when you want her to speak.</p>
+<p><em>Figure 6 on the left shows the voice settings page.</em></p>
 </td>
 </tr>
 </table>
 
-#### 2.7.1. 语音组件
+#### 2.7.1. Voice Components
 
-| 组件 | 用途 |
+| Component | Purpose |
 | --- | --- |
-| Windows 系统语音 | 直接使用本机已安装声音，快速朗读口语稿 |
-| 本地语音识别 | 将麦克风输入转成聊天文字或问题答案 |
-| CosyVoice3 自然语音 | 使用预置或自制音色，生成带有不同表达风格的声音 |
+| Windows system speech | Uses locally installed voices to read short spoken replies |
+| Local speech recognition | Turns microphone input into chat text or question answers |
+| CosyVoice3 natural speech | Generates speech with bundled or custom voices and expression styles |
 
-系统声音可以在小本本中直接选择；本地识别与自然语音按需准备。安装流程统一见[3.4. 语音组件安装](#sec34)，完成后就能在同一个“语音”页面选择声音、制作音色并试听。
+Windows voices can be selected directly in the Notebook. Prepare recognition and natural speech separately as needed. See [3.4. Optional Voice Components](#sec34); once installed, voice selection, voice creation, and previews share the same page.
 
-#### 2.7.2. 文字转语音
+#### 2.7.2. Text to Speech
 
-同一份口语稿可以交给两条本机语音路线，最终汇入播放与角色表现：
+The same spoken reply can use either local speech route, joining the same playback and character animation path:
 
 ```text
-             ┌── Windows 系统语音 → 本机声音 / 语速 ─────────┐
-口语稿 ───────                                              ────── 播放 / 停止 → 口型与角色表现
-             └── CosyVoice3 → 预置或自制音色 / 表达风格 ─────┘
+               ┌── Windows speech → Installed voice / Rate ──────┐
+Spoken reply ──┤                                                  ├── Playback / Stop → Mouth movement
+               └── CosyVoice3 → Bundled or custom voice / Style ──┘
 ```
 
-| 方案 | 效果 |
+| Route | Experience |
 | --- | --- |
-| Windows 系统语音 | 启动轻便、响应快、资源占用低，但音色和语调较固定，机械感更明显 |
-| CosyVoice3 自然语音 | 可使用自制音色，语气更流畅，但需要额外模型、显存和生成时间 |
+| Windows system speech | Lightweight, quick to respond, and low in resource use; voice and intonation are more fixed and mechanical |
+| CosyVoice3 natural speech | Supports custom voices and more natural expression, with additional model, GPU memory, and generation requirements |
 
-CosyVoice3 的“**早点开口**”在默认语速下采用分块生成与播放，让声音更早开始；调整语速后采用整句生成。分块衔接有时会带来停顿，可根据听感选择开启或关闭。
+CosyVoice3's **Speak sooner** option generates and plays audio in chunks at the default rate. Changing the rate uses whole-sentence synthesis. Chunk transitions may introduce pauses; enable or disable the option to suit your listening preference.
 
-#### 2.7.3. 自制音色
+#### 2.7.3. Custom Voices
 
-CosyVoice3 可以从参考声音和对应文字中提取音色条件。制作完成后，项目保存参考音频与特征数据，后续选择该音色时直接复用，并可叠加自然、柔和、开心等表达风格。
+CosyVoice3 extracts voice conditioning from reference audio and its transcript. Once created, the application saves the reference and feature data for reuse. You can then choose the voice and apply styles such as Natural, Soft, or Happy.
 
 ```text
-参考音频（3–30秒）+ 音频对应文本
-    → 检查格式、时长与有效声音
-    → 整理为标准参考音频，提取音色特征
-    → 保存并加入音色列表 → 选择音色与风格 → 生成新台词并试听
+Reference audio (3–30 seconds) + Matching transcript
+    → Check format, duration, and usable speech
+    → Prepare standard reference audio and extract voice features
+    → Save to voice list → Choose voice and style → Generate and preview new lines
 ```
 
-清晰的录音与准确的对应文字有助于保留声音特点。原理和上游用法可参阅 [CosyVoice库](https://github.com/QwenAudio/CosyVoice)。
+Clear recordings and accurate transcripts help preserve the voice's characteristics. For the upstream approach and usage, see the [CosyVoice repository](https://github.com/QwenAudio/CosyVoice).
 
 <table>
 <tr>
 <td width="55%" valign="middle">
-<p><strong>以下是同一句台词，两条路线的不同表现：</strong></p>
-<p>试听文本：<code>La la la, la la la.</code></p>
-<p><strong>Windows 系统语音</strong><br>Microsoft Huihui Desktop<br><a href="docs/media/voice-lalala-windows.wav">试听 WAV</a></p>
-<p><strong>CosyVoice3 自然语音</strong><br>内置音色 · 自然风格<br><a href="docs/media/voice-lalala-natural.wav">试听 WAV</a></p>
-<p>两份声音均在本机生成。点击音频链接试听，右侧动图（图7）展示自然语音对应的口型表现。</p>
+<p><strong>The same line, spoken through the two routes:</strong></p>
+<p>Sample text: <code>La la la, la la la.</code></p>
+<p><strong>Windows system speech</strong><br>Microsoft Huihui Desktop<br><a href="docs/media/voice-lalala-windows.wav">Listen to WAV</a></p>
+<p><strong>CosyVoice3 natural speech</strong><br>Bundled voice · Natural style<br><a href="docs/media/voice-lalala-natural.wav">Listen to WAV</a></p>
+<p>Both samples were generated locally. Follow the audio links to listen; Figure 7 on the right shows mouth movement during natural speech playback.</p>
 </td>
-<td width="45%" align="center" valign="middle"><img src="docs/media/character-speaking.gif" alt="角色随自然语音播放变化的口型" width="240"></td>
+<td width="45%" align="center" valign="middle"><img src="docs/media/character-speaking.gif" alt="Character mouth movement following natural speech playback" width="240"></td>
 </tr>
 </table>
 
@@ -416,171 +419,176 @@ CosyVoice3 可以从参考声音和对应文字中提取音色条件。制作完
 
 <a id="sec3"></a>
 
-## 3. 项目部署 [⌃](#top)
+## 3. Installation [⌃](#top)
 
-Cute-Partner 以 DeepSeek Harness 提供后台智能体能力，再把交流和工作协作带到桌面角色中。部署分为三步：先安装并配置 Harness，再准备 Cute-Partner 的基础运行环境，最后按需加入语音组件。
+Cute-Partner uses DeepSeek Harness for its backend agent capabilities and brings conversation and collaboration to a desktop character. Setup has three parts: install and configure Harness, prepare the base Cute-Partner runtime, and add voice components if wanted.
 
 ```text
-准备 Harness → 安装 Cute-Partner → 确保交流无阻 → 按需添加语音
+Prepare Harness → Install Cute-Partner → Verify conversation → Add optional voice
 ```
 
-如果希望 Agent 协助部署，可把项目目录交给具备本机终端权限的 Agent，并复制下面的指示。将目录替换为自己的实际位置即可：
+To ask an agent with local terminal access to set up the project, give it the project directory and copy the instructions below. Replace the directory placeholder with your actual path:
 
 ```text
-请帮我部署 Cute-Partner，项目目录为：<填写本机项目根目录>。
+Please set up Cute-Partner. Project root: <enter the local project root>.
 
-先阅读 README 第3章「项目部署」，检查 Windows、Node.js、pnpm、Harness
-和默认角色资源，按第3.2节「前置工作」及第3.3节「基础安装」完成基础部署。
-我授权安装基础程序所需的依赖；请保留现有设置和个人资料。
+First read README.md, Chapter 3, "Installation". Check Windows, Node.js,
+pnpm, Harness, and the default character resources. Follow 3.2 "Prerequisites"
+and 3.3 "Base Installation" to complete the base setup.
+I authorize installation of the dependencies required for the base application.
+Preserve existing settings and personal data.
 
-语音模块不在本次默认安装范围内。请先完成角色显示与文字交流。
-如果我另外要求安装本地语音识别或 CosyVoice3，请阅读第3.4节「语音组件安装」，
-确认我需要的组件后，再按该节安装，准备相应模型和环境。
+Voice components are outside this default installation. First get the character
+display and text conversation working. If I separately request local speech
+recognition or CosyVoice3, read 3.4 "Optional Voice Components", confirm which
+components I want, and prepare their models and environments as described there.
 
-运行 pnpm run doctor 检查基础文件，再执行 pnpm start 启动角色。
-首次成功加载角色后，程序会自动在桌面创建“哦鲸鲸”图标。
-引导我发送一句问候确认能收到回复；这一步使用我的 DeepSeek API 额度。
-账户和 API key 由我在 Harness 本机设置中配置，不需要我把密钥发给你。
-遇到问题请定位并修复，完成后说明运行结果和仍需我操作的步骤。
+Run pnpm run doctor to check the base files, then pnpm start to launch.
+After the character first loads successfully, the app creates a desktop shortcut
+named "哦鲸鲸" automatically. Help me send a short greeting to confirm a reply;
+this uses my DeepSeek API credit.
+I will configure the account and API key in Harness locally; I do not need to
+send you my key. Locate and fix problems, then report the outcome and any steps
+that still require my interaction.
 ```
 
 <a id="sec31"></a>
 
-### 3.1. 项目结构 [⌃](#top)
+### 3.1. Project Structure [⌃](#top)
 
-主要运行模块与开发入口如下：
+The main runtime modules and development entry points are:
 
 ```text
 Cute-Partner/
     │
-    ├── apps/desktop/                  # 桌面应用
-    │   ├── main.cjs                   # 窗口、服务组装与生命周期
-    │   ├── preload.cjs                # 界面调用宿主的接口
-    │   ├── server.cjs                 # 本机服务与角色资源读取
-    │   ├── launch.ps1                 # 桌面快捷方式的后台启动入口
-    │   ├── package.json               # 桌面依赖与脚本
-    │   ├── pnpm-lock.yaml             # 固定依赖版本
-    │   ├── pnpm-workspace.yaml        # 桌面依赖安装配置
-    │   ├── model-service.config.json  # 模型与调用限额
-    │   ├── lib/                       # 对话、记忆、工具、语音与资料
-    │   ├── ui/                        # 角色、白云、聊聊与小本本
-    │   ├── assets/                    # 图标与预置音色
-    │   ├── optional-modules/          # 可选语音组件适配
-    │   └── tools/                     # 启动与组件准备
+    ├── apps/desktop/                # Desktop application
+    │   ├── main.cjs                 # Windows, service composition, and lifecycle
+    │   ├── preload.cjs              # UI-to-host interface
+    │   ├── server.cjs               # Local service and character resource access
+    │   ├── launch.ps1               # Background launcher for the desktop shortcut
+    │   ├── package.json             # Desktop dependencies and scripts
+    │   ├── pnpm-lock.yaml           # Locked dependency versions
+    │   ├── pnpm-workspace.yaml      # Desktop dependency installation settings
+    │   ├── model-service.config.json # Model and call limits
+    │   ├── lib/                     # Chat, memory, tools, speech, and data
+    │   ├── ui/                      # Character, cloud, reader, and Notebook
+    │   ├── assets/                  # Icons and bundled voice presets
+    │   ├── optional-modules/        # Optional voice adapters
+    │   └── tools/                   # Startup and component preparation
     │
-    ├── characters/default/            # 默认角色：哦鲸鲸
-    │   ├── character.json             # 角色 ID 与显示名
-    │   ├── parameter-contract.json    # 参数契约
-    │   ├── actions.json               # 动作清单
-    │   ├── model/                     # 模型、纹理、动作与表情
-    │   ├── preview.png                # 静态预览图
-    │   └── web/                       # 角色驱动、SDK 与 Core
+    ├── characters/default/          # Default character: 哦鲸鲸
+    │   ├── character.json           # Character ID and display name
+    │   ├── parameter-contract.json  # Parameter contract
+    │   ├── actions.json             # Action definitions
+    │   ├── model/                   # Model, textures, motions, and expressions
+    │   ├── preview.png              # Static preview
+    │   └── web/                     # Character drivers, SDK, and Core
     │
-    ├── integrations/harness/          # Harness 集成入口
-    ├── tools/                         # 环境检查、组件安装与发布工具
-    │   ├── doctor.cjs                 # 基础环境检查
-    │   ├── install-voice.ps1          # 可选自然语音安装
-    │   ├── check-release.cjs          # 上传候选文件检查
-    │   ├── release-resources.json     # 公开资源的大小与哈希
-    │   ├── build-market-index.cjs     # Harness 集成索引生成
-    │   └── build-windows-release.cjs # Windows 基础程序包构建
-    ├── docs/media/                    # 文档图片、动图与试听
-    ├── .gitignore                     # 排除依赖、运行资料与下载资源
-    ├── package.json                   # 项目命令入口
-    ├── pnpm-workspace.yaml            # 根目录脚本配置
-    ├── product.json                   # 产品名称、版本与默认角色
-    ├── README.md                      # 中文项目文档
-    ├── README_EN.md                   # 英文项目文档
-    └── LICENSE                        # MIT License
+    ├── integrations/harness/        # Harness integration entry
+    ├── tools/                       # Setup, component installation, and release tools
+    │   ├── doctor.cjs               # Base environment checks
+    │   ├── install-voice.ps1        # Optional natural speech installer
+    │   ├── check-release.cjs        # Git upload candidate checks
+    │   ├── release-resources.json   # Public resource sizes and hashes
+    │   ├── build-market-index.cjs   # Harness integration index builder
+    │   └── build-windows-release.cjs # Windows base application packager
+    ├── docs/media/                  # Documentation images, GIFs, and audio
+    ├── .gitignore                   # Excludes dependencies, personal data, and downloads
+    ├── package.json                 # Project commands
+    ├── pnpm-workspace.yaml          # Root script configuration
+    ├── product.json                 # Product name, version, and default character
+    ├── README_CN.md                 # Chinese documentation
+    ├── README.md                 # English documentation
+    └── LICENSE                      # MIT License
 ```
 
 <a id="sec32"></a>
 
-### 3.2. 前置工作 [⌃](#top)
+### 3.2. Prerequisites [⌃](#top)
 
-正式安装前，先准备后台框架、模型账户与基础工具。完成这些环节后，Cute-Partner 就可以接入你的模型服务，并在本机显示角色、保存资料和处理任务。
+Prepare the backend framework, model account, and basic tools first. Cute-Partner can then connect to your model service, display the character, save data, and handle tasks locally.
 
-#### 3.2.1. 配置 Harness
+#### 3.2.1. Configure Harness
 
-1. 从 **[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)** 获取 Windows 桌面版，按其说明完成安装。
-2. 准备 [DeepSeek API 账户](https://platform.deepseek.com/)，创建 API key，并准备可用调用额度。接入步骤可参阅 [API 入门说明](https://api-docs.deepseek.com/)。
-3. 打开 Harness 的模型设置，在本机保存这枚 key，然后选择 DeepSeek 模型，完成一次简短交流，确认模型已可使用。
+1. Get the Windows desktop version of **[DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)** and follow its installation instructions.
+2. Set up a [DeepSeek API account](https://platform.deepseek.com/), create an API key, and make sure you have available credit. See the [API introduction](https://api-docs.deepseek.com/) for connection instructions.
+3. Save the key locally in Harness's model settings, choose a DeepSeek model, and complete a short conversation to confirm the model works.
 
-项目使用你自己的 DeepSeek API 账户，由 Harness 保存本机连接配置，模型请求发送至 DeepSeek 服务。完成配置后，日常交流从角色界面完成。
+The project uses your own DeepSeek API account. Harness stores the local connection configuration, and model requests go to DeepSeek's service. After configuration, use the character interface for everyday conversation.
 
-#### 3.2.2. 基础运行工具
+#### 3.2.2. Base Runtime Tools
 
-| 准备项 | 用途与准备方式 |
+| Requirement | Purpose and preparation |
 | --- | --- |
-| Windows x64 | 桌面运行环境 |
-| Node.js 24 | 运行项目命令与辅助工具，安装后确认 `node --version` 可用 |
-| pnpm | JavaScript 依赖与脚本管理工具，用来安装 Electron 并运行项目命令 |
-| Git | 使用Git获取源码时需要；自然语音安装器也会用它下载固定修订源码 |
-| 角色与 Cubism Core | 默认角色及适配的 Core 已随源码提供，克隆或解压后即可使用 |
-| Electron运行库 | 项目使用版本为44.8.0，在[3.3.1. 环境配置](#sec331)时准备，无需先单独安装桌面程序 |
+| Windows x64 | Desktop runtime environment |
+| Node.js 24 | Runs project commands and helpers; check that `node --version` works after installation |
+| pnpm | Installs JavaScript dependencies, including Electron, and runs project scripts |
+| Git | Needed when cloning the source; the natural speech installer also uses it to retrieve fixed source revisions |
+| Character and Cubism Core | The default character and matching Core are included with the source |
+| Electron runtime | Version 44.8.0 is prepared in [3.3.1. Prepare the Environment](#sec331); a separate desktop application installation is not needed first |
 
-**pnpm 是什么？** 可以把它理解为 JavaScript 项目的依赖安装器和命令入口：`package.json` 定义要安装什么、有哪些脚本，`pnpm-lock.yaml` 固定具体依赖版本。Node.js 运行 JavaScript，pnpm 负责准备依赖和调用这些脚本。
+**What is pnpm?** It is the dependency installer and script launcher for this JavaScript project. `package.json` defines dependencies and commands, and `pnpm-lock.yaml` pins their versions. Node.js runs JavaScript; pnpm prepares dependencies and invokes the scripts.
 
-装好 Node.js 后，若尚未安装 pnpm，可在 PowerShell 中执行一次：
+After installing Node.js, install pnpm once from PowerShell if it is not already available:
 
 ```powershell
 npm install -g pnpm@11.25.0
 ```
 
-这里的 `npm` 随 Node.js 提供，用于初次安装 pnpm；后续按本页命令使用即可。然后检查：
+Here, `npm` comes with Node.js and is used to install pnpm. Use the commands in this guide afterward. Check:
 
 ```powershell
 node --version
 pnpm --version
 ```
 
-| 常见命令 | 在本项目中的含义 |
+| Common command | Meaning in this project |
 | --- | --- |
-| `pnpm --dir apps/desktop install --frozen-lockfile` | 在桌面目录安装锁文件指定的依赖；`--dir` 指定目录，`--frozen-lockfile` 保持锁文件不变，不匹配时会报错 |
-| `pnpm run doctor` | 调用 `tools/doctor.cjs`，检查基础文件是否齐全 |
-| `pnpm start` | 调用桌面启动脚本，打开角色 |
-| `pnpm voice:plan` / `pnpm voice:install` | 分别查看自然语音安装计划、执行安装 |
+| `pnpm --dir apps/desktop install --frozen-lockfile` | Installs locked desktop dependencies; `--dir` selects the directory, and `--frozen-lockfile` refuses changes when the manifest and lockfile disagree |
+| `pnpm run doctor` | Runs `tools/doctor.cjs` to check that the base files are present |
+| `pnpm start` | Runs the desktop startup helper and opens the character |
+| `pnpm voice:plan` / `pnpm voice:install` | Shows the natural speech installation plan / performs the installation |
 
-这些脚本由根目录[package.json](package.json)的 `scripts` 定义，例如 `pnpm start` 对应 `node apps/desktop/tools/start.cjs`。`pnpm run doctor` 显式运行项目脚本，避免与 pnpm 自身的同名诊断命令混淆。安装依赖通常只在首次准备或依赖变更时进行；完成[3.3.2. 启动测试](#sec332)后，日常可直接双击桌面图标启动。工具用法可参阅[pnpm 官方命令说明](https://pnpm.io/cli/run)。
+These commands are defined by `scripts` in the root [package.json](package.json). For example, `pnpm start` runs `node apps/desktop/tools/start.cjs`. Use `pnpm run doctor` explicitly to distinguish this project's script from pnpm's own diagnostic command. Dependency installation is usually needed only on first setup or after dependency changes. After [3.3.2. Startup Check](#sec332), launch daily from the desktop icon. See the [pnpm command documentation](https://pnpm.io/cli/run) for details.
 
-#### 3.2.3. 自然语音（可选）
+#### 3.2.3. Natural Speech (Optional)
 
-如果计划安装 CosyVoice3，再准备 **Git、Python 3.11、可用的 NVIDIA CUDA 运行环境**，并预留模型、Python环境与下载缓存空间。安装器采用 CUDA 12.1 对应的 PyTorch 依赖路线，语音模型的文件约5.43GB。
+For CosyVoice3, also prepare **Git, Python 3.11, and a working NVIDIA CUDA environment**, with room for models, the Python environment, and download caches. The installer uses the CUDA 12.1 PyTorch route; the voice model files total approximately 5.43 GB.
 
-先使用文字或 Windows 系统声音时，可直接进入基础安装。本地语音识别与自然语音的准备统一放在[3.4. 语音组件安装](#sec34)。
+For text or Windows system speech, continue directly with the base installation. Recognition and natural speech setup are covered in [3.4. Optional Voice Components](#sec34).
 
 <a id="sec33"></a>
 
-### 3.3. 基础安装 [⌃](#top)
+### 3.3. Base Installation [⌃](#top)
 
-以下步骤在 PowerShell 中完成。本文所说的“仓库根”是包含 `package.json`、`product.json`、`apps/` 和 `characters/` 的 Cute-Partner 文件夹。
+Run the following steps in PowerShell. The **repository root** is the Cute-Partner folder containing `package.json`, `product.json`, `apps/`, and `characters/`.
 
 <a id="sec331"></a>
 
-#### 3.3.1. 环境配置
+#### 3.3.1. Prepare the Environment
 
-- 获取源码与资源
+- Get the source and resources
 
-将源码包解压到固定位置，或通过 Git 克隆项目，然后在仓库根打开 PowerShell。默认角色的模型、纹理、动作、表情、图标、静态预览图和适配的 Cubism Core 已放入对应目录，一起随源码获取。
+Extract the source package to a fixed location or clone the repository with Git, then open PowerShell at the repository root. The default model, textures, motions, expressions, icons, static preview, and matching Cubism Core are included in their respective directories.
 
 ```text
 characters/default/
-    ├── model/                         # 模型、纹理、动作与表情
-    ├── preview.png                    # 静态预览图
-    └── web/sdk/live2dcubismcore.min.js # 配套 Core，约 223 KiB
+    ├── model/                         # Model, textures, motions, and expressions
+    ├── preview.png                    # Static preview
+    └── web/sdk/live2dcubismcore.min.js # Matching Core, about 223 KiB
 ```
 
-- 安装桌面依赖
+- Install desktop dependencies
 
-在仓库根运行：
+From the repository root, run:
 
 ```powershell
 pnpm --dir apps/desktop install --frozen-lockfile
 ```
 
-这一步按锁文件安装桌面依赖，并准备固定版本的 Electron。角色资源、图标、预置音色和小型运行脚本随库提供，Electron 运行库由安装命令获取。
+This installs the locked desktop dependencies and prepares the fixed Electron version. Character resources, icons, voice presets, and small runtime helpers come with the source; the installation command obtains Electron.
 
-若安装后 `pnpm run doctor` 仍显示缺少 Electron，可补执行下载脚本：
+If `pnpm run doctor` still reports Electron as missing after installation, run its download script:
 
 ```powershell
 node apps/desktop/node_modules/electron/install.js
@@ -588,17 +596,17 @@ node apps/desktop/node_modules/electron/install.js
 
 <a id="sec332"></a>
 
-#### 3.3.2. 启动测试
+#### 3.3.2. Startup Check
 
-先检查基础文件是否准备齐全：
+Check the base files first:
 
 ```powershell
 pnpm run doctor
 ```
 
-`doctor` 会逐项显示 `[present]` 或 `[missing]`，检查 Node、Electron、Harness、已保存的凭据文件，以及角色模型、Core、图标和预览图。若出现缺项，按该项提示补齐后再运行一次检查。
+`doctor` reports `[present]` or `[missing]` for Node, Electron, Harness, the saved credentials file, character model, Core, icons, and preview. Follow the guidance for any missing item, then run the check again.
 
-检查完成后，在项目根目录启动：
+Once ready, launch from the repository root:
 
 ```powershell
 pnpm start
@@ -607,25 +615,25 @@ pnpm start
 <table>
 <tr>
 <td width="75%" valign="middle">
-<p>首次成功加载角色后，程序会自动在桌面创建使用卡通图标的 <strong>哦鲸鲸</strong> 快捷方式。以后双击桌面图标即可启动，无需打开命令行。</p>
-<p>项目文件夹移动后，在新位置执行一次 <code>pnpm start</code>，程序会更新自己创建的桌面图标。若已有同名的其他入口，新图标会附加编号。</p>
+<p>After the character first loads successfully, the application automatically creates a desktop shortcut named <strong>哦鲸鲸</strong> with the character icon. Double-click it for future launches, without opening a terminal.</p>
+<p>If you move the project folder, run <code>pnpm start</code> once from the new location. The application updates the shortcut it created. If another shortcut already uses that name, a number is appended.</p>
 </td>
 <td width="25%" align="center" valign="middle">
-<img src="apps/desktop/assets/character-icon.png" alt="桌面上的哦鲸鲸启动图标" width="96">
-<p><strong>哦鲸鲸</strong><br>桌面启动图标</p>
+<img src="apps/desktop/assets/character-icon.png" alt="Desktop launcher icon for 哦鲸鲸" width="96">
+<p><strong>哦鲸鲸</strong><br>Desktop shortcut</p>
 </td>
 </tr>
 </table>
 
-启动后，确认桌面出现角色，右键选择“打字交流”，再打开“读读刚才”；随后发送一句简短问候，查看云朵和“和她聊聊”中的回复。
+Confirm the character appears, right-click and choose Text Mode (打字交流), then open the reader through Read Recent (读读刚才). Send a short greeting and check the cloud and conversation reader (和她聊聊) for the reply.
 
-**基础检查通过、角色正常显示、收到第一条模型回复后，基础部署就完成了。** 接下来可以直接使用文字交流，也可以继续准备声音与麦克风输入。首次真实回复会使用你自己的API额度。
+**The base setup is complete when the file checks pass, the character appears, and the first model reply arrives.** Continue with text or prepare voice output and microphone input. The first real reply uses your own API credit.
 
 <a id="sec333"></a>
 
-#### 3.3.3. 自定义 Harness 安装
+#### 3.3.3. Custom Harness Location
 
-项目会检测默认 Windows 安装目录。如果 Harness 安装在其他位置，可以在同一个 PowerShell 窗口中指定目录，再检查和启动：
+The application checks the default Windows installation directory. If Harness is installed elsewhere, set its location in the same PowerShell window before checking and launching:
 
 ```powershell
 $env:CUTE_PARTNER_HARNESS_DIR = 'D:\Apps\DeepSeek Harness'
@@ -633,256 +641,261 @@ pnpm run doctor
 pnpm start
 ```
 
-将示例路径换成自己实际的 Harness 安装文件夹。若要日后通过桌面图标使用这一位置，也请在 Windows 的用户环境变量中保存同名变量 `CUTE_PARTNER_HARNESS_DIR`，并重新登录 Windows。账户与密钥继续通过 Harness 本机设置管理。
+Replace the example path with your actual Harness installation folder. To use that location from the desktop shortcut later, also save `CUTE_PARTNER_HARNESS_DIR` as a Windows user environment variable and sign out and back in. Continue managing the account and key in Harness's local settings.
 
 <a id="sec34"></a>
 
-### 3.4. 语音组件安装 [⌃](#top)
+### 3.4. Optional Voice Components [⌃](#top)
 
-语音功能可以按体验逐步加入：Windows系统声音适合快速开始，本地识别让你通过麦克风交流，CosyVoice3则提供更有角色感的声音与自制音色。后两项可分别准备，也可以一起使用。
+Add voice features step by step: Windows voices are a quick starting point, local recognition adds microphone input, and CosyVoice3 provides natural speech and custom voices. Recognition and natural speech can be prepared separately or used together.
 
-#### 3.4.1. 准备资源与环境
+#### 3.4.1. Prepare Resources and Environments
 
-**① 本地语音识别**
+**① Local speech recognition**
 
-在仓库根运行：
+From the repository root, run:
 
 ```powershell
 pnpm speech:prepare
 ```
 
-准备工具会读取已安装 Harness 对应的识别资源清单，优先核验已有缓存，再补齐需要的模型、词表与VAD文件。终端显示“本地 SenseVoice 已就绪”后，即可进行麦克风输入设置。
+The preparation helper reads the speech resource manifest from your installed Harness version, verifies existing caches first, and obtains the required model, vocabulary, and VAD files. When it prints “本地 SenseVoice 已就绪” (local SenseVoice is ready), proceed with microphone settings.
 
-**② CosyVoice3 自然语音**
+**② CosyVoice3 natural speech**
 
-先查看安装位置、依赖和步骤：
+First review the installation location, dependencies, and steps:
 
 ```powershell
 pnpm voice:plan
 ```
 
-确认前置工具与空间就绪后，执行实际安装：
+When the prerequisites and disk space are ready, install:
 
 ```powershell
 pnpm voice:install
 ```
 
-安装器依次完成固定版本源码准备、独立 Python venv 创建、CUDA版PyTorch与锁定依赖安装、模型下载和文件校验，再运行依赖检查、worker测试与本地合成/停止验证；通过后注册语音模块。
+The installer prepares fixed source revisions, creates a separate Python venv, installs CUDA PyTorch and locked dependencies, downloads and checks models, and runs dependency, worker, and local synthesis/stop checks. It registers the voice module after those checks pass.
 
 ```text
-检查环境 → 准备源码与独立venv → 安装依赖与模型 → 校验 / 测试 → 注册模块
+Check environment → Prepare source and venv → Install dependencies and models
+    → Validate / Test → Register module
 ```
 
-下载完成时会显示模块准备与注册成功的信息。
+Successful preparation and registration are reported in the terminal.
 
-#### 3.4.2. 启用、试听与助手代办
+#### 3.4.2. Enable, Preview, or Ask an Agent
 
-组件准备完成后，重新打开角色，在小本本中依次设置。若当前为文字模式，先右键选择“能说话了”，再进行语音输入或试听：
+Reopen the character after preparing components, then configure them in the Notebook. If you are in text mode, right-click and choose Voice Mode (能说话了) before using microphone input or previews:
 
-| 能力 | 设置步骤 | 完成 |
+| Capability | Setup | Confirmation |
 | --- | --- | --- |
-| Windows 系统声音 | “语音”页开启输出，选择本机系统声音，点击试听 | 能听到试听内容 |
-| 本地语音识别 | “习惯”页设置倾听键与自动发送，使用语音交流模式；按键说一句短话 | 识别文字进入草稿或提交到交流中 |
-| CosyVoice3 自然语音 | “语音”页开启输出，选择内置音色，点击试听 | 模块就绪并播放自然语音，可继续调整风格或制作新音色 |
+| Windows voices | Enable output on Voice (语音), select a local system voice, and preview it | The sample is audible |
+| Local recognition | Set the listening key and auto-send on Habits (习惯), switch to voice mode, press the key, and say a short phrase | Recognized text becomes a draft or is sent to the conversation |
+| CosyVoice3 | Enable output on Voice (语音), select a bundled voice, and preview it | The module is ready and natural speech plays; adjust styles or create a voice afterward |
 
-Windows系统声音使用本机已安装的语音资源，可直接从上表第一项开始；无需先运行自然语音安装器。
+Windows voices use resources already installed on the machine. You can start with the first row without running the natural speech installer.
 
-当然，让 agent 处理环境会更加简单。可以将仓库交给具备本机终端能力的 agent，并复制下面的指示。将目录和组件选择替换成自己的实际内容即可：
+You can also ask an agent with local terminal access to prepare the environment. Give it the repository and use the instructions below, replacing the directory and component choices:
 
 ```text
-请帮我准备 Cute-Partner 的可选语音组件。
-项目目录：<填写本机仓库根目录>
-需要的组件：<本地语音识别 / CosyVoice3自然语音 / 两者>
+Please prepare optional voice components for Cute-Partner.
+Project root: <enter the local repository root>.
+Components: <local recognition / CosyVoice3 natural speech / both>.
 
-请先阅读项目README第3章「项目部署」及安装脚本，检查Node、pnpm、Harness和角色运行资源。
-若选择自然语音，再检查Git、Python3.11和NVIDIA/CUDA环境，并运行pnpm voice:plan。
-我授权下载所选组件所需的依赖与模型，请使用项目规定的独立目录和venv完成准备。
+Read README.md, Chapter 3, "Installation", and the installation scripts first.
+Check Node, pnpm, Harness, and character resources. For natural speech, also check
+Git, Python 3.11, and NVIDIA/CUDA, then run pnpm voice:plan.
+I authorize downloading dependencies and models for the selected components.
+Use the project's specified separate directories and venv.
 
-本地识别使用pnpm speech:prepare；自然语音使用pnpm voice:install。
-遇到问题请定位具体步骤并修复，保留已有环境和个人资料；需要我操作的软件安装界面、
-账户配置或条款确认，请明确告诉我。账户和密钥由我在本机设置中处理。
+For recognition, use pnpm speech:prepare; for natural speech, pnpm voice:install.
+Locate and fix failures while preserving existing environments and personal data.
+Tell me clearly if an installation screen, account setting, or terms confirmation
+requires my interaction. I will manage accounts and keys locally.
 
-完成后按第3.4.2节「启用、试听与助手代办」核对启用与试听，汇报组件位置、运行结果和需要我完成的界面操作。
+Follow 3.4.2 "Enable, Preview, or Ask an Agent" to verify the setup.
+Report component locations, results, and any UI steps I still need to complete.
 ```
 
 ---
 
 <a id="sec4"></a>
 
-## 4. 运行与使用 [⌃](#top)
+## 4. Using Cute-Partner [⌃](#top)
 
-完成部署后，就可以开始与她交流。首次使用时，个人设定、记忆和聊天记录从空白开始；你可以先聊几句，再逐步补充相处方式，让小本本随着交流慢慢充实。
+After setup, start getting to know her. Your persona, memories, and chat history begin empty. Chat first, then add preferences over time as the Notebook fills with your shared information.
 
 <a id="sec41"></a>
 
-### 4.1. 首次交流 [⌃](#top)
+### 4.1. Your First Conversation [⌃](#top)
 
-双击桌面的 **哦鲸鲸** 图标即可启动角色；首次启动或通过终端启动时，在仓库根执行：
+Double-click **哦鲸鲸** on the desktop. For the first launch or a terminal launch, run this at the repository root:
 
 ```powershell
 pnpm start
 ```
 
-第一次见面，可以按下面的顺序熟悉她：
+For your first meeting:
 
-1. **先从文字开始。** 右键角色选择“打字交流”，打开“记小本本 → 习惯”，在“一起做点事”中选择“只聊聊天”，并保存设置。模型初始为 DeepSeek Flash；需要切换时，可从小本本页末的 `i` 打开调试页选择。
-2. **打个招呼。** 右键选择“读读刚才”，在“和她聊聊”中发送一句问候。短回复会出现在白云上，完整内容留在阅读窗口。
-3. **留下一条小记忆。** 例如告诉她：“请记住：我喜欢早睡早起。”随后打开“小本本 → 记忆 → 关于你”，看看新记录；也可以告诉她希望怎样相处，逐步补充设定。
-4. **再试着一起做事。** 在习惯页选择工作范围和目录并保存，交付一项具体任务。需要声音时，按[3.4. 语音组件安装](#sec34)启用相应组件。
+1. **Start with text.** Right-click and choose Text Mode (打字交流). Open Notebook → Habits (记小本本 → 习惯), select Chat Only (只聊聊天) under the working options, and save. DeepSeek Flash is the initial model. To change it, open the debug page from the `i` at the bottom of the Notebook.
+2. **Say hello.** Right-click Read Recent (读读刚才) to open the conversation reader (和她聊聊). Send a greeting; the short reply appears in the cloud and the full reply stays in the reader.
+3. **Keep a small memory.** For example, send “请记住：我喜欢早睡早起。” (“Please remember: I like going to bed and getting up early.”), then check Notebook → Memory → About You (小本本 → 记忆 → 关于你). You can also describe how you would like her to interact with you and build the persona gradually.
+4. **Try working together.** Select a working scope and directory on Habits, save, and give her a concrete task. For voice, follow [3.4. Optional Voice Components](#sec34).
 
-角色正常显示、问候收到回复、记忆条目可以查看，就完成了第一次体验。接下来可以继续聊天，或从一个小任务开始合作。
+Once the character appears, your greeting gets a reply, and the memory is visible, you have completed the first experience. Keep chatting or begin with a small task.
 
 <a id="sec42"></a>
 
-### 4.2. 角色界面 [⌃](#top)
+### 4.2. Character Interface [⌃](#top)
 
-启动程序后，角色的live2d形象将会自动显现，其中包括角色本身与底部的状态栏。若与角色进行交流，则会在附近出现白云，其中将显示角色正在回复的内容。右键角色可调出菜单栏。
+The application displays the Live2D character and her status bar. Conversation brings up a nearby cloud bubble containing her short reply. Right-click the character for the menu.
 
-#### 4.2.1. 角色窗口
+#### 4.2.1. Character Window
 
 <table>
 <tr>
 <td width="60%" valign="top">
-<p>拖动角色可以调整桌面位置，右键打开菜单。快捷键 <code>Ctrl+Alt+Shift+P</code> 用于显示或隐藏角色；隐藏后程序继续运行，再按一次即可叫她回来。</p>
-<p>窗口底部采用“<strong>角色名 · 当前状态</strong>”显示，例如“哦鲸鲸 · 自然动态”。交流、倾听和工作时，状态与角色反馈会随之变化。需要调整缩放时，可从小本本页末的 <code>i</code> 打开调试页；置顶则直接使用右键菜单。</p>
+<p>Drag the character to move her, or right-click for the menu. <code>Ctrl+Alt+Shift+P</code> hides or shows her. The application keeps running while hidden; press the shortcut again to bring her back.</p>
+<p>The bottom bar shows <strong>character name · current state</strong>, such as “哦鲸鲸 · 自然动态” (idle animation). Conversation, listening, and work change her status and reactions. Adjust scale from the debug page linked by the Notebook's bottom <code>i</code>; use the context menu to toggle always-on-top.</p>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/character-window.png" alt="角色窗口与哦鲸鲸的名称状态栏" width="260"></p>
-<p><em>图 8 – 角色自然状态窗口视图</em></p>
+<p><img src="docs/media/character-window.png" alt="Character window with name and status bar" width="260"></p>
+<p><em>Figure 8 – The idle character window</em></p>
 </td>
 </tr>
 </table>
 
-#### 4.2.2. 白云
+#### 4.2.2. The Cloud Bubble
 
 <table>
 <tr>
 <td width="60%" valign="top">
-<p>白云是随身的交流入口：短回复、倾听提示和任务状态会出现在这里。需要你选择时，它会展开问题卡片；选择选项或填写“其他”后，点击“回答她”继续交流。多题可逐题填写，再一起提交。</p>
-<p>点击“全文”可以打开完整阅读窗口；点击 <code>×</code> 收起白云。在文字模式下，把鼠标移到角色身上后按倾听快捷键，即可展开头顶输入框。</p>
+<p>The cloud is a nearby conversation interface for short replies, listening prompts, and task status. When she needs a decision, it expands into a question card. Choose options or fill in Other (其他), then select Answer Her (回答她). For several questions, fill them in one by one and submit together.</p>
+<p>Full Text (全文) opens the reader; <code>×</code> closes the bubble. In text mode, hover over the character and press your listening shortcut to open the text box above her.</p>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/character-cloud.png" alt="角色白云：简短回复、全文与收起按钮" width="320"></p>
-<p><em>图 9 – 白云中的简短回复与全文入口</em></p>
+<p><img src="docs/media/character-cloud.png" alt="Cloud bubble with short reply, full-text link, and close control" width="320"></p>
+<p><em>Figure 9 – A short reply and the full-text entry</em></p>
 </td>
 </tr>
 </table>
 
-#### 4.2.3. 菜单栏
+#### 4.2.3. Context Menu
 
 <table>
 <tr>
 <td width="60%" valign="top">
-<p>右键角色即可打开常用菜单，托盘菜单也提供这些入口。</p>
+<p>Right-click the character for common actions. The tray menu provides the same entries.</p>
 <table>
 <thead>
 <tr>
-<th>菜单选项</th>
-<th>用处</th>
+<th>Menu entry</th>
+<th>Action</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>记小本本</td>
-<td>打开习惯、记忆、语音和伙食费四页</td>
+<td>Notebook (记小本本)</td>
+<td>Opens Habits, Memory, Voice, and Food Budget</td>
 </tr>
 <tr>
-<td>打字交流 / 能说话了</td>
-<td>切换文字与语音交流；菜单显示可切换到的方式</td>
+<td>Text / Voice Mode (打字交流 / 能说话了)</td>
+<td>Switches the interaction mode; the label names the mode you can switch to</td>
 </tr>
 <tr>
-<td>读读刚才</td>
-<td>打开“和她聊聊”，查看完整回复、回顾历史或输入文字</td>
+<td>Read Recent (读读刚才)</td>
+<td>Opens the reader for full replies, history, and text input</td>
 </tr>
 <tr>
-<td>伙食费</td>
-<td>直接打开余额、用量与节食设置页</td>
+<td>Food Budget (伙食费)</td>
+<td>Opens balance, usage, and Budget Guard settings</td>
 </tr>
 <tr>
-<td>过来待着</td>
-<td>勾选后让角色保持置顶，再次点击取消置顶</td>
+<td>Stay Here (过来待着)</td>
+<td>Checked means always-on-top; click again to turn it off</td>
 </tr>
 <tr>
-<td>睡觉去吧</td>
-<td>退出程序，结束桌面驻留</td>
+<td>Go to Sleep (睡觉去吧)</td>
+<td>Quits the application</td>
 </tr>
 </tbody></table>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/character-menu-diagram.svg" alt="按程序当前六个菜单选项绘制的清晰矢量示意图" width="240"></p>
-<p><em>图 10 – 角色右键菜单示意（按当前选项绘制）</em></p>
+<p><img src="docs/media/character-menu-diagram.svg" alt="Diagram showing the six current context-menu entries" width="240"></p>
+<p><em>Figure 10 – Context-menu diagram using the current entries</em></p>
 </td>
 </tr>
 </table>
 
 <a id="sec43"></a>
 
-### 4.3. 小本本指南 [⌃](#top)
+### 4.3. Notebook Guide [⌃](#top)
 
-项目将设置与资料页面称为“**她的小本本**”。右键角色选择“记小本本”即可打开，顶部四个板块分别照顾相处方式、共同记忆、声音和用量：
+The application calls its settings and personal data pages **Her Notebook (她的小本本)**. Right-click Notebook (记小本本) to open it. Its four pages cover interaction preferences, shared memories, speech, and usage:
 
 ```text
-她的小本本
-    ├── 习惯   → 相处方式、倾听按键、办事范围与资料备份
-    ├── 记忆   → 关于你、各件事、还在聊的事与最近整理
-    ├── 语音   → 声音选择、播放设置与自制音色
-    └── 伙食费 → 账户余额、用量统计与节食保护
+Her Notebook
+    ├── Habits      → Persona, listening key, working scope, and backups
+    ├── Memory      → About you, projects, topics in progress, and recent changes
+    ├── Voice       → Voice selection, playback, and custom voices
+    └── Food Budget → Account balance, usage, and Budget Guard
 ```
 
-页面中的 `i` 收纳来源、修订和详细说明，需要时再展开。关闭小本本只会收起页面，角色仍会留在桌面。
+The `i` controls provide sources, revisions, and additional explanations. Closing the Notebook hides the page while the character stays on the desktop.
 
-#### 4.3.1. 习惯
+#### 4.3.1. Habits
 
 <table>
 <tr>
 <td width="60%" valign="top">
-<p>这一页决定你们怎样相处，以及她可以帮到哪里。</p>
-<p><strong>相处方式与设定：</strong> 在“她的小习惯”中写下性格、称呼和表达偏好，或用“从文件带来”导入 TXT、Markdown、JSON，再点击“保存设置”。也可以从“慢慢认识她”发起补充，或直接在聊天中告诉她；她提出设定修改时，会先展示差异供你确认。通过“查看最新设定”和“最近的设定修订”可以核对内容，并撤销最近一次修改。</p>
-<p><strong>倾听与发送：</strong> 默认单击并松开 <code>Ctrl</code> 开始倾听，再按一次结束。“重新映射”可以换成习惯的按键；开启“说完就发给她”后，识别完成即发送，关闭时则先保留草稿供你核对。修改后点击“保存设置”。麦克风输入需要先完成<a href="#sec34">3.4. 语音组件安装</a>中的本地识别准备。</p>
-<p><strong>一起做点事：</strong> 在“她能帮到哪里”中选择“只聊聊天”“一起处理文件和代码”或“帮我操作电脑与其他应用”。处理文件时，再选择“一起做事的地方”并保存；新范围从新对话开始生效。前者围绕工作目录处理资料，电脑操作模式则可以访问当前 Windows 用户可用的其他目录与应用。执行中的待决定步骤会展示出来，你可以确认，也可以点击“先停一下”。</p>
-<p>页内“把小本本收好”提供完整备份、载入和重置，具体操作见<a href="#sec45">4.5. 导出、载入与重置</a>。</p>
+<p>This page sets how you interact and what she can help with.</p>
+<p><strong>Persona and preferences:</strong> Write personality, names, and communication preferences in Her Habits (她的小习惯), or import TXT, Markdown, or JSON through From File (从文件带来), then select Save Settings (保存设置). You can also start from Getting to Know Her (慢慢认识她) or tell her during chat. She shows proposed changes for confirmation. View Current Persona (查看最新设定) and Recent Persona Revisions (最近的设定修订) let you review content and undo the latest change.</p>
+<p><strong>Listening and sending:</strong> By default, press and release <code>Ctrl</code> to start listening, then press it again to finish. Remap (重新映射) changes the key. Auto-send (说完就发给她) sends recognized text immediately when enabled; otherwise it stays as a draft for review. Save the settings afterward. Microphone input needs the recognition setup in <a href="#sec34">3.4. Optional Voice Components</a>.</p>
+<p><strong>Working together:</strong> Under Where She Can Help (她能帮到哪里), choose Chat Only (只聊聊天), Files and Code (一起处理文件和代码), or Computer and Other Apps (帮我操作电脑与其他应用). For file work, choose a directory under 一起做事的地方 and save. The new scope applies to a new conversation. File mode works around that directory; computer mode can reach other directories and applications available to your Windows user. Pending decisions are shown for approval, and Pause for Now (先停一下) requests a stop.</p>
+<p>The backup section (把小本本收好) provides export, restore, and reset. See <a href="#sec45">4.5. Export, Restore, and Reset</a>.</p>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/notebook-habits-rounded.svg" alt="小本本习惯页：相处方式、倾听设置与办事范围" width="320"></p>
-<p><em>图 11 – 小本本的习惯页</em></p>
+<p><img src="docs/media/notebook-habits-rounded.svg" alt="Habits page with persona, listening, and working-scope settings" width="320"></p>
+<p><em>Figure 11 – The Habits page</em></p>
 </td>
 </tr>
 </table>
 
-#### 4.3.2. 记忆
+#### 4.3.2. Memory
 
 <table>
 <tr>
 <td width="60%" valign="top">
-<p><strong> 关于你</strong> 这一页把聊过的重要内容整理成可以翻阅的小记录。你可以从分类入口查看，再对具体条目进行调整：</p>
+<p><strong>About You (关于你)</strong> turns important information from conversation into records you can browse and adjust:</p>
 <table>
 <thead>
 <tr>
-<th>入口</th>
-<th>可以做什么</th>
+<th>Entry</th>
+<th>What you can do</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>关于你</td>
-<td>查看偏好、资料与约定，按需更正、移动、标记核心或忘记</td>
+<td>About You (关于你)</td>
+<td>Review preferences, information, and agreements; correct, move, mark as core, or forget</td>
 </tr>
 <tr>
-<td>各件事</td>
-<td>选择事务抽屉，查看同一目标下的计划、决定与待办</td>
+<td>Projects (各件事)</td>
+<td>Choose a project drawer and review its plans, decisions, and to-dos</td>
 </tr>
 <tr>
-<td>还在聊的事</td>
-<td>查看尚在讨论、等待整理的话题线索</td>
+<td>Topics in Progress (还在聊的事)</td>
+<td>Review topics still being discussed or waiting to be organized</td>
 </tr>
 <tr>
-<td>最近整理</td>
-<td>回顾新近归类和修改，查看可撤销的整理记录</td>
+<td>Recent Changes (最近整理)</td>
+<td>Review recent classification and edits, including changes available to undo</td>
 </tr>
 </tbody></table>
-<p>例如，告诉她“请记住：我喜欢早睡早起”后，到“关于你”中查找这条记录。点击条目上的 <code>i</code> 可以查看来源和旧版本；内容变化时使用更正，归属不合适时移动，之后不再需要时选择忘记。</p>
+<p>After sending “请记住：我喜欢早睡早起。” (“Please remember: I like going to bed and getting up early.”), look for the record in About You. An entry's <code>i</code> shows its source and older versions. Correct changed information, move an entry whose scope is wrong, or forget it when no longer needed.</p>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/notebook-memory-rounded.svg" alt="记忆页关于你的条目、来源和更正入口" width="320"></p>
-<p><em>图 12 – 关于你的资料与偏好</em></p>
+<p><img src="docs/media/notebook-memory-rounded.svg" alt="Memory entries, sources, and correction controls under About You" width="320"></p>
+<p><em>Figure 12 – Your information and preferences</em></p>
 </td>
 </tr>
 </table>
@@ -890,144 +903,144 @@ pnpm start
 <table>
 <tr>
 <td width="60%" valign="top">
-<p><strong> 各件事</strong> 展示各类事务，能集中翻阅围绕它积累的内容。例如，“周末相册”可以持续保留选图计划、后续决定和检查待办；继续交流时，在“和她聊聊”中选中同一事务，便于接着推进。需要留一份方便阅读的文字时，可使用“保存文字副本”；完整资料迁移使用<a href="#sec45">4.5. 导出、载入与重置</a>中的备份功能。</p>
+<p><strong>Projects (各件事)</strong> keeps an ongoing goal's information together. A weekend album, for example, can retain the photo-selection plan, later decisions, and remaining checks. Select the same project in the reader to continue. Save Text Copy (保存文字副本) creates a readable copy; use the backup in <a href="#sec45">4.5. Export, Restore, and Reset</a> to transfer the complete dataset.</p>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/notebook-affair-rounded.svg" alt="记忆页事务抽屉中的相册计划与待办" width="320"></p>
-<p><em>图 13 – 事务抽屉中的计划与待办</em></p>
+<p><img src="docs/media/notebook-affair-rounded.svg" alt="Plans and to-dos in the photo album project drawer" width="320"></p>
+<p><em>Figure 13 – Plans and to-dos in a project drawer</em></p>
 </td>
 </tr>
 </table>
 
-#### 4.3.3. 语音
+#### 4.3.3. Voice
 
 <table>
 <tr>
 <td width="60%" valign="top">
-<p><strong> 语音</strong> 这一页负责她怎样开口说话，包括选择声音、试听、风格调整和制作新音色。</p>
-<h5>4.3.3.1. 选择与播放</h5>
+<p>The <strong>Voice (语音)</strong> page controls how she speaks: voice selection, previews, expression styles, and custom voice creation.</p>
+<h5>4.3.3.1. Selection and Playback</h5>
 <ol>
-<li>开启语音，选择本机的 Windows 声音，或已准备好的自然语音音色。</li>
-<li>调整音量与语速，点击“保存声音”，再用“试听一句”听效果。</li>
-<li>选择自然语音时，还可以切换自然、轻柔、开心或平静风格。“早点开口”在默认语速下以分块方式生成和播放，调整语速后采用整句生成；分块播放偶尔会出现衔接停顿。</li>
+<li>Enable voice output and choose an installed Windows voice or a prepared natural voice.</li>
+<li>Adjust volume and rate, select Save Voice (保存声音), then Preview a Line (试听一句).</li>
+<li>Natural speech supports Natural, Soft, Happy, and Calm styles. Speak Sooner (早点开口) generates and plays chunks at the default rate; changing the rate uses whole-sentence synthesis. Chunk transitions may sometimes pause.</li>
 </ol>
-<p>日常朗读在语音交流模式下进行；如果当前为文字模式，右键选择“能说话了”即可切换。“停止说话”用于中止声音播放，模型任务则由“停止生成 / 任务”或“先停一下”控制。</p>
-<h5>4.3.3.2. 预置与自制音色</h5>
-<p>项目提供的预置音色可以直接从列表选择，安装自然语音组件后即可使用。想制作自己的声音时，展开“制作一个音色”：</p>
+<p>Everyday reading runs in voice mode. From text mode, right-click Voice Mode (能说话了). Stop Speaking (停止说话) stops audio; Stop Generation / Task (停止生成 / 任务) or Pause for Now (先停一下) controls the model task.</p>
+<h5>4.3.3.2. Bundled and Custom Voices</h5>
+<p>Bundled presets appear in the voice list and become usable after installing natural speech. To create your own, expand Create a Voice (制作一个音色):</p>
 <ol>
-<li>选择一段有权使用的 <strong>3–30 秒清晰单人录音</strong>，支持 WAV、FLAC、MP3。</li>
-<li>填写音色名称，以及录音中实际说出的文字。</li>
-<li>点击“生成并保存音色”，等待制作完成，再从声音列表选择并试听。</li>
+<li>Select a <strong>clear, single-speaker recording of 3–30 seconds</strong> that you have permission to use. WAV, FLAC, and MP3 are supported.</li>
+<li>Enter a voice name and the words actually spoken in the recording.</li>
+<li>Select Generate and Save Voice (生成并保存音色), wait for completion, then choose and preview it from the list.</li>
 </ol>
-<p>完成的自制音色保存在本机，之后可以反复使用，也会随完整资料一起备份。</p>
+<p>Completed custom voices stay on this machine for reuse and are included in full personal-data backups.</p>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/notebook-voice-rounded.svg" alt="小本本语音页：声音选择、播放与音色制作" width="320"></p>
-<p><em>图 14 – 声音选择与播放设置</em></p>
+<p><img src="docs/media/notebook-voice-rounded.svg" alt="Notebook voice selection, playback, and voice creation" width="320"></p>
+<p><em>Figure 14 – Voice selection and playback settings</em></p>
 </td>
 </tr>
 </table>
 
-#### 4.3.4. 伙食费
+#### 4.3.4. Food Budget
 
 <table>
 <tr>
 <td width="60%" valign="top">
-<p>“伙食费”用更直观的方式展示账户余额与她的用量，方便边用边掌握消耗。</p>
-<p>点击“刷新余额”查看当前账户人民币余额，下方显示本应用近 24 小时的估算费用与每小时柱图。右上角的旋转按钮可切换为“米粒”，查看累计和近 24 小时的 token 数量。柱图也会随之切换，悬停可查看明细。</p>
-<p>想保留一定余额时，打开“节食”的“<strong>开启保护</strong>”，填写“保留伙食费”并保存。余额达到保留值或暂时无法查询时，程序会暂停模型调用。</p>
+<p><strong>Food Budget (伙食费)</strong> presents your account balance and her usage together.</p>
+<p>Refresh Balance (刷新余额) queries the current CNY balance. Below it are this application's estimated cost over the last 24 hours and an hourly chart. The rotating button at the top right switches to Rice (米粒) for cumulative and recent token counts. The chart changes with the view; hover for details.</p>
+<p>To keep a reserve, enable protection (开启保护) under Budget Guard (节食), enter the amount to retain (保留伙食费), and save. Reaching that amount or being unable to confirm the balance pauses model calls.</p>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/notebook-usage-rounded.svg" alt="小本本伙食费页：余额、每小时用量和节食设置" width="320"></p>
-<p><em>图 15 – 伙食费与近 24 小时用量</em></p>
+<p><img src="docs/media/notebook-usage-rounded.svg" alt="Food Budget page with balance, hourly usage, and protection settings" width="320"></p>
+<p><em>Figure 15 – Food budget and the last 24 hours of usage</em></p>
 </td>
 </tr>
 </table>
 
 <a id="sec44"></a>
 
-### 4.4. 阅读与回答 [⌃](#top)
+### 4.4. Reading and Answering [⌃](#top)
 
 <table>
 <tr>
 <td width="60%" valign="top">
-<p><strong>“和她聊聊”</strong> 是完整交流窗口。白云中的 <strong>“全文”</strong> 和右键菜单的 <strong>“读读刚才”</strong> 都能打开它。长回复、清单和代码可以在这里慢慢阅读，输入框则用于发送文字。</p>
-<p>窗口顶部可以选择当前事务、创建新抽屉，或关联本次需要参考的其他抽屉。要讨论另一件事时切换事务；要重新开始当前交流时点击“新对话”。输入文字后按 <code>Enter</code> 发送，<code>Shift+Enter</code> 换行；选中正文的一段文字，还可以点击“解释这一段”继续追问。</p>
-<p>她提出问题时，可以直接在白云回答，也可以进入阅读窗口仔细填写。单选、多选、“其他”和多题共用同一份草稿，切换窗口后可以继续编辑。检查完选项与补充文字，再点击 <strong>“回答她”</strong>。执行中需要暂停时，使用“停止生成 / 任务”。</p>
+<p>The <strong>conversation reader (和她聊聊)</strong> is the full conversation window. Open it through <strong>Full Text (全文)</strong> in the cloud or <strong>Read Recent (读读刚才)</strong> in the context menu. Read long replies, lists, and code here, and use the input box to send text.</p>
+<p>At the top, select the current project, create a drawer, or link other drawers to reference. Switch projects for another ongoing goal; use New Conversation (新对话) to start a fresh session. <code>Enter</code> sends and <code>Shift+Enter</code> inserts a new line. Select part of a reply and use Explain This Part (解释这一段) to prepare a follow-up.</p>
+<p>Answer her questions in the cloud or use the reader for more space. Single choice, multiple choice, Other, and several questions share one draft across windows. Review the choices and extra text, then select <strong>Answer Her (回答她)</strong>. During execution, Stop Generation / Task (停止生成 / 任务) requests a stop.</p>
 </td>
 <td width="40%" align="center" valign="middle">
-<p><img src="docs/media/reader-conversation-rounded.svg" alt="和她聊聊窗口的完整内容、事务选择与文字输入" width="320"></p>
-<p><em>图 16 – 和她聊聊：完整阅读与文字交流</em></p>
+<p><img src="docs/media/reader-conversation-rounded.svg" alt="Full conversation reader with project selection and text input" width="320"></p>
+<p><em>Figure 16 – Full reading and text conversation</em></p>
 </td>
 </tr>
 </table>
 
 <a id="sec45"></a>
 
-### 4.5. 导出、载入与重置 [⌃](#top)
+### 4.5. Export, Restore, and Reset [⌃](#top)
 
-在“小本本 → 习惯 → 把小本本收好”中，可以保存你积累的资料，迁移到另一份程序中装载，或重新开始。
+Under Notebook → Habits → Backup (小本本 → 习惯 → 把小本本收好), save your accumulated data, move it to another instance, or start over.
 
-- 导出资料
+- Export data
 
-点击“导出全部资料”，选择保存位置，程序会生成一个 `.cpbackup` 文件。它包含已保存的设置、设定、记忆与旧修订、事务、聊天与问题记录、用量统计，以及制作完成的自制音色。模型账户、已安装组件和外部工作文件分别保留在各自位置，迁移电脑时单独准备。
+Choose Export All Data (导出全部资料), select a destination, and the application creates a `.cpbackup` file. It includes saved settings, persona, memories and old revisions, projects, chat and question history, usage, and completed custom voices. Model accounts, installed components, and external work files remain separate and need their own preparation when moving computers.
 
-这份备份记录着你们的相处资料与声音，适合自行留存。记忆页中的“保存文字副本”便于阅读，而 `.cpbackup` 用于完整恢复。
+Keep this backup as a copy of your shared information and voices. Save Text Copy (保存文字副本) on the Memory page is for reading; `.cpbackup` is for full restoration.
 
-- 载入备份
+- Restore a backup
 
-点击“载入备份”，选择 `.cpbackup`，先查看资料数量、工作范围、语音与节食设置的预览。确认使用这份资料后，输入“载入备份”并确认，程序会重新打开，恢复到备份时的状态。
+Choose Load Backup (载入备份), select a `.cpbackup`, and review the data counts, working scope, voice, and Budget Guard settings. To proceed, type the exact confirmation **`载入备份`** and confirm. The application restarts and restores the saved state.
 
-载入会用备份替换当前资料。替换前，程序先为当前资料生成恢复备份。已保存的聊天可以继续查看，模型会话重新建立，之后再交付新的任务。
+Restore replaces current personal data. Before replacement, the application creates a recovery backup of the current dataset. Saved chats remain available to read, while model sessions are rebuilt before you give a new task.
 
-- 重新开始
+- Start again
 
-想从空白重新认识彼此时，点击“清空一切”，按提示输入“清空一切”并确认。当前设定、记忆、聊天、统计和自制音色会收进恢复区。重新打开后，从只聊天、语音输出关闭的状态开始。账户、已安装组件、内置音色和外部工作文件继续保留。
+Choose Reset Everything (清空一切), type **`清空一切`** as prompted, and confirm. The current persona, memories, chats, usage, and custom voices move to the recovery area. After restarting, the application starts in chat-only mode with voice output off. Accounts, installed components, bundled voices, and external work files stay in place.
 
-- 找回资料
+- Recover earlier data
 
-需要找回整理前的资料时，打开这一板块的 `i`，在“整理前的小本本”中选择“恢复这份”，按预览和确认步骤载入即可。列表展示最近 10 份恢复包，也可以“打开恢复备份位置”选择更早的一份。
+Open this section's `i` and find Earlier Notebook (整理前的小本本). Choose Restore This Copy (恢复这份), then follow the preview and confirmation steps. The list shows the ten most recent recovery backups; Open Recovery Location (打开恢复备份位置) lets you select an older one.
 
 ---
 
 <a id="sec5"></a>
 
-## 5. 开发与扩展 [⌃](#top)
+## 5. Development and Extension [⌃](#top)
 
-项目主体使用 JavaScript / CommonJS，角色渲染部分使用 ES Modules，自然语音通过独立 Python worker 接入。本章介绍现有代码中的调用接口与数据流，方便从具体功能定位到实现。
+The application primarily uses JavaScript / CommonJS, with ES Modules for character rendering and a separate Python worker for natural speech. This chapter maps existing interfaces and data flow to their source entry points.
 
 ```text
-界面操作（ui/）
-    └── window.desktop（preload.cjs）
-         └── 主进程分派与窗口校验（main.cjs）
-              ├── ChatService → HarnessProvider → 模型会话
-              ├── AgentService / QuestionService → 工具、审批与问题
-              ├── MemoryService / GrowthService / DataService → 本机资料
-              └── SpeechService / TtsService → 识别、合成与播放
+UI actions (ui/)
+    └── window.desktop (preload.cjs)
+         └── Main-process dispatch and window checks (main.cjs)
+              ├── ChatService → HarnessProvider → Model session
+              ├── AgentService / QuestionService → Tools, approvals, and questions
+              ├── MemoryService / GrowthService / DataService → Local personal data
+              └── SpeechService / TtsService → Recognition, synthesis, and playback
 
-状态与结果事件 → 对应窗口 → 白云 / 完整阅读 / 小本本 / 角色驱动
+State and result events → Relevant window → Cloud / Reader / Notebook / Character driver
 ```
 
-以下名称对应当前源码中的内部接口，由宿主统一组装；各节直接给出源码入口，可沿调用名查看实现。
+These names refer to the current internal interfaces, composed by the host. Follow the source links and method names to locate each implementation.
 
 <a id="sec51"></a>
 
-### 5.1. 宿主与界面接口 [⌃](#top)
+### 5.1. Host and UI Interfaces [⌃](#top)
 
-[preload.cjs](apps/desktop/preload.cjs)将可用方法暴露为 `window.desktop`，[main.cjs](apps/desktop/main.cjs)接收请求、校验调用窗口，再交给对应服务。界面通过查询方法取得初始状态，通过命令提交操作，通过订阅接收后续变化。
+[preload.cjs](apps/desktop/preload.cjs) exposes methods as `window.desktop`. [main.cjs](apps/desktop/main.cjs) receives requests, checks the calling window, and dispatches them to services. The UI uses queries for initial state, commands for actions, and subscriptions for later updates.
 
-| 功能 | 查询与操作 | 状态订阅 |
+| Area | Queries and actions | Subscriptions |
 | --- | --- | --- |
-| 交流与草稿 | `getChat()`、`chatCommand(input)`、`getDraft()`、`saveDraft(text)` | `onChat(callback)`、`onDraft(callback)` |
-| 设定与记忆 | `getSettings()`、`settingsCommand(input)`、`getMemory()`、`memoryCommand(input)`、`getGrowth()`、`growthCommand(input)` | `onMemory(callback)`、`onGrowth(callback)` |
-| 问题与任务 | `getQuestions()`、`questionDraft(value)`、`answerQuestion(value)`、`getAgent()`、`agentCommand(input)` | `onQuestions(callback)`、`onAgent(callback)` |
-| 声音与识别 | `getTts()`、`saveTts(value)`、`ttsCommand(action, messageId)`、`getSpeech()`、`speechCommand(action)` | `onTts(callback)`、`onSpeech(callback)` |
-| 资料与用量 | `getDataState()`、`dataCommand(input)`、`getFood()`、`refreshBalance()`、`saveBudget(value)` | `onBudget(callback)` |
-| 窗口与角色 | `openReader()`、`showPanel()`、`getPresence()`、`setScale(scale)`、`presenceCommand(command)` | `onPresence(callback)`、`onLifecycle(callback)` |
+| Conversation and drafts | `getChat()`, `chatCommand(input)`, `getDraft()`, `saveDraft(text)` | `onChat(callback)`, `onDraft(callback)` |
+| Persona and memory | `getSettings()`, `settingsCommand(input)`, `getMemory()`, `memoryCommand(input)`, `getGrowth()`, `growthCommand(input)` | `onMemory(callback)`, `onGrowth(callback)` |
+| Questions and tasks | `getQuestions()`, `questionDraft(value)`, `answerQuestion(value)`, `getAgent()`, `agentCommand(input)` | `onQuestions(callback)`, `onAgent(callback)` |
+| Speech and recognition | `getTts()`, `saveTts(value)`, `ttsCommand(action, messageId)`, `getSpeech()`, `speechCommand(action)` | `onTts(callback)`, `onSpeech(callback)` |
+| Data and usage | `getDataState()`, `dataCommand(input)`, `getFood()`, `refreshBalance()`, `saveBudget(value)` | `onBudget(callback)` |
+| Windows and character | `openReader()`, `showPanel()`, `getPresence()`, `setScale(scale)`, `presenceCommand(command)` | `onPresence(callback)`, `onLifecycle(callback)` |
 
-各方法只开放给相应窗口。例如，文字发送由阅读窗口等交流入口发起，设置和资料管理由小本本发起。订阅方法返回取消订阅函数，页面退出时用它释放监听。
+Methods are available only to their intended windows. For example, conversation windows send text, while the Notebook manages settings and data. Subscription methods return an unsubscribe function; call it when leaving the page.
 
-下面是阅读窗口中发送文字并接收状态的调用形式：
+Example: send text and receive conversation updates in the reader:
 
 ```javascript
 const unsubscribe = window.desktop.onChat(state => {
@@ -1036,191 +1049,191 @@ const unsubscribe = window.desktop.onChat(state => {
 
 const result = await window.desktop.chatCommand({
   action: 'send',
-  text: '一起整理这份资料吧。'
+  text: 'Let us organize these files together.'
 });
 
 window.addEventListener('pagehide', unsubscribe, { once: true });
 ```
 
-白云、阅读窗口、小本本和角色窗口分别位于 [ui 目录](apps/desktop/ui)，界面脚本与对应的 preload 方法共同构成具体交互入口。
+The cloud, reader, Notebook, and character windows are in the [ui directory](apps/desktop/ui). Their scripts and corresponding preload methods define the interaction entry points.
 
 <a id="sec52"></a>
 
-### 5.2. 模型、工具与问题接口 [⌃](#top)
+### 5.2. Model, Tool, and Question Interfaces [⌃](#top)
 
-#### 5.2.1. 模型会话
+#### 5.2.1. Model Sessions
 
-[ChatService](apps/desktop/lib/chat-service.cjs)负责当前模型、事务、消息和会话状态；[HarnessProvider](apps/desktop/lib/harness-provider.cjs)负责与 Harness 后台会话连接。
+[ChatService](apps/desktop/lib/chat-service.cjs) owns the current model, project, messages, and session state. [HarnessProvider](apps/desktop/lib/harness-provider.cjs) connects to the Harness backend session.
 
-| 调用接口 | 输入与结果 |
+| Interface | Input and result |
 | --- | --- |
-| `ChatService.command(input)` | `action` 支持 `send`、`new`、`stop`、`drawer`、`link-drawers`，分别用于发送、新对话、停止、切换事务和关联抽屉；返回当前状态 |
-| `ChatService.state()` / `update` | 查询或推送 `phase`、`busy`、`messages`、当前模型、事务和用量信息 |
-| `HarnessProvider.openConversation({ model, sessionId, resume })` | 创建或恢复指定模型会话 |
-| `HarnessProvider.send(text)` | 将本轮内容交给后台会话 |
-| `HarnessProvider.stop()` / `close()` | 取消当前执行或关闭后台连接 |
-| Provider 的 `notification` / `stream` 事件 | 将会话事件和正文增量交回 ChatService，包含回复、工具事件与用量报告 |
+| `ChatService.command(input)` | `action` supports `send`, `new`, `stop`, `drawer`, and `link-drawers` for sending, new sessions, stopping, switching projects, and linking drawers; returns current state |
+| `ChatService.state()` / `update` | Queries or publishes `phase`, `busy`, `messages`, model, project, and usage information |
+| `HarnessProvider.openConversation({ model, sessionId, resume })` | Creates or resumes a session for the specified model |
+| `HarnessProvider.send(text)` | Sends this turn's content to the backend session |
+| `HarnessProvider.stop()` / `close()` | Cancels execution or closes the backend connection |
+| Provider `notification` / `stream` events | Returns session events and incremental content, including replies, tools, and usage |
 
-[reply-format.cjs](apps/desktop/lib/reply-format.cjs)解析 `<voice>` 和 `<body>`，分别交给白云、语音与完整阅读；[usage-ledger.cjs](apps/desktop/lib/usage-ledger.cjs)汇总用量，[BudgetGuard](apps/desktop/lib/budget-guard.cjs)提供余额保护检查。
+[reply-format.cjs](apps/desktop/lib/reply-format.cjs) parses `<voice>` and `<body>` for the cloud, speech, and reader. [usage-ledger.cjs](apps/desktop/lib/usage-ledger.cjs) aggregates usage; [BudgetGuard](apps/desktop/lib/budget-guard.cjs) performs balance protection checks.
 
-#### 5.2.2. 工具注册与执行
+#### 5.2.2. Tool Registration and Execution
 
-[harness-host-plugin.cjs](apps/desktop/lib/harness-host-plugin.cjs)在 Harness 中注册宿主工具，并连接审批、问题与流事件；[AgentService](apps/desktop/lib/agent-service.cjs)接收宿主请求，按当前会话、工作范围和操作类型执行。
+[harness-host-plugin.cjs](apps/desktop/lib/harness-host-plugin.cjs) registers host tools in Harness and connects approvals, questions, and stream events. [AgentService](apps/desktop/lib/agent-service.cjs) receives host requests and executes them according to the session, working scope, and operation type.
 
 ```text
-工具定义（名称 / 描述 / 参数）
-    → Harness 调用工具
-    → 宿主桥请求（action / sessionId / 参数）
-    → AgentService 校验与分派
-    → 执行结果返回工具；状态事件返回角色界面
+Tool definition (name / description / parameters)
+    → Harness tool call
+    → Host bridge request (action / sessionId / parameters)
+    → AgentService validation and dispatch
+    → Result to the tool; state events to the character UI
 ```
 
-插件内部使用 `register(name, description, parameters, action)` 组织工具定义，再通过 `defineTool` 注册。现有工具包括 `runtime_permissions` 权限查询、`prepare_self_upgrade` 与 `review_self_upgrade` 候选准备/审阅，以及电脑模式下的 `desktop_windows`、`desktop_inspect`、`desktop_action`。
+The plugin organizes definitions with `register(name, description, parameters, action)` and registers them through `defineTool`. Existing tools include `runtime_permissions`, the candidate preparation/review tools `prepare_self_upgrade` and `review_self_upgrade`, and, in computer mode, `desktop_windows`, `desktop_inspect`, and `desktop_action`.
 
-桥接使用本机临时端口、Bearer 租约和会话标识，工具事件以 `sessionId`、`callId` 关联调用与结果。审批经 `approval/request` 交回宿主，由界面承接用户决定；连接结束时撤销租约并清理本轮等待。
+The bridge uses a temporary local port, a Bearer lease, and session identifiers. Tool events associate calls and results through `sessionId` and `callId`. Approvals return to the host through `approval/request` for a UI decision. Closing the connection revokes the lease and clears pending work for that turn.
 
-#### 5.2.3. 结构化问题
+#### 5.2.3. Structured Questions
 
-[harness-question-bridge.cjs](apps/desktop/lib/harness-question-bridge.cjs)把 `ask_user_question` 请求交给 [QuestionService](apps/desktop/lib/question-service.cjs)。一批请求包含 `questions`，每题提供 `id`、`question`，以及可选的 `options`、`multiSelect`；答案返回为：
+[harness-question-bridge.cjs](apps/desktop/lib/harness-question-bridge.cjs) forwards `ask_user_question` requests to [QuestionService](apps/desktop/lib/question-service.cjs). A request batch contains `questions`; each question has `id`, `question`, and optional `options` and `multiSelect`. Answers return in this form:
 
 ```json
 {
   "answers": [
-    { "id": "next-step", "selected": ["先整理清单"], "custom": "按日期排序" }
+    { "id": "next-step", "selected": ["Make a list first"], "custom": "Sort by date" }
   ]
 }
 ```
 
-白云与阅读窗口通过 `questionDraft(value)` 保存草稿，通过 `answerQuestion(value)` 提交；请求、会话和草稿版本共同确定答案归属。单选、多选、自填与多题共用这一条链路，具体控件在 [questions.js](apps/desktop/ui/questions.js)。
+The cloud and reader save drafts with `questionDraft(value)` and submit through `answerQuestion(value)`. Request, session, and draft revisions determine which question an answer belongs to. Single choice, multiple choice, free text, and several questions use the same flow. The controls are implemented in [questions.js](apps/desktop/ui/questions.js).
 
 <a id="sec53"></a>
 
-### 5.3. 设定、记忆与资料接口 [⌃](#top)
+### 5.3. Persona, Memory, and Data Interfaces [⌃](#top)
 
-#### 5.3.1. 记忆与事务
+#### 5.3.1. Memory and Projects
 
-[MemoryService](apps/desktop/lib/memory-service.cjs)管理条目、抽屉、来源与修订，以 SQLite 保存长期记忆。主要调用如下：
+[MemoryService](apps/desktop/lib/memory-service.cjs) manages entries, drawers, sources, and revisions, using SQLite for long-term memory.
 
-| 接口 | 用途 |
+| Interface | Purpose |
 | --- | --- |
-| `saveDrawer(input, source)` | 创建或更新事务抽屉 |
-| `saveEntry(input, source)` | 保存条目；输入包括 `drawerId`、`kind`、`content` 等，更新时携带条目 ID 和修订信息 |
-| `search(options)` | 按抽屉、关键词及候选范围检索条目 |
-| `history(id)` | 读取一条记忆的旧修订 |
-| `forget(id, expectedRevision, source)` | 按当前修订执行遗忘 |
-| `undoOperation(operationId, source)` | 撤销符合条件的整理操作 |
+| `saveDrawer(input, source)` | Creates or updates a project drawer |
+| `saveEntry(input, source)` | Saves an entry with fields such as `drawerId`, `kind`, and `content`; updates include the entry ID and revision information |
+| `search(options)` | Searches by drawer, text, and whether candidate entries are included |
+| `history(id)` | Reads an entry's older revisions |
+| `forget(id, expectedRevision, source)` | Forgets an entry at the expected revision |
+| `undoOperation(operationId, source)` | Reverses an eligible organization operation |
 
-`source` 记录 `actor`、`ref` 等来源信息，修改以 `revision` 校验。模型端由 [harness-memory-bridge.cjs](apps/desktop/lib/harness-memory-bridge.cjs)提供 `memory_search`、`memory_candidate`、`memory_drawer`、`memory_manage`；[memory-manager.cjs](apps/desktop/lib/memory-manager.cjs)处理操作范围、修订和确认，再调用同一套 MemoryService。
+`source` records provenance such as `actor` and `ref`; edits check `revision`. On the model side, [harness-memory-bridge.cjs](apps/desktop/lib/harness-memory-bridge.cjs) provides `memory_search`, `memory_candidate`, `memory_drawer`, and `memory_manage`. [memory-manager.cjs](apps/desktop/lib/memory-manager.cjs) checks scope, revisions, and confirmation before calling the same MemoryService.
 
-[memory-context.cjs](apps/desktop/lib/memory-context.cjs)的 `snapshot(memory, options)` 按当前事务、关联抽屉和问题组织上下文，返回选用条目、来源与估算用量，供会话使用。
+The `snapshot(memory, options)` function in [memory-context.cjs](apps/desktop/lib/memory-context.cjs) builds context around the current project, linked drawers, and query. It returns selected entries, sources, and estimated usage for the session.
 
-#### 5.3.2. 设定与话题
+#### 5.3.2. Persona and Topics
 
-[GrowthService](apps/desktop/lib/growth-service.cjs)负责人物设定修订、尚在讨论的话题和事务归档。模型工具 `persona_update` 对应设定查询、增补与替换，`conversation_topic` 对应话题的绑定、暂存和归档。
+[GrowthService](apps/desktop/lib/growth-service.cjs) handles persona revisions, topics in progress, and project archiving. The `persona_update` tool supports querying, appending, and replacing the persona; `conversation_topic` handles binding, staging, and archiving topics.
 
-设定修改通过 `personaCommand(lease, input, questions, response)` 展示差异并取得确认，话题操作通过 `topicCommand(...)` 处理；`state()` 与 `update` 供小本本刷新，`undoPersona(id, expectedRevision)` 用于撤销符合条件的设定修订。
+`personaCommand(lease, input, questions, response)` presents proposed changes and obtains confirmation. `topicCommand(...)` handles topic operations. The Notebook refreshes through `state()` and `update`; `undoPersona(id, expectedRevision)` reverses an eligible persona revision.
 
-#### 5.3.3. 完整资料
+#### 5.3.3. Complete Personal Data
 
-[DataService](apps/desktop/lib/data-service.cjs)管理 `.cpbackup` 备份、载入预览与恢复：`export(target)` 导出资料，`prepareImport(file)` 和 `prepareReset()` 返回待确认方案，`commit(token, confirmation)` 提交，`cancel(token)` 取消。
+[DataService](apps/desktop/lib/data-service.cjs) manages `.cpbackup` export, restore previews, and recovery. `export(target)` saves data; `prepareImport(file)` and `prepareReset()` return plans for confirmation; `commit(token, confirmation)` commits a plan, and `cancel(token)` cancels it.
 
-主进程在重启时调用 `applyPending` 完成已确认的资料切换，再打开各服务。资料文件范围由该服务统一定义，包含设置、记忆、聊天、统计与完成的自制音色；界面入口为 `dataCommand(input)`。
+On restart, the main process calls `applyPending` to apply a confirmed data switch before opening services. The service defines the included files: settings, memory, chats, usage, and completed custom voices. Its UI entry point is `dataCommand(input)`.
 
 <a id="sec54"></a>
 
-### 5.4. 角色显示与动作接口 [⌃](#top)
+### 5.4. Character Rendering and Motion Interfaces [⌃](#top)
 
-角色资源由 [characters/default](characters/default)组织，显示名来自 `character.json`，模型入口和参数定义来自 `parameter-contract.json`，动作与表现映射由配套 JSON 和驱动读取。
+Character resources live in [characters/default](characters/default). `character.json` supplies the display name, `parameter-contract.json` defines the model entry and parameters, and the accompanying JSON and drivers map actions and expressions.
 
-| 入口 | 接口职责 |
+| Entry point | Responsibility |
 | --- | --- |
-| [NativeAvatar](apps/desktop/ui/native-avatar.mjs) | 加载 Core、模型、纹理和动作库，执行逐帧渲染，并处理暂停、恢复与资源释放 |
-| [presence.mjs](apps/desktop/ui/presence.mjs) | 把鼠标、拖动、交流、倾听和任务状态送入角色驱动 |
-| [InteractionMotionDriver](characters/default/web/interaction-driver.js) | `installLibrary(library)` 装载动作；`setExpression(id)`、`setState(id, options)`、`triggerGesture(id, options)` 选择表现 |
-| 拖动与逐帧接口 | `beginDrag()`、`moveDrag(horizontalSpeed)`、`endDrag()` 接收拖动；`update(delta)` 返回本帧参数值 |
-| 状态与音频输入 | 配套状态驱动接收鼠标与音频包络，和呼吸、眨眼、动作一起汇入同一条参数驱动链 |
+| [NativeAvatar](apps/desktop/ui/native-avatar.mjs) | Loads Core, model, textures, and motion library; renders frames; handles pause, resume, and resource release |
+| [presence.mjs](apps/desktop/ui/presence.mjs) | Sends mouse, drag, conversation, listening, and task state to the character driver |
+| [InteractionMotionDriver](characters/default/web/interaction-driver.js) | `installLibrary(library)` loads motions; `setExpression(id)`, `setState(id, options)`, and `triggerGesture(id, options)` select behavior |
+| Drag and frame methods | `beginDrag()`, `moveDrag(horizontalSpeed)`, and `endDrag()` receive dragging; `update(delta)` returns frame parameters |
+| State and audio input | State drivers receive pointer and audio envelopes, combining them with breathing, blinking, and motion in one parameter pipeline |
 
 ```text
-用户输入 / 会话与任务事件 / 实际音频包络
+User input / Session and task events / Actual audio envelope
     → presence.mjs
-    → 状态、动作与交互驱动
-    → NativeAvatar 写入模型参数
-    → Core 更新模型并渲染
+    → State, motion, and interaction drivers
+    → NativeAvatar writes model parameters
+    → Core updates and renders the model
 ```
 
-参数 ID、范围和绑定见[参数契约](characters/default/parameter-contract.json)，现有动作见[动作清单](characters/default/actions.json)。角色名、软件名和软件版本分别读取，项目名称不会覆盖角色显示名。
+Parameter IDs, ranges, and bindings are in the [parameter contract](characters/default/parameter-contract.json); existing actions are in the [action definitions](characters/default/actions.json). Character name, product name, and version are read separately, so the product name does not replace the character's display name.
 
 <a id="sec55"></a>
 
-### 5.5. 语音识别与合成接口 [⌃](#top)
+### 5.5. Speech Recognition and Synthesis Interfaces [⌃](#top)
 
-#### 5.5.1. 本地识别
+#### 5.5.1. Local Recognition
 
-[SpeechService](apps/desktop/lib/speech-service.cjs)通过 `start()`、`stopRecording()`、`cancel()` 和 `toggle()` 管理录音周期；`capture` 事件携带录音 ID 与开始/停止指令，界面通过 `speechCapture(input)` 交回录音或状态。
+[SpeechService](apps/desktop/lib/speech-service.cjs) manages recording through `start()`, `stopRecording()`, `cancel()`, and `toggle()`. Its `capture` event carries a recording ID and a start/stop command; the UI returns audio or status through `speechCapture(input)`.
 
-输入音频采用 **16 kHz、单声道、16-bit PCM WAV**，时长 0.4–60 秒。识别结果随 `update` 返回 `recordingId`、`phase`、`text` 等信息，再路由到普通聊天或当前问题草稿。资源准备入口为 [prepare-speech.cjs](apps/desktop/tools/prepare-speech.cjs)。
+Input is **16 kHz, mono, 16-bit PCM WAV**, from 0.4 to 60 seconds. Recognition updates include `recordingId`, `phase`, and `text`, then route to ordinary conversation or the current question draft. Resources are prepared by [prepare-speech.cjs](apps/desktop/tools/prepare-speech.cjs).
 
-#### 5.5.2. 声音合成与播放
+#### 5.5.2. Synthesis and Playback
 
-[TtsService](apps/desktop/lib/tts-service.cjs)通过 `speak({ text, messageId, conversationId, generationId, preview })` 接收口语稿，将声音后端封装为 `backend(input, signal)`：
+[TtsService](apps/desktop/lib/tts-service.cjs) receives spoken text through `speak({ text, messageId, conversationId, generationId, preview })` and wraps its speech backend as `backend(input, signal)`:
 
-| 后端操作 | 输入与输出 |
+| Backend operation | Input and output |
 | --- | --- |
-| `voices` | 返回 `{ voices: [{ name, culture, ... }] }`，供界面选择声音 |
-| `synthesize` | 接收文本、音色、语速、风格等参数，整句模式返回 `{ audio: Base64_WAV }` |
-| 分块合成 | 在后端能力协商后，通过分块回调交付音频，并按队列顺序播放 |
-| 取消 | `AbortSignal` 关联当前合成请求，服务另通过 `stop()` 停止播放 |
+| `voices` | Returns `{ voices: [{ name, culture, ... }] }` for the voice selector |
+| `synthesize` | Accepts text, voice, rate, style, and related fields; whole-sentence mode returns `{ audio: Base64_WAV }` |
+| Chunked synthesis | After backend capability negotiation, delivers audio through callbacks and plays it in queue order |
+| Cancellation | `AbortSignal` cancels the current synthesis request; `stop()` separately stops playback |
 
-[CosyVoiceModule](apps/desktop/lib/cosyvoice-module.cjs)负责自然语音 worker 的启动、预加载、请求关联和退出；worker 实现在 [optional-modules/cosyvoice3](apps/desktop/optional-modules/cosyvoice3)。Windows 声音由 `systemSpeech` 后端处理。
+[CosyVoiceModule](apps/desktop/lib/cosyvoice-module.cjs) manages worker startup, preloading, request association, and shutdown. The worker is in [optional-modules/cosyvoice3](apps/desktop/optional-modules/cosyvoice3). The `systemSpeech` backend handles Windows voices.
 
-`audio`、`stop`、`update` 事件连接 [audio-output.js](apps/desktop/ui/audio-output.js)。播放器通过 `ttsPlayer(value)` 回报 `playbackId`、句子索引和播放结果；解码后的 PCM 包络按音频时钟驱动角色口型。音色文件与制作入口由 [VoiceProfiles](apps/desktop/lib/voice-profiles.cjs)管理。
+The `audio`, `stop`, and `update` events connect to [audio-output.js](apps/desktop/ui/audio-output.js). The player reports `playbackId`, sentence index, and playback results through `ttsPlayer(value)`. Decoded PCM envelopes drive the character's mouth on the audio clock. [VoiceProfiles](apps/desktop/lib/voice-profiles.cjs) manages voice files and creation entry points.
 
 <a id="sec56"></a>
 
-### 5.6. 配置与 Harness 集成接口 [⌃](#top)
+### 5.6. Configuration and Harness Integration [⌃](#top)
 
-| 配置或入口 | 作用 |
+| Configuration or entry point | Purpose |
 | --- | --- |
-| [product.json](product.json) | 宿主与集成入口读取的产品名称和版本信息，同时记录发布目标、通道与默认角色标识 |
-| [character.json](characters/default/character.json) | 默认角色的 ID 与显示名 |
-| [model-service.config.json](apps/desktop/model-service.config.json) | 当前 Provider 标识与会话、请求、token 限额 |
-| `CUTE_PARTNER_HARNESS_DIR` | 指定 Harness 安装目录；Provider 据此定位本机运行框架 |
-| `CompanionSettings`、`TtsService`、`BudgetGuard` | 分别校验与保存相处方式/工作范围、声音、余额保护设置 |
-| [integrations/harness/index.cjs](integrations/harness/index.cjs) | 提供 `createController({ root, platform, run, node, installer })`，返回 `inspect()`、`install(options)` 和 `start(signal)` |
+| [product.json](product.json) | Product name and version read by the host and integration; also records the release target, channel, and default character identifier |
+| [character.json](characters/default/character.json) | Default character ID and display name |
+| [model-service.config.json](apps/desktop/model-service.config.json) | Provider ID and session, request, and token limits |
+| `CUTE_PARTNER_HARNESS_DIR` | Specifies the Harness installation directory used by the Provider |
+| `CompanionSettings`, `TtsService`, `BudgetGuard` | Validate and save persona/working scope, speech, and balance protection settings |
+| [integrations/harness/index.cjs](integrations/harness/index.cjs) | Exposes `createController({ root, platform, run, node, installer })`, returning `inspect()`, `install(options)`, and `start(signal)` |
 
-本版从 `characters/default` 加载角色资源；`product.json` 中的 `characterId` 记录角色标识，实际资源路径由加载代码确定。
+This version loads character resources from `characters/default`. The `characterId` field in `product.json` records the character identifier; the loading code defines the actual resource paths.
 
-Harness 集成入口通过本机安装记录或 `CUTE_PARTNER_HOME` 定位 Cute-Partner，注册 `cute_partner_status` 检查状态、`cute_partner_install` 展示安装计划并在确认后准备 Windows 基础程序、`cute_partner_start` 显式启动角色。安装器依据 `release.json` 校验固定发布包的大小与 SHA-256，不下载可选语音模型。启动后的角色使用自己的会话和资料，卸载集成入口保留独立程序。配套 `cordis.patch.yml` 与 `package.json` 定义集成入口。
+The integration locates Cute-Partner through its local installation record or `CUTE_PARTNER_HOME`. It registers `cute_partner_status` to inspect the installation, `cute_partner_install` to show the installation plan and prepare the Windows base application after confirmation, and `cute_partner_start` to launch the character. The installer checks the fixed release package's size and SHA-256 against `release.json`; optional voice models are not downloaded. The character uses its own sessions and personal data, and removing the integration retains the independent application. The accompanying `cordis.patch.yml` and `package.json` define the integration entry.
 
-**常用配置与保存位置。** 日常设置通过小本本保存，代码默认值与本机已保存设置共同决定启动状态；源码配置修改后重启生效。
+**Common settings and storage.** Save everyday settings in the Notebook. Code defaults and locally saved settings determine startup behavior; changes to source configuration take effect after restart.
 
-| 配置 | 主要字段与范围 |
+| Configuration | Main fields and ranges |
 | --- | --- |
-| `companion-settings.json` | `persona` 最多 8000 字符；`communicationMode` 为 `voice/text`；`voiceAutoSend` 控制识别后发送；`agentMode` 为 `chat/workspace/desktop`，`agentWorkspace` 为工作目录 |
-| `speech-output-settings.json` | `enabled` 控制输出；`volume` 为 0–1，`rate` 为 -3–3；`style` 为 `natural/soft/happy/calm`，`streaming` 控制分块播放 |
-| `budget-settings.json` | `enabled` 默认关闭，`minimumCny` 默认 1 元，可设为 0–1000000 元 |
-| `model-service.config.json` | `monthlyRequests`、`monthlyReportedTokens` 为本地限额，0 表示关闭；`turnsPerConversation` 为 1–20 |
-| `DSH_HOME` | 可指定 Harness 凭据所在目录，默认使用当前用户的 `.dsh`；密钥由 Harness 本机设置管理 |
+| `companion-settings.json` | `persona`: up to 8000 characters; `communicationMode`: `voice/text`; `voiceAutoSend`: send after recognition; `agentMode`: `chat/workspace/desktop`; `agentWorkspace`: working directory |
+| `speech-output-settings.json` | `enabled`: output switch; `volume`: 0–1; `rate`: -3–3; `style`: `natural/soft/happy/calm`; `streaming`: chunked playback |
+| `budget-settings.json` | `enabled` defaults to false; `minimumCny` defaults to 1 CNY and accepts 0–1000000 CNY |
+| `model-service.config.json` | `monthlyRequests` and `monthlyReportedTokens` are local limits, with 0 disabling them; `turnsPerConversation` accepts 1–20 |
+| `DSH_HOME` | Sets the Harness credentials directory, defaulting to the current user's `.dsh`; keys are managed through Harness's local settings |
 
-上述三份个人设置保存在 `apps/desktop/.runtime/`，长期记忆在其中的 `memory/memory.sqlite`，聊天、自制音色与恢复包也由本机资料目录管理。默认工作文件目录为 `%LOCALAPPDATA%/CutePartner/workspace`，完整备份和恢复见[4.5. 导出、载入与重置](#sec45)。
+The three personal settings files are in `apps/desktop/.runtime/`. Long-term memory is in `memory/memory.sqlite` beneath it; chats, custom voices, and recovery backups are also managed under the local data directory. The default work directory is `%LOCALAPPDATA%/CutePartner/workspace`. For full backups and recovery, see [4.5. Export, Restore, and Reset](#sec45).
 
 <a id="sec57"></a>
 
 ---
 
-欢迎基于 Cute-Partner 继续开发，也欢迎通过 **[Issue](https://github.com/suzuran0y/Cute-Partner/issues)** 交流使用问题与想法，通过 **[Pull Request](https://github.com/suzuran0y/Cute-Partner/pulls)** 提交代码、文档和资源说明的改进。无论是一次小修正，还是对已有接口的完善，都欢迎参与。
+Further development is welcome. Use **[Issues](https://github.com/suzuran0y/Cute-Partner/issues)** to discuss problems and ideas, and **[Pull Requests](https://github.com/suzuran0y/Cute-Partner/pulls)** to improve code, documentation, or resource information. Small fixes and improvements to existing interfaces are all welcome.
 
 ---
 
 <a id="sec6"></a>
 
-## 6. 项目信息 [⌃](#top)
+## 6. Project Information [⌃](#top)
 
 <a id="sec61"></a>
 
-### 6.1. 系统版本 [⌃](#top)
+### 6.1. Version [⌃](#top)
 
-Cute-Partner 由桌面应用、角色资源和可选语音组件组成，当前版本信息如下：
+Cute-Partner consists of the desktop application, character resources, and optional voice components. Current project information:
 
 <table>
 <tr>
@@ -1228,74 +1241,73 @@ Cute-Partner 由桌面应用、角色资源和可选语音组件组成，当前�
 <table>
 <thead>
 <tr>
-<th>项目</th>
-<th>当前信息</th>
+<th>Item</th>
+<th>Current information</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>项目名称</td>
+<td>Project</td>
 <td>Cute-Partner · 可爱的助手</td>
 </tr>
 <tr>
-<td>项目版本</td>
-<td><code>v1.0.0</code></td>
+<td>Version</td>
+<td><code>v1.0.1</code></td>
 </tr>
 <tr>
-<td>默认角色</td>
+<td>Default character</td>
 <td>哦鲸鲸</td>
 </tr>
 <tr>
-<td>支持 agent</td>
+<td>Supported agent</td>
 <td>DeepSeek Harness</td>
 </tr>
 <tr>
-<td>更新日期</td>
+<td>Updated</td>
 <td>2026-11-01</td>
 </tr>
 </tbody></table>
 </td>
 <td width="40%" align="center" valign="middle">
-<img src="docs/media/character-motion.gif" alt="哦鲸鲸的透明背景待机动态" width="260">
-<p><em>图 17 – 待机状态下的哦鲸鲸</em></p>
+<img src="docs/media/character-motion.gif" alt="Default character idle animation on a transparent background" width="260">
+<p><em>Figure 17 – The character at rest</em></p>
 </td>
 </tr>
 </table>
 
-产品版本统一定义于根目录 [product.json](product.json)，桌面宿主读取同一份信息，根包、桌面包与 Harness 集成 bundle 保持版本一致。
+The root [product.json](product.json) defines the product version. The desktop host reads the same metadata, and the root package, desktop package, and Harness integration bundle use matching versions.
 
 ---
 
 <a id="sec62"></a>
 
-### 6.2. 测试环境 [⌃](#top)
+### 6.2. Test Environment [⌃](#top)
 
-本项目在以下本机环境中开发与测试：
+The project is developed and tested on this local configuration:
 
-| 项目 | 配置 |
+| Item | Configuration |
 | --- | --- |
-| 操作系统 | Windows 11 家庭版 x64|
-| 处理器 | Intel Core i9-14900HX |
-| 内存 | 16 GB |
-| 语言 | JavaScript（Node.js 24.22.1）；可选语音模块使用 Python 3.11 |
+| Operating system | Windows 11 Home x64 |
+| Processor | Intel Core i9-14900HX |
+| Memory | 16 GB |
+| Languages | JavaScript (Node.js 24.22.1); Python 3.11 for optional natural speech |
 
 ---
 
 <a id="sec63"></a>
 
-### 6.3. 后续规划 [⌃](#top)
+### 6.3. Future Plans [⌃](#top)
 
-后续将围绕已有模块继续完善：
+Further work will build on the existing modules:
 
-- **角色形象**：支持更多角色资源与各自的显示名、动作和兼容契约。
-- **模型后端**：增加会话适配，延续现有交流、工具、问题与用量接口。
-- **功能适配**：增加角色对其他程序的信息获取与反馈能力。
+- **Characters:** support more character resources, each with its own display name, motions, and compatibility contract.
+- **Model backends:** add session adapters while keeping the existing conversation, tool, question, and usage interfaces.
+- **Application integration:** expand how the character obtains information from and interacts with other applications.
 
 ---
 
 <a id="sec64"></a>
 
-### 6.4. 使用与授权说明 [⌃](#top)
+### 6.4. License [⌃](#top)
 
-Cute-Partner 项目原创代码采用 **[MIT License](LICENSE)**。
-
+Original Cute-Partner project code is licensed under the **[MIT License](LICENSE)**.
 © 2026 Suzuran0y

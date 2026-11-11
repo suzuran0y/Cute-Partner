@@ -1,6 +1,6 @@
 {
   "name": "cute-partner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Windows desktop companion with Live2D, DeepSeek Harness, voice and scoped memory",
   "license": "MIT",

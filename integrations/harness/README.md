@@ -12,7 +12,7 @@ Windows x64 的 Live2D 桌面伙伴。安装此插件后，可以让 Harness 协
 
 基础程序包含 Electron、默认角色和预置音色，校验下载文件的 SHA-256 后安装到当前用户的 `CutePartner` 目录，不需要另行安装 Node.js 或 pnpm。模型账户由本机 Harness 管理。
 
-语音识别与 CosyVoice3 按需安装，见[3.4. 语音组件安装](https://github.com/suzuran0y/Cute-Partner/blob/main/README.md#sec34)。卸载此插件保留独立桌面程序和个人资料；退出角色使用角色菜单。
+语音识别与 CosyVoice3 按需安装，见[3.4. 语音组件安装](https://github.com/suzuran0y/Cute-Partner/blob/main/README_CN.md#sec34)。卸载此插件保留独立桌面程序和个人资料；退出角色使用角色菜单。
 
 已有独立安装时，也可将 `CUTE_PARTNER_HOME` 指向项目根目录。当前验证基线为 Harness `0.2.1-rc.2`。
 
@@ -30,6 +30,6 @@ Ask Harness to check the installation, show the installation plan, install after
 
 The base package includes Electron, the default character, and voice presets. The installer verifies SHA-256 and installs under the current user's `CutePartner` directory. No separate Node.js or pnpm installation is needed for the base application. Harness manages model credentials locally.
 
-Speech recognition and CosyVoice3 are optional; see [3.4. Optional Voice Components](https://github.com/suzuran0y/Cute-Partner/blob/main/README_EN.md#sec34). Removing this plugin retains the independent application and personal data. Exit the character from its own menu.
+Speech recognition and CosyVoice3 are optional; see [3.4. Optional Voice Components](https://github.com/suzuran0y/Cute-Partner/blob/main/README.md#sec34). Removing this plugin retains the independent application and personal data. Exit the character from its own menu.
 
 Set `CUTE_PARTNER_HOME` to use an existing installation. The current validation baseline is Harness `0.2.1-rc.2`.
