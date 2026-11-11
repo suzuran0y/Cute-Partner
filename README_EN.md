@@ -4,9 +4,9 @@
 # Cute-Partner
 
 [![Version](https://img.shields.io/badge/version-1.0.0-black)](https://github.com/suzuran0y/Cute-Partner/issues/1)
-[![Platform](https://img.shields.io/badge/platform-Windows%20x64-blue)](#sec32)
 [![Live2D](https://img.shields.io/badge/Live2D-Cubism-FF6699)](#sec54)
 [![Harness](https://img.shields.io/badge/Agent-DeepSeek%20Harness-536DFE)](#sec12)
+[![Codex](https://img.shields.io/badge/Agent-Codex-27272A)](docs/codex-pet_EN.md)
 [![SQLite](https://img.shields.io/badge/memory-SQLite-003B57)](#sec22)
 
 [🇺🇸 English](README_EN.md) | [🇨🇳 中文](README.md)
@@ -17,13 +17,21 @@ She brings the model and its tools into a character you can talk to. Give her a 
 
 The project currently uses DeepSeek Harness as its backend framework. Its default character is the whale girl **哦鲸鲸**:
 
-<p align="center">
-  <img src="docs/media/character-pointer.gif" alt="The default character responding to mouse movements in a real Live2D recording" width="280">
-</p>
+Codex currently has basic desktop pet support for the character. Further development is planned.
 
-<p align="center"><em>Figure 1 – Interacting with the mouse</em></p>
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/media/character-pointer.gif" alt="The default character responding to mouse movements in a real Live2D recording" width="280"></td>
+    <td align="center"><img src="docs/media/character-codex-pet.gif" alt="Jump animation preview of the Codex desktop pet" width="280"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Figure 1.1 - Interacting with the mouse</em></td>
+    <td align="center"><em>Figure 1.2 - Codex desktop pet</em></td>
+  </tr>
+</table>
 
 > Recommended reading order: ① [Project Overview](#sec1) → ② [Installation](#sec3) → ③ [Using Cute-Partner](#sec4).  
+> To use her as a Codex desktop pet, see the [Codex guide](docs/codex-pet_EN.md).<br>
 > For further development, see [Development and Extension](#sec5).
 
 The current interface and screenshots use Chinese. This guide includes the original UI labels and confirmation text where needed to help you find the right controls.

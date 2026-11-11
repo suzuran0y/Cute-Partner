@@ -132,6 +132,11 @@
       "sha256": "ff79f5e09297dbf7155d8faa8789a436a874c42e942b7ab08ff4bcbe24c90b1a"
     },
     {
+      "path": "docs/media/character-codex-pet.gif",
+      "bytes": 357000,
+      "sha256": "abcf1aeb73ace13070d1e519ed081f19b7bbe655e0b0809035e839ec575ec868"
+    },
+    {
       "path": "docs/media/character-feedback-rounded.svg",
       "bytes": 542789,
       "sha256": "21dd4772e16b0dade3445593cffce344837569b68c43514cdc1fee56b540c3a7"
@@ -210,6 +215,11 @@
       "path": "docs/media/voice-lalala-windows.wav",
       "bytes": 114000,
       "sha256": "7877a9610a9438e593ec9304fa19b73ab8ebfd04b8346683fc8eea48664f78c4"
+    },
+    {
+      "path": "extras/codex-pet/cute-partner-whale/spritesheet.png",
+      "bytes": 2991922,
+      "sha256": "8e515fac621bd1fd9d8e6c784f7091827917c2bc272b46014f7913c3d008484b"
     }
   ]
 }

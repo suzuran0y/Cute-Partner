@@ -4,9 +4,9 @@
 # Cute-Partner · 可爱的助手
 
 [![Version](https://img.shields.io/badge/version-1.0.0-black)](https://github.com/suzuran0y/Cute-Partner/issues/1)
-[![Platform](https://img.shields.io/badge/platform-Windows%20x64-blue)](#sec32)
 [![Live2D](https://img.shields.io/badge/Live2D-Cubism-FF6699)](#sec54)
 [![Harness](https://img.shields.io/badge/Agent-DeepSeek%20Harness-536DFE)](#sec12)
+[![Codex](https://img.shields.io/badge/Agent-Codex-27272A)](docs/codex-pet.md)
 [![SQLite](https://img.shields.io/badge/memory-SQLite-003B57)](#sec22)
 
 [🇨🇳 中文](README.md) | [🇺🇸 English](README_EN.md)
@@ -17,13 +17,21 @@
 
 项目当前以 DeepSeek Harness 为后台运行框架，默认搭载的角色是大肥鱼——**哦鲸鲸**：
 
-<p align="center">
-  <img src="docs/media/character-pointer.gif" alt="哦鲸鲸跟随鼠标的真实 Live2D 互动" width="280">
-</p>
+Codex 端目前只完成了桌宠的基础适配，待后续进一步开发。
 
-<p align="center"><em>图 1 – 与鼠标互动的哦鲸鲸</em></p>
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/media/character-pointer.gif" alt="哦鲸鲸跟随鼠标的真实 Live2D 互动" width="280"></td>
+    <td align="center"><img src="docs/media/character-codex-pet.gif" alt="哦鲸鲸的 Codex 桌宠跳跃动画预览" width="280"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>图 1.1 - 与鼠标互动的哦鲸鲸</em></td>
+    <td align="center"><em>图 1.2 - Codex 桌宠形态</em></td>
+  </tr>
+</table>
 
 > 在使用项目前，建议按顺序阅读：① [项目概览](#sec1) → ② [项目部署](#sec3) → ③ [运行与使用](#sec4)。  
+> 需要将她加载为 Codex 桌宠，请参考 [Codex 使用指南](docs/codex-pet.md)。<br>
 > 如果需要进一步开发，请阅读 [开发与扩展](#sec5)。
 
 ---
