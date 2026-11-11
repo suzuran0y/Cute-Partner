@@ -5,9 +5,9 @@
 
 [![Version](https://img.shields.io/badge/version-1.0.1-black)](CHANGELOG.md)
 [![Live2D](https://img.shields.io/badge/Live2D-Cubism-FF6699)](#sec54)
-[![Harness](https://img.shields.io/badge/Agent-DeepSeek%20Harness-536DFE)](#sec12)
-[![Codex](https://img.shields.io/badge/Agent-Codex-27272A)](docs/codex-pet_EN.md)
 [![SQLite](https://img.shields.io/badge/memory-SQLite-003B57)](#sec22)
+[![Harness](https://img.shields.io/badge/DeepSeek-%20Harness-536DFE)](#sec12)
+[![Codex](https://img.shields.io/badge/OpenAI-Codex-27272A)](docs/codex-pet_EN.md)
 
 [🇺🇸 English](README.md) | [🇨🇳 中文](README_CN.md)
 
